@@ -2,20 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5f0e08-341f-4cef-aafe-0c414341c58b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Modele/Contacts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/Discussion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/DiscussionGroupe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/DiscussionSimple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Modele/Utilisateur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -27,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1bJXlv8gVXzSUT39Scs2hLm1lDE" />
   <component name="ProjectViewState">
@@ -40,6 +38,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Vue" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -49,15 +50,15 @@
       <recent name="C:\Users\alexi\Projets\GénieLogiciel\src\Vue" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
+  <component name="ServiceViewManager">
+    <option name="viewStates">
       <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
       </list>
     </option>
   </component>
@@ -73,6 +74,7 @@
       <updated>1588351324349</updated>
       <workItem from="1588351327485" duration="1000" />
       <workItem from="1589306027659" duration="617000" />
+      <workItem from="1589830361354" duration="51000" />
     </task>
     <servers />
   </component>
@@ -84,14 +86,24 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" />
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" />
+    <state x="320" y="105" key="#Project_Structure" timestamp="1589830411926">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="320" y="105" key="#Project_Structure/0.23.1440.833@0.23.1440.833" timestamp="1589830411926" />
+    <state x="569" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1589830365809">
+      <screen x="0" y="23" width="1440" height="833" />
+    </state>
+    <state x="569" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.833@0.23.1440.833" timestamp="1589830365809" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1589830363634" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1589830363634" />
   </component>
 </project>
