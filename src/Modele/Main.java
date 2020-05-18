@@ -1,3 +1,8 @@
+package Controleur;
+
+import Modele.ClientConnexion;
+import Modele.TimeServer;
+
 import java.io.IOException;
 
 public class Main {
