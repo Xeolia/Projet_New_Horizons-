@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class ChatPanel extends JPanel {
     TextArea textArea;
-    InputPanel inputPanel;
+    Vue.InputPanel inputPanel;
 
     ChatPanel(){
         textArea = new TextArea();
-        inputPanel = new InputPanel();
+        inputPanel = new Vue.InputPanel();
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)) ;
         this.setLayout(new BorderLayout());
         this.add(textArea, BorderLayout.CENTER) ;
@@ -21,7 +21,7 @@ public class ChatPanel extends JPanel {
         return textArea;
     }
 
-    public InputPanel getInputPanel() {
+    public Vue.InputPanel getInputPanel() {
         return inputPanel;
     }
 }
