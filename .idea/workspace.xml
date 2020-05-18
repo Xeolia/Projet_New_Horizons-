@@ -2,18 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5f0e08-341f-4cef-aafe-0c414341c58b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Vue/ChatPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Vue/InputPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Vue/maFenetre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/Contacts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/Discussion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/DiscussionGroupe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/DiscussionSimple.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Modele/Utilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/Controleur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controleur/Controleur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/FenetreMere.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,15 +49,15 @@
       <recent name="C:\Users\alexi\Projets\GénieLogiciel\src\Vue" />
     </key>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
+  <component name="RunDashboard">
+    <option name="ruleStates">
       <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
       </list>
     </option>
   </component>
@@ -69,10 +79,19 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1589306644259">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1589306644259" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" />
   </component>
 </project>
