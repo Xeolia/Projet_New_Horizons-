@@ -48,10 +48,10 @@ public class ClientProcessor implements Runnable{
                 String toSend = "";
 
                 switch(response.toUpperCase()){
-                    case "Creation de compte":
+                   /* case "Creation de compte":
                         System.out.println("Creation de compte");
                         break;
-                    /*case "ajout de contact":
+                    case "ajout de contact":
                         toSend = DateFormat.getDateInstance(DateFormat.FULL).format(new Date());
                         break;
                     case "a":
@@ -82,6 +82,7 @@ public class ClientProcessor implements Runnable{
                 }
             }catch(SocketException e){
                 System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
+                System.out.println(e.fillInStackTrace());
                 break;
             } catch (IOException e) {
                 e.printStackTrace();

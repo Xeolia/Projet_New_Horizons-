@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 public class TimeServer {
 
     //On initialise des valeurs par défaut
-    private int port = 2345;
+    private int port = 1515;
     private String host = "127.0.0.1";
     private ServerSocket server = null;
     private boolean isRunning = true;
@@ -77,5 +77,6 @@ public class TimeServer {
 
     public static void main(String[] args) {
         TimeServer timeServer = new TimeServer();
+        timeServer.open();
     }
 }
