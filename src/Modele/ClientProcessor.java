@@ -47,25 +47,31 @@ public class ClientProcessor implements Runnable{
                 //On traite la demande du client en fonction de la commande envoyée
                 String toSend = "";
 
-                switch(response.toUpperCase()){
-                   /* case "Creation de compte":
+                switch(response.toLowerCase()){
+                    case "creation":
                         System.out.println("Creation de compte");
                         break;
-                    case "ajout de contact":
-                        toSend = DateFormat.getDateInstance(DateFormat.FULL).format(new Date());
+                    /*case "PWD":
+                        System.out.println(ftp.pwd());
                         break;
-                    case "a":
-                        toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
+                    case "CWD":
+                        System.out.println(">> Saisissez le nom du répertoire où vous voulez aller : ");
+                        String dir = sc.nextLine();
+                        System.out.println(ftp.cwd(dir));
                         break;
-                    case "CLOSE":
-                        toSend = "Communication terminée";
-                        closeConnexion = true;
+                    case "LIST":
+                        String list = ftp.list();
+                        System.out.println(list);
+                        break;
+                    case "QUIT":
+                        ftp.quit();
+                        sock.isClosed();
                         break;*/
                     default :
                         toSend = response;
                         break;
                 }
-
+                System.out.println("Reponse serveur : "+ toSend);
                 //On envoie la réponse au client
                 writer.write(toSend);
                 //Il FAUT IMPERATIVEMENT UTILISER flush()

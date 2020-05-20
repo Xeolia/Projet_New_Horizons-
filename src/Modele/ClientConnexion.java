@@ -16,16 +16,10 @@ public class ClientConnexion implements Runnable {
     private static int count = 0;
     private String name = "Client-";
 
-    public ClientConnexion(String host, int port) {
-        //attribuyion n client
+    public ClientConnexion(Socket socket) {
+        //attribution numero client
         name += ++count;
-        try {
-            connexion = new Socket(host, port);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        connexion = socket;
     }
 
 
@@ -67,10 +61,10 @@ public class ClientConnexion implements Runnable {
         response = new String(b, 0, stream);
         return response;
     }
-
+/*
     public static void main(String[] args) {
         ClientConnexion client = new ClientConnexion("127.0.0.1", 1515);
         client.run();
-    }
+    }*/
 
 }
