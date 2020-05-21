@@ -2,6 +2,7 @@ package Vue;
 
 
 import Controleur.Controleur;
+import Modele.Singletons;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

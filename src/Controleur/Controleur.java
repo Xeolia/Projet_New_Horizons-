@@ -1,5 +1,6 @@
 package Controleur;
 
+import Modele.Singletons;
 import Vue.ChatPanel;
 import Vue.InputPanel;
 import Vue.InscriptionPanel;
@@ -11,27 +12,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Controleur implements ActionListener, MouseListener {
-    ChatPanel chatPanel;
-    InputPanel inputPanel;
-    InscriptionPanel inscriptionPanel;
 
-    public Controleur(ChatPanel parChatPanel, InputPanel parInputPanel, InscriptionPanel parInscriptionPanel) {
-        this.chatPanel = parChatPanel;
-        this.inputPanel = parInputPanel;
-        this.inscriptionPanel = parInscriptionPanel;
-        inputPanel.enregistreEcouteur(this);
-        inscriptionPanel.enregistreEcouteur(this);
+
+    public Controleur() {
+        Singletons.getInputPanel().enregistreEcouteur(this);
+        Singletons.getInscriptionPanel().enregistreEcouteur(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand() == "envoiMessage") {
-            chatPanel.getTextArea().append(inputPanel.getTextField().getText() + "\n");
+            Singletons.getChatPanel().getTextArea().append(Singletons.getInputPanel().getTextField().getText() + "\n");
             //ClientSocket.sendOut(textField.getText(), textArea) ;
-            inputPanel.getTextField().setText("");
+            Singletons.getInputPanel().getTextField().setText("");
         }
-
-
     }
 
     @Override
@@ -51,11 +45,11 @@ public class Controleur implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
-        inscriptionPanel.getInscriptionButton().setBackground(new Color(255,100,100));
+        Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(255,100,100));
     }
 
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
-        inscriptionPanel.getInscriptionButton().setBackground(new Color(12, 91, 160));
+        Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(12, 91, 160));
     }
 }

@@ -5,6 +5,8 @@
  */
 package Vue;
 
+import Modele.Singletons;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseMotionListener;
@@ -19,7 +21,6 @@ public class PanelFond extends JPanel {
     public Color kEndColor = Color.BLUE;
     public boolean kTransparentControls = true;
     public int kGradientFocus = 500;
-    InscriptionPanel inscriptionPanel = new InscriptionPanel();
 
     public Color getkStartColor() {
         return kStartColor;
@@ -64,7 +65,7 @@ public class PanelFond extends JPanel {
         } else {
             setBg(false);
         }
-        this.add(inscriptionPanel);
+        this.add(Singletons.getInscriptionPanel());
 
     }
 
@@ -104,6 +105,6 @@ public class PanelFond extends JPanel {
     }
 
     public InscriptionPanel getInscriptionPanel() {
-        return inscriptionPanel;
+        return Singletons.getInscriptionPanel();
     }
 }

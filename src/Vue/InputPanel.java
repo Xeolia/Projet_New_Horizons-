@@ -9,13 +9,12 @@ public class InputPanel extends JPanel {
     JTextField textField;
     JButton button;
 
-    InputPanel(){
+    public InputPanel(){
         textField = new JTextField();
         button = new JButton("Envoyer");
         this.setLayout(new BorderLayout());
         add(textField, BorderLayout.CENTER) ;
         add(button, BorderLayout.EAST) ;
-
     }
 
     public JTextField getTextField() {
