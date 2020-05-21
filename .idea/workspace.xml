@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da5f0e08-341f-4cef-aafe-0c414341c58b" name="Default Changelist" comment="update on modele class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Modele/ListeContacts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Modele/Personne.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetGenieLogciel.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modele/Contacts.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modele/Discussion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Discussion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modele/DiscussionGroupe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/DiscussionGroupe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modele/DiscussionSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/DiscussionSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modele/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modele/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Utilisateur.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="add_modele_class" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,24 +46,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/Modele" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Modele" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="Java" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\alexi\Projets\GénieLogiciel\src\Vue" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Controleur" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Modele" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Fred\IdeaProjects\Projet_New_Horizons-\src\main\java\Modele" />
+      <recent name="C:\Users\alexi\Projets\GénieLogiciel\src\Vue" />
     </key>
   </component>
   <component name="RunDashboard">
