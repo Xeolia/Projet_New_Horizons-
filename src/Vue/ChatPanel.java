@@ -7,7 +7,7 @@ public class ChatPanel extends JPanel {
     TextArea textArea;
     Vue.InputPanel inputPanel;
 
-    ChatPanel(){
+    public ChatPanel(){
         textArea = new TextArea();
         inputPanel = new Vue.InputPanel();
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)) ;
@@ -19,9 +19,5 @@ public class ChatPanel extends JPanel {
 
     public TextArea getTextArea() {
         return textArea;
-    }
-
-    public Vue.InputPanel getInputPanel() {
-        return inputPanel;
     }
 }
