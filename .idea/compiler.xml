@@ -7,7 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ProjetGenieLogciel" />
+        <module name="Projet_New_Horizons" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ProjetGenieLogciel" target="7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
