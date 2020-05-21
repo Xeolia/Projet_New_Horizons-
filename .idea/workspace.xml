@@ -1,47 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da5f0e08-341f-4cef-aafe-0c414341c58b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Projet_New_Horizons.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Projet_New_Horizons.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controleur/Controleur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controleur/Controleur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/ClientConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/ClientConnexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/ClientProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/ClientProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Contacts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Contacts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Discussion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Discussion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DiscussionGroupe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/DiscussionGroupe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/DiscussionSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/DiscussionSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/ServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/ServerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Singletons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Singletons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/TimeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/TimeServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modele/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modele/Utilisateur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/ChatPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vue/ChatPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/FormBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vue/FormBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/InputPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vue/InputPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/InscriptionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vue/InscriptionPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/MaFenetre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vue/MaFenetre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Vue/PanelFond.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vue/PanelFond.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controleur/Controleur.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controleur/Controleur.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/ProjetGenieLogciel.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/ClientConnexion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modele/ClientConnexion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/ClientProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modele/ClientProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modele/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/Requete.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/ServerThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modele/ServerThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/TimeServer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modele/TimeServer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Modele/TimeServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Modele/TimeServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Vue/ChatPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vue/ChatPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Vue/InputPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vue/InputPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Vue/maFenetre.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vue/maFenetre.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-    </list>
+    <list default="true" id="da5f0e08-341f-4cef-aafe-0c414341c58b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,10 +48,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\src" />
+      <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\src\main" />
       <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\src\main\java" />
       <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\target" />
-      <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\src\main" />
-      <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\src" />
       <recent name="X:\Esiea Confinement\Genie Logiciel\Projet_New_Horizons-\.idea" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -190,6 +150,14 @@
       <workItem from="1589377525456" duration="15532000" />
       <workItem from="1589575646905" duration="2753000" />
     </task>
+    <task id="LOCAL-00001" summary="refactor project folder">
+      <created>1590081648009</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590081648010</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +174,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor project folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor project folder" />
   </component>
   <component name="WindowStateProjectService">
     <state x="569" y="135" key="#Project_Structure" timestamp="1590081097481">
@@ -240,6 +212,10 @@
       <screen x="0" y="23" width="1440" height="832" />
     </state>
     <state x="440" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.832@0.23.1440.832" timestamp="1589399357245" />
+    <state x="1121" y="288" key="CommitChangelistDialog2" timestamp="1590081647516">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1121" y="288" key="CommitChangelistDialog2/0.0.2560.1400/2560.-484.1080.1880@0.0.2560.1400" timestamp="1590081647516" />
     <state width="1319" height="323" key="GridCell.Tab.0.bottom" timestamp="1590080155793">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -325,10 +301,10 @@
       <screen x="0" y="23" width="1440" height="835" />
     </state>
     <state x="397" y="273" key="com.intellij.ide.util.TipDialog/0.23.1440.835@0.23.1440.835" timestamp="1589577374542" />
-    <state x="1488" y="710" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590080137749">
+    <state x="1488" y="710" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590081374597">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1488" y="710" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400/2560.-484.1080.1880@0.0.2560.1400" timestamp="1590080137749" />
+    <state x="1488" y="710" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400/2560.-484.1080.1880@0.0.2560.1400" timestamp="1590081374597" />
     <state x="97" y="59" key="new project wizard" timestamp="1589724793745">
       <screen x="0" y="23" width="1440" height="836" />
     </state>
