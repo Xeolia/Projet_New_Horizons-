@@ -7,23 +7,25 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
 
-public class ClientProcessor implements Runnable{
+public class ClientProcessor implements Runnable {
 
     private Socket sock;
-    private PrintWriter writer = null;
-    private BufferedInputStream reader = null;
+    private PrintWriter writer;
+    private BufferedInputStream reader;
+    private int numClient;
 
-    public ClientProcessor(Socket pSock){
+    public ClientProcessor(Socket pSock, int numClient) {
         sock = pSock;
+        numClient = numClient;
     }
 
     //Le traitement lancé dans un thread séparé
-    public void run(){
+    public void run() {
         System.err.println("Lancement du traitement de la connexion cliente");
 
         boolean closeConnexion = false;
         //tant que la connexion est active, on traite les demandes
-        while(!sock.isClosed()){
+        while (!sock.isClosed()) {
 
             try {
 
@@ -34,8 +36,9 @@ public class ClientProcessor implements Runnable{
 
                 //On attend la demande du client
                 String response = read();
-                InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
+                InetSocketAddress remote = (InetSocketAddress) sock.getRemoteSocketAddress();
 
+                /*
                 //On affiche quelques infos, pour le débuggage
                 String debug = "";
                 debug = "Thread : " + Thread.currentThread().getName() + ". ";
@@ -43,11 +46,17 @@ public class ClientProcessor implements Runnable{
                 debug += " Sur le port : " + remote.getPort() + ".\n";
                 debug += "\t -> Commande reçue : " + response + "\n";
                 System.err.println("\n" + debug);
+                 */
+
+                System.out.println("===================================\n" +
+                        "\tString recue du client n0 " + numClient + "\n" +
+                        "> " + response + "\n" +
+                        "===================================");
 
                 //On traite la demande du client en fonction de la commande envoyée
                 String toSend = "";
 
-                switch(response.toLowerCase()){
+                switch (response.toLowerCase()) {
                     case "creation":
                         System.out.println("Creation de compte");
                         break;
@@ -67,26 +76,27 @@ public class ClientProcessor implements Runnable{
                         ftp.quit();
                         sock.isClosed();
                         break;*/
-                    default :
-                        toSend = response;
+                    default:
+                        toSend = "[SERVER] A bien recu la reponse : " + response;
                         break;
                 }
-                System.out.println("Reponse serveur : "+ toSend);
+                System.out.println("Reponse serveur : " + toSend);
                 //On envoie la réponse au client
+                writer.flush();
                 writer.write(toSend);
                 //Il FAUT IMPERATIVEMENT UTILISER flush()
                 //Sinon les données ne seront pas transmises au client
                 //et il attendra indéfiniment
                 writer.flush();
 
-                if(closeConnexion){
+                if (closeConnexion) {
                     System.err.println("COMMANDE CLOSE DETECTEE ! ");
                     writer = null;
                     reader = null;
                     sock.close();
                     break;
                 }
-            }catch(SocketException e){
+            } catch (SocketException e) {
                 System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
                 System.out.println(e.fillInStackTrace());
                 break;
@@ -97,7 +107,7 @@ public class ClientProcessor implements Runnable{
     }
 
     //La méthode que nous utilisons pour lire les réponses
-    private String read() throws IOException{
+    private String read() throws IOException {
         String response = "";
         int stream;
         byte[] b = new byte[4096];

@@ -13,13 +13,13 @@ public class Main {
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
         Thread t = new Thread(new ClientConnexion(socket));
         t.start();
-        Boolean connexion = true;
 
-        while (connexion) {
+        while (true) {
             String messageServeur;
             Scanner sc = new Scanner(System.in);
+            System.out.print("Ecrire le texte a envoyer au serveur :\n>");
             messageServeur = sc.nextLine();
-            System.out.print("Commande envoyé au serveur " + messageServeur);
+            // System.out.print("Commande envoyée au serveur " + messageServeur + "\n"); // pas trop necessaire
             writer.write(messageServeur);
             writer.flush();
 
