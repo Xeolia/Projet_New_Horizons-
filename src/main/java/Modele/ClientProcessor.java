@@ -49,7 +49,7 @@ public class ClientProcessor implements Runnable {
                  */
 
                 System.out.println("===================================\n" +
-                        "\tString recue du client n0 " + numClient + "\n" +
+                        "\tString recue du client n° " + numClient + "\n" +
                         "> " + response + "\n" +
                         "===================================");
 
