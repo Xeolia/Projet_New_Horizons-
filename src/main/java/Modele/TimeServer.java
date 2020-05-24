@@ -55,6 +55,9 @@ public class TimeServer {
                     try {
                         //On attend une connexion d'un client
                         System.out.println("En attente d'un client numero " + countClients);
+                        for(Socket s : listClients) {
+                            System.out.println("[SOCKET] " + s);
+                        }
                         Socket sockClient = server.accept();
 
                         listClients.add(sockClient);

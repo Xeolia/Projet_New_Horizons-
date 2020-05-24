@@ -77,14 +77,15 @@ public class ClientProcessor implements Runnable {
                         sock.isClosed();
                         break;*/
                     default:
-                        toSend = "[SERVER] A bien recu la reponse : " + response;
+                        toSend = "[SERVER] Reponse du serveur : " + response;
                         break;
                 }
-                System.out.println("Reponse serveur : " + toSend);
+                // System.out.println("Reponse serveur : " + toSend);
                 //On envoie la réponse au client
-                writer.println(toSend);
+                /*
                 writer.write(toSend);
                 writer.flush();
+                 */
                 //Il FAUT IMPERATIVEMENT UTILISER flush()
                 //Sinon les données ne seront pas transmises au client
                 //et il attendra indéfiniment

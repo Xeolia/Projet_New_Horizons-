@@ -34,23 +34,26 @@ public class ClientConnexion implements Runnable {
             e.printStackTrace();
         }
          */
-        try {
-            reader = new BufferedInputStream(connexion.getInputStream());
-            //On envoie la commande au serveur
-            //TOUJOURS UTILISER flush() POUR ENVOYER RÉELLEMENT DES INFOS AU SERVEUR
-            //On attend la réponse
-            String response = read();
-            System.out.println("[CLIENT CONNEXIOIN " + name + "] : Réponse reçue " + response);
+        while(true) {
+            try {
+                reader = new BufferedInputStream(connexion.getInputStream());
+                //On envoie la commande au serveur
+                //TOUJOURS UTILISER flush() POUR ENVOYER RÉELLEMENT DES INFOS AU SERVEUR
+                //On attend la réponse
+                String response = read();
+                System.out.println("[CLIENT CONNEXION " + name + "] : Réponse reçue " + response);
 
-        } catch (IOException e1) {
-            e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+            try {
+                Thread.currentThread().sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
-        try {
-            Thread.currentThread().sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 
