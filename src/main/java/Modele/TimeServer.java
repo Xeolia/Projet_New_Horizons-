@@ -15,9 +15,10 @@ public class TimeServer {
     private ServerSocket server;
     private boolean isRunning = true;
     private int countClients; // variable temp, utile en mode console
-    static ArrayList<Socket> listClients = new ArrayList<Socket>();
+    public static ArrayList<Socket> listClients = new ArrayList<Socket>();
 
-    public TimeServer(){
+
+    public TimeServer() {
         try {
             server = new ServerSocket(port, 100, InetAddress.getByName(host));
         } catch (UnknownHostException e) {
@@ -41,6 +42,7 @@ public class TimeServer {
         }
 
         countClients = 1;
+
     }
 
 
@@ -65,7 +67,7 @@ public class TimeServer {
                         //Une fois reçue, on la traite dans un thread séparé
                         System.out.println("Connexion cliente reçue.");
                         countClients++;
-                        Thread t = new Thread(new ClientProcessor(sockClient, countClients));
+                        Thread t = new Thread(new ClientProcessor(sockClient, countClients, ""));
                         t.start();
 
                     } catch (IOException e) {

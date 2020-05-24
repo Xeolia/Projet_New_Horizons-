@@ -13,10 +13,12 @@ public class ClientProcessor implements Runnable {
     private PrintWriter writer;
     private BufferedInputStream reader;
     private int numClient;
+    private String nom;
 
-    public ClientProcessor(Socket pSock, int numClient) {
+    public ClientProcessor(Socket pSock, int pumClient, String parNom) {
         sock = pSock;
-        numClient = numClient;
+        this.numClient = numClient;
+        nom = parNom;
     }
 
     //Le traitement lancé dans un thread séparé

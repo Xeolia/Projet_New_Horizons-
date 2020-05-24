@@ -16,10 +16,11 @@ public class ClientConnexion implements Runnable {
     private static int count = 0;
     private String name = "Client-";
 
-    public ClientConnexion(Socket socket) {
+    public ClientConnexion(Socket socket, String nomClient) {
         //attribution numero client
         name += ++count;
         connexion = socket;
+        name += nomClient;
     }
 
 
