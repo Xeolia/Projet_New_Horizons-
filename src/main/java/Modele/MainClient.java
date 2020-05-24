@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Main {
+public class MainClient {
 
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("127.0.0.1", 1515);
@@ -20,6 +20,7 @@ public class Main {
             System.out.print("Ecrire le texte a envoyer au serveur :\n>");
             messageServeur = sc.nextLine();
             // System.out.print("Commande envoyée au serveur " + messageServeur + "\n"); // pas trop necessaire
+            // writer.println("Message a envoyer : " + messageServeur);
             writer.write(messageServeur);
             writer.flush();
 

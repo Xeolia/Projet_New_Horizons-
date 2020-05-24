@@ -82,12 +82,19 @@ public class ClientProcessor implements Runnable {
                 }
                 System.out.println("Reponse serveur : " + toSend);
                 //On envoie la réponse au client
-                writer.flush();
+                writer.println(toSend);
                 writer.write(toSend);
+                writer.flush();
                 //Il FAUT IMPERATIVEMENT UTILISER flush()
                 //Sinon les données ne seront pas transmises au client
                 //et il attendra indéfiniment
-                writer.flush();
+
+                // on renvoie la reponse a tous les clients
+                for(Socket s : TimeServer.listClients) {
+                    PrintWriter writerDiffusion = new PrintWriter(s.getOutputStream());
+                    writerDiffusion.write(toSend);
+                    writerDiffusion.flush();
+                }
 
                 if (closeConnexion) {
                     System.err.println("COMMANDE CLOSE DETECTEE ! ");
