@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class TimeServer {
 
@@ -14,8 +15,10 @@ public class TimeServer {
     private ServerSocket server;
     private boolean isRunning = true;
     private int countClients; // variable temp, utile en mode console
+    public static ArrayList<Socket> listClients = new ArrayList<Socket>();
 
-    public TimeServer(){
+
+    public TimeServer() {
         try {
             server = new ServerSocket(port, 100, InetAddress.getByName(host));
         } catch (UnknownHostException e) {
@@ -39,6 +42,7 @@ public class TimeServer {
         }
 
         countClients = 1;
+
     }
 
 
@@ -53,12 +57,17 @@ public class TimeServer {
                     try {
                         //On attend une connexion d'un client
                         System.out.println("En attente d'un client numero " + countClients);
+                        for(Socket s : listClients) {
+                            System.out.println("[SOCKET] " + s);
+                        }
                         Socket sockClient = server.accept();
+
+                        listClients.add(sockClient);
 
                         //Une fois reçue, on la traite dans un thread séparé
                         System.out.println("Connexion cliente reçue.");
                         countClients++;
-                        Thread t = new Thread(new ClientProcessor(sockClient, countClients));
+                        Thread t = new Thread(new ClientProcessor(sockClient));
                         t.start();
 
                     } catch (IOException e) {

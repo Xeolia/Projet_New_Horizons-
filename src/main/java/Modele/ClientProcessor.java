@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class ClientProcessor implements Runnable {
 
@@ -13,10 +15,28 @@ public class ClientProcessor implements Runnable {
     private PrintWriter writer;
     private BufferedInputStream reader;
     private int numClient;
+    private Hashtable listClients;
 
-    public ClientProcessor(Socket pSock, int numClient) {
+    public ClientProcessor(Socket pSock){
         sock = pSock;
-        numClient = numClient;
+    }
+    public ClientProcessor(Socket sockClient, int countClients, Hashtable listClients1) {
+        this.listClients = listClients1;
+    }
+
+    public int getNumClient() {
+        return numClient;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    private String nom;
+
+    public ClientProcessor(Socket pSock, Hashtable listClients) {
+        this.sock = pSock;
+        this.listClients = listClients;
     }
 
     //Le traitement lancé dans un thread séparé
@@ -28,9 +48,6 @@ public class ClientProcessor implements Runnable {
         while (!sock.isClosed()) {
 
             try {
-
-                //Ici, nous n'utilisons pas les mêmes objets que précédemment
-                //Je vous expliquerai pourquoi ensuite
                 writer = new PrintWriter(sock.getOutputStream());
                 reader = new BufferedInputStream(sock.getInputStream());
 
@@ -49,45 +66,57 @@ public class ClientProcessor implements Runnable {
                  */
 
                 System.out.println("===================================\n" +
-                        "\tString recue du client n0 " + numClient + "\n" +
+                        "\tString recue du client n° " + numClient + "\n" +
                         "> " + response + "\n" +
                         "===================================");
 
                 //On traite la demande du client en fonction de la commande envoyée
                 String toSend = "";
-
-                switch (response.toLowerCase()) {
-                    case "creation":
-                        System.out.println("Creation de compte");
+                String[] tableauReponse = response.split("::");
+                Protocole code = Protocole.values()[Integer.parseInt(tableauReponse[0])];
+                String message =tableauReponse[1];
+                switch (code) {
+                    case CREATION_COMPTE:
+                        System.out.println("Creation de contact");
+                        //TODO ajout protocole
                         break;
-                    /*case "PWD":
-                        System.out.println(ftp.pwd());
+                    case CONNEXION:
+                        toSend = "Connexion ";
+                        System.out.println(toSend);
                         break;
-                    case "CWD":
+                    case CREATION_CONTACT:
                         System.out.println(">> Saisissez le nom du répertoire où vous voulez aller : ");
-                        String dir = sc.nextLine();
-                        System.out.println(ftp.cwd(dir));
+
                         break;
-                    case "LIST":
-                        String list = ftp.list();
-                        System.out.println(list);
+                    case MESSAGE:
+                        toSend = "[SERVER] message : " + message;
+                        System.out.println(toSend);
                         break;
-                    case "QUIT":
-                        ftp.quit();
+                    case DECONNEXION:
+                        System.out.println("GOOD BYE");
                         sock.isClosed();
-                        break;*/
+                        break;
                     default:
-                        toSend = "[SERVER] A bien recu la reponse : " + response;
+                        toSend = "Erreur";
+                        System.err.println(toSend);
                         break;
                 }
-                System.out.println("Reponse serveur : " + toSend);
+                // System.out.println("Reponse serveur : " + toSend);
                 //On envoie la réponse au client
-                writer.flush();
+                /*
                 writer.write(toSend);
+                writer.flush();
+                 */
                 //Il FAUT IMPERATIVEMENT UTILISER flush()
                 //Sinon les données ne seront pas transmises au client
                 //et il attendra indéfiniment
-                writer.flush();
+
+                // on renvoie la reponse a tous les clients
+                for (Socket s : TimeServer.listClients) {
+                    PrintWriter writerDiffusion = new PrintWriter(s.getOutputStream());
+                    writerDiffusion.write(toSend);
+                    writerDiffusion.flush();
+                }
 
                 if (closeConnexion) {
                     System.err.println("COMMANDE CLOSE DETECTEE ! ");

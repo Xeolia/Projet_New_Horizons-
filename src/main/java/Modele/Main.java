@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("127.0.0.1", 1515);
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
-        Thread t = new Thread(new ClientConnexion(socket));
+        Thread t = new Thread(new ClientConnexion(socket," "));
         t.start();
 
         while (true) {
