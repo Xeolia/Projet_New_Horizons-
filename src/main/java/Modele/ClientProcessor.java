@@ -25,7 +25,7 @@ public class ClientProcessor implements Runnable {
 
     //Le traitement lancé dans un thread séparé
     public void run() {
-        System.err.println("Lancement du traitement de la connexion cliente");
+        System.out.println("=== Lancement du traitement de la connexion cliente ===");
 
         boolean closeConnexion = false;
         //tant que la connexion est active, on traite les demandes
@@ -104,6 +104,7 @@ public class ClientProcessor implements Runnable {
                  */
 
                 serverHandler.broadCastMessage(toSend);
+                // serverHandler.notify(); // ne marche pas
 
                 if (closeConnexion) {
                     System.err.println("COMMANDE CLOSE DETECTEE ! ");

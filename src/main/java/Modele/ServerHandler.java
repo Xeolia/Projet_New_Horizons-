@@ -12,6 +12,7 @@ public class ServerHandler extends Thread {
 
     private ArrayList<Socket> listClients = new ArrayList<Socket>();
     private ArrayList<String> messagesAEnvoyer = new ArrayList<String>();
+
     boolean isRunning;
 
     // Constructeur inutilise
@@ -35,16 +36,20 @@ public class ServerHandler extends Thread {
         listClients.add(sClient);
     }
 
-    public void broadCastMessage(String message) {
-        System.out.println("Methode de fissuion");
+    public synchronized void broadCastMessage(String message) {
+        System.out.println("Methode de diffusion");
         messagesAEnvoyer.add(message);
+        System.out.println("Taille de l'arraylist : " + messagesAEnvoyer.size());
     }
 
     public void run() {
         try {
             while(true) {
+                int taille = messagesAEnvoyer.size();
+                System.out.println("Taille de l'arraylist : ");// + messagesAEnvoyer.size());
                 String toSend = "";
-                if(messagesAEnvoyer.size() > 0) {
+                if(taille > 0) {
+                    System.out.println("On rentre dans la condition");
                     toSend = messagesAEnvoyer.remove(0);
                     System.out.println("String envoyee a tous les clients : " + toSend);
                     for(Socket s : listClients) {
@@ -55,6 +60,7 @@ public class ServerHandler extends Thread {
                 }
             }
         } catch (IOException e) {
+            System.out.println("On entre dans l'exception");
             e.printStackTrace();
         }
     }
