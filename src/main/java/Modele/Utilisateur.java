@@ -1,6 +1,6 @@
 package Modele;
 
-public class Utilisateur extends Personne{
+public class Utilisateur{
 
     private String nom;
     private String prenom;
@@ -8,9 +8,20 @@ public class Utilisateur extends Personne{
     private String password;
 
     public Utilisateur(String nom, String prenom, String pseudo, String password){
-        super(nom,prenom,pseudo);
         this.pseudo = pseudo;
         this.password = password;
+        this.nom= nom;
+        this.prenom = prenom;
+    }
+
+    public Utilisateur(String pseudo, String password){
+        this.pseudo = pseudo;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "pseudo= " + pseudo;
     }
 
     public String getPseudo() {
