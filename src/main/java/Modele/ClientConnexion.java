@@ -26,16 +26,7 @@ public class ClientConnexion implements Runnable {
 
     public void run() {
 
-        //nous n'allons faire que 10 demandes par thread...
-        // for(int i =0; i < 10; i++){
-        /*
-        try {
-            Thread.currentThread().sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-         */
-        while(true) {
+        while(true) { //On autorise continuelement la connexion du client
             try {
                 reader = new BufferedInputStream(connexion.getInputStream());
                 //On envoie la commande au serveur
@@ -54,7 +45,6 @@ public class ClientConnexion implements Runnable {
                 e.printStackTrace();
             }
         }
-
     }
 
 
@@ -67,10 +57,4 @@ public class ClientConnexion implements Runnable {
         response = new String(b, 0, stream);
         return response;
     }
-/*
-    public static void main(String[] args) {
-        ClientConnexion client = new ClientConnexion("127.0.0.1", 1515);
-        client.run();
-    }*/
-
 }

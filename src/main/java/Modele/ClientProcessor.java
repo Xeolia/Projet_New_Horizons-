@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class ClientProcessor implements Runnable {
@@ -51,68 +50,53 @@ public class ClientProcessor implements Runnable {
                 writer = new PrintWriter(sock.getOutputStream());
                 reader = new BufferedInputStream(sock.getInputStream());
 
-                //On attend la demande du client
                 String response = read();
                 InetSocketAddress remote = (InetSocketAddress) sock.getRemoteSocketAddress();
-
-                /*
-                //On affiche quelques infos, pour le débuggage
-                String debug = "";
-                debug = "Thread : " + Thread.currentThread().getName() + ". ";
-                debug += "Demande de l'adresse : " + remote.getAddress().getHostAddress() +".";
-                debug += " Sur le port : " + remote.getPort() + ".\n";
-                debug += "\t -> Commande reçue : " + response + "\n";
-                System.err.println("\n" + debug);
-                 */
 
                 System.out.println("===================================\n" +
                         "\tString recue du client n° " + numClient + "\n" +
                         "> " + response + "\n" +
                         "===================================");
 
-                //On traite la demande du client en fonction de la commande envoyée
                 String toSend = "";
-                String[] tableauReponse = response.split("::");
-                Protocole code = Protocole.values()[Integer.parseInt(tableauReponse[0])];
-                String message =tableauReponse[1];
+                String[] tableauReponse = response.split(RequestActions.delimiteur);
+                ProtocoleCode code = ProtocoleCode.values()[Integer.parseInt(tableauReponse[0])];
                 switch (code) {
                     case CREATION_COMPTE:
                         System.out.println("Creation de contact");
-                        //TODO ajout protocole
+                        //TODO ajout protocole (ajout sur le serveur JSON du compte si le pseudo n'est pas deja utilisé)
                         break;
                     case CONNEXION:
-                        toSend = "Connexion ";
+                        String pseudo_connexion =tableauReponse[1];
+                        toSend = "Connexion de : " + pseudo_connexion;
+
                         System.out.println(toSend);
                         break;
-                    case CREATION_CONTACT:
-                        System.out.println(">> Saisissez le nom du répertoire où vous voulez aller : ");
-
+                    case CREATION_CHAT:
+                        //TODO creation de discussion (un expediteur, un destinataire)
                         break;
                     case MESSAGE:
-                        toSend = "[SERVER] message : " + message;
+                        String expediteur_message =tableauReponse[1];
+                        String message =tableauReponse[2];
+                        toSend = expediteur_message+ " : " + message;
                         System.out.println(toSend);
                         break;
                     case DECONNEXION:
-                        System.out.println("GOOD BYE");
+                        String pseudo_deconnexion =tableauReponse[1];
+                        System.out.println("Deconnexion de : " + pseudo_deconnexion);
                         sock.isClosed();
                         break;
                     default:
-                        toSend = "Erreur";
+                        toSend = "Une erreur s'est produite, le code du protocole n'a pas été reconnu";
                         System.err.println(toSend);
                         break;
                 }
-                // System.out.println("Reponse serveur : " + toSend);
-                //On envoie la réponse au client
-                /*
-                writer.write(toSend);
-                writer.flush();
-                 */
                 //Il FAUT IMPERATIVEMENT UTILISER flush()
                 //Sinon les données ne seront pas transmises au client
                 //et il attendra indéfiniment
 
-                // on renvoie la reponse a tous les clients
-                for (Socket s : TimeServer.listClients) {
+                // on renvoie la reponse a tous les clients pour l'instant
+                for (Socket s : TimeServer.listClients.keySet()) {
                     PrintWriter writerDiffusion = new PrintWriter(s.getOutputStream());
                     writerDiffusion.write(toSend);
                     writerDiffusion.flush();
@@ -135,7 +119,7 @@ public class ClientProcessor implements Runnable {
         }
     }
 
-    //La méthode que nous utilisons pour lire les réponses
+    //La méthode que nous utilisons pour lire les réponses client
     private String read() throws IOException {
         String response = "";
         int stream;

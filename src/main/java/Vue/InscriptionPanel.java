@@ -169,5 +169,7 @@ public class InscriptionPanel extends JPanel {
 
     public void enregistreEcouteur(Controleur controleur) {
         inscriptionButton.addMouseListener(controleur);
+        inscriptionButton.addActionListener(controleur);
+        inscriptionButton.setActionCommand("connexion");
     }
 }
