@@ -10,8 +10,8 @@ public class MaFenetre extends JFrame {
     public MaFenetre() {
         setTitle("Chat Window");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setSize(new Dimension(500, 300));
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(new Dimension(1280, 850));
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setVisible(true);
         this.getContentPane().add(Singletons.getPanelFond(), BorderLayout.CENTER);
@@ -20,5 +20,7 @@ public class MaFenetre extends JFrame {
     public static void main(String[] args) {
         Singletons.getMaFenetre();
         Singletons.getControleur();
+        Singletons.getMaFenetre().repaint();
+        Singletons.getMaFenetre().revalidate();
     }
 }

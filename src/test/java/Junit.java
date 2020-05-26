@@ -13,5 +13,4 @@ public class Junit {
         Assert.assertNotNull(instance);
     }
 
-
 }
