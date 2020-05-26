@@ -14,9 +14,11 @@ public class ClientProcessor implements Runnable {
     private BufferedInputStream reader;
     private int numClient;
     private String nom;
+    private ServerHandler serverHandler;
 
-    public ClientProcessor(Socket pSock, int pumClient, String parNom) {
+    public ClientProcessor(Socket pSock, ServerHandler serverHandler, int pumClient, String parNom) {
         sock = pSock;
+        this.serverHandler = serverHandler;
         this.numClient = numClient;
         nom = parNom;
     }
@@ -93,11 +95,15 @@ public class ClientProcessor implements Runnable {
                 //et il attendra indéfiniment
 
                 // on renvoie la reponse a tous les clients
+                /*
                 for(Socket s : TimeServer.listClients) {
                     PrintWriter writerDiffusion = new PrintWriter(s.getOutputStream());
                     writerDiffusion.write(toSend);
                     writerDiffusion.flush();
                 }
+                 */
+
+                serverHandler.broadCastMessage(toSend);
 
                 if (closeConnexion) {
                     System.err.println("COMMANDE CLOSE DETECTEE ! ");
