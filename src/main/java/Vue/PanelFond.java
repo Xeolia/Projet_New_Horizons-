@@ -11,10 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseMotionListener;
 
-/**
- *
- * @author oXCToo
- */
 public class PanelFond extends JPanel {
 
     public Color kStartColor = new Color(255,100,100);
@@ -54,9 +50,6 @@ public class PanelFond extends JPanel {
         this.kGradientFocus = kGradientFocus;
     }
   
- 
-    
-    
 
     public PanelFond() {
 
@@ -65,8 +58,7 @@ public class PanelFond extends JPanel {
         } else {
             setBg(false);
         }
-        this.add(Singletons.getInscriptionPanel());
-
+        this.add(Singletons.getPanelOnglet());
     }
 
     @Override

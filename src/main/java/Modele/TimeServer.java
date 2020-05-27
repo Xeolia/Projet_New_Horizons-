@@ -18,7 +18,7 @@ public class TimeServer {
     private boolean isRunning = true;
     private Utilisateur utilisateur;
     private int countClients; // variable temp, utile en mode console
-    private static String host = "127.0.0.1";
+    public static String host = "127.0.0.1";
     public static HashMap<Socket, Utilisateur> listClients = new HashMap<Socket, Utilisateur> ();
 
 

@@ -10,6 +10,7 @@ public class ChatPanel extends JPanel {
 
     public ChatPanel(){
         textArea = new TextArea();
+        textArea.setBackground(Color.white);
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)) ;
         this.setLayout(new BorderLayout());
         this.add(textArea, BorderLayout.CENTER) ;

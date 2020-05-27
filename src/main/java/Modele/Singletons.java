@@ -10,6 +10,8 @@ public class Singletons {
     private static InputPanel inputPanel;
     private static PanelFond panelFond;
     private static Controleur controleur;
+    private static ConnexionPanel connexionPanel;
+    private static PanelOnglet panelOnglet;
 
     public static MaFenetre getMaFenetre(){
         if(maFenetre==null){
@@ -25,11 +27,25 @@ public class Singletons {
         return chatPanel;
     }
 
+    public static PanelOnglet getPanelOnglet(){
+        if(panelOnglet==null){
+            return panelOnglet= new PanelOnglet();
+        }
+        return panelOnglet;
+    }
+
     public static InscriptionPanel getInscriptionPanel(){
         if(inscriptionPanel==null){
             return inscriptionPanel= new InscriptionPanel();
         }
         return inscriptionPanel;
+    }
+
+    public static ConnexionPanel getConnexionPanel(){
+        if(connexionPanel==null){
+            return connexionPanel= new ConnexionPanel();
+        }
+        return connexionPanel;
     }
 
     public static InputPanel getInputPanel(){
