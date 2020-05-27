@@ -10,6 +10,7 @@ public class PanelCentre extends JPanel {
     JPanel deuxiemeDiscussion = new JPanel();
     JPanel troisiemeDiscussion = new JPanel();
 
+
     public JPanel getPremiereDiscussion() {
         return premiereDiscussion;
     }
@@ -23,12 +24,14 @@ public class PanelCentre extends JPanel {
     }
 
     public PanelCentre() {
+        premiereDiscussion.setBackground(Color.cyan);
+        deuxiemeDiscussion.setBackground(Color.red);
+        troisiemeDiscussion.setBackground(Color.gray);
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        this.setLayout(new BorderLayout());
-        FormBuilder.init(this)
-                .add(premiereDiscussion)
-                .add(deuxiemeDiscussion)
-                .add(troisiemeDiscussion);
+        setLayout(new GridLayout(3, 1));
+        this.add(premiereDiscussion);
+        this.add(deuxiemeDiscussion);
+        this.add(troisiemeDiscussion);
 
 
     }
