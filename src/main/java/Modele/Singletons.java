@@ -10,6 +10,7 @@ public class Singletons {
     private static InputPanel inputPanel;
     private static PanelFond panelFond;
     private static Controleur controleur;
+    private static PanelNord panelNord;
 
     public static MaFenetre getMaFenetre(){
         if(maFenetre==null){
@@ -51,5 +52,11 @@ public class Singletons {
             controleur = new Controleur();
         }
         return controleur;
+    }
+    public static PanelNord getPanelNord(){
+        if(panelNord==null){
+            return panelNord= new PanelNord();
+        }
+        return panelNord;
     }
 }

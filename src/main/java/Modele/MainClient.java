@@ -15,8 +15,8 @@ public class MainClient {
         // scanNom.close();
         Socket socket = new Socket("127.0.0.1", 1515);
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
-        Thread t = new Thread(new ClientConnexion(socket));
-        t.start();
+        //Thread t = new Thread(new ClientConnexion(socket));
+        //t.start();
 
         while (true) {
             Scanner sc = new Scanner(System.in);

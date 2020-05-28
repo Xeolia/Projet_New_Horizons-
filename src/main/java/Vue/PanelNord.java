@@ -1,5 +1,7 @@
 package Vue;
 
+import Controleur.Controleur;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,4 +18,9 @@ public class PanelNord extends JPanel {
         add(button,BorderLayout.NORTH);
 
     }
+    public void enregistreEcouteur(Controleur parControleur){
+        button.addActionListener(parControleur);
+        button.setActionCommand("Discussion");
+    }
+
 }

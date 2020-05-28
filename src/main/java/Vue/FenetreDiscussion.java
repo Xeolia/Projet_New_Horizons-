@@ -19,8 +19,6 @@ public class FenetreDiscussion extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.add(panelDiscussion);
-        //on cree le JPanel principal
-        //fenetreDiscussion.getContentPane().add(scrollPane, BorderLayout.CENTER);
         this.repaint();
         this.revalidate();
     }

@@ -18,6 +18,7 @@ public class Controleur implements ActionListener, MouseListener {
     public Controleur() {
         Singletons.getInputPanel().enregistreEcouteur(this);
         Singletons.getInscriptionPanel().enregistreEcouteur(this);
+        Singletons.getPanelNord().enregistreEcouteur(this);
     }
 
     @Override
