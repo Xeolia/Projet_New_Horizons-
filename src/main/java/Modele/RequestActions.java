@@ -19,7 +19,7 @@ public class RequestActions {
         if(socketInstance == null){
             socketInstance = new Socket(TimeServer.host, 1515);
         }
-        Utilisateur utilisateur = new Utilisateur("Tanguy","password"); //TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
+        Utilisateur utilisateur = new Utilisateur("Tanguy", "Benard","Guytanfeu","password"); //TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
         TimeServer.listClients.put(socketInstance,utilisateur);
         Thread t = new Thread(new ClientConnexion(socketInstance, utilisateur.getPseudo()));
         return utilisateur;
