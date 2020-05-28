@@ -49,8 +49,8 @@ public class Controleur implements ActionListener, MouseListener {
             Singletons.getConnexionPanel().getFieldPseudo().setText("");
             Singletons.getConnexionPanel().getFieldMDP().setText("");
 
-            Singletons.getMaFenetre().remove(Singletons.getPanelFond());
-            Singletons.getMaFenetre().add(Singletons.getChatPanel());
+            Singletons.getPanelFond().remove(Singletons.getPanelOnglet());
+            Singletons.getPanelFond().add(Singletons.getChatPanel());
             //Todo :  Après le test serveur de log, afficher le panel discussion
             try {
                 Utilisateur utilisateur = RequestActions.connexion();

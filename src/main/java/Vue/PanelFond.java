@@ -17,6 +17,7 @@ public class PanelFond extends JPanel {
     public Color kEndColor = Color.BLUE;
     public boolean kTransparentControls = true;
     public int kGradientFocus = 500;
+    private JLabel labelTitre;
 
     public Color getkStartColor() {
         return kStartColor;

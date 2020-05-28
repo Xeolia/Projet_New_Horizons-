@@ -19,6 +19,7 @@ public class TimeServer {
     private Utilisateur utilisateur;
     private int countClients; // variable temp, utile en mode console
     public static String host = "127.0.0.1";
+
     public static HashMap<Socket, Utilisateur> listClients = new HashMap<Socket, Utilisateur> ();
 
 
@@ -60,7 +61,6 @@ public class TimeServer {
                         System.out.println("En attente d'un client numero " + countClients);
                         Socket sockClient = server.accept();
                         listClients.put(sockClient,utilisateur);
-//                        listClients.forEach((s,u) -> System.out.println("user: "+u.toString()+" Socket:"+s)); //FIXME (affiche la liste des socket et des utilisateur, essentiellement pour debug)
 
                         //Une fois reçue, on la traite dans un thread séparé
                         System.out.println("Connexion cliente reçue.");

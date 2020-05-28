@@ -3,6 +3,7 @@ package Modele;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class RequestActions {
     public static Socket socketInstance;
@@ -24,11 +25,11 @@ public class RequestActions {
         return utilisateur;
     }
 
-    public static void creationChatSimple() throws IOException {
+    public static void creationChatSimple(Utilisateur client, Utilisateur contact) throws IOException {
         //TODO (protocole CREATION_CHAT_SIMPLE)
     }
 
-    public static void creationChatGroupe() throws IOException {
+    public static void creationChatGroupe(Utilisateur client, ArrayList<Utilisateur>  contact) throws IOException {
         //TODO (protocole CREATION_CHAT_GROUPE)
     }
 
