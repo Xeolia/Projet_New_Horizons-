@@ -1,6 +1,7 @@
 package Vue;
 
 import Controleur.Controleur;
+import Modele.Singletons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +10,8 @@ public class FenetreDiscussion extends JFrame {
     PanelDiscussion panelDiscussion;
     //JScrollPane scrollPane = new JScrollPane(panelCentre);
 
-    FenetreDiscussion() {
-        panelDiscussion = new PanelDiscussion();
-        JPanel panelNord = panelDiscussion.getPanelNord();
-        JPanel panelCentre = panelDiscussion.getPanelCentre();
+    public FenetreDiscussion() {
+        panelDiscussion = Singletons.getPanelDiscussion();
         this.setTitle("hello");
         this.setSize(300, 300);
         this.setLocationRelativeTo(null);
@@ -24,7 +23,8 @@ public class FenetreDiscussion extends JFrame {
     }
 
     public static void main(String[] args) {
-        new FenetreDiscussion();
+        Singletons.getFenetreDiscussion();
+        Singletons.getControleur();
 
     }
 

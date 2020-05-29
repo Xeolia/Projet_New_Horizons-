@@ -4,6 +4,7 @@ import Controleur.Controleur;
 import Vue.*;
 
 public class Singletons {
+    public static PanelCentre panelCentre;
     private static MaFenetre maFenetre;
     private static ChatPanel chatPanel;
     private static InscriptionPanel inscriptionPanel;
@@ -11,52 +12,75 @@ public class Singletons {
     private static PanelFond panelFond;
     private static Controleur controleur;
     private static PanelNord panelNord;
+    private static FenetreDiscussion fenetreDiscussion;
+    private static PanelDiscussion panelDiscussion;
 
-    public static MaFenetre getMaFenetre(){
-        if(maFenetre==null){
+    public static MaFenetre getMaFenetre() {
+        if (maFenetre == null) {
             return maFenetre = new MaFenetre();
         }
         return maFenetre;
     }
 
-    public static ChatPanel getChatPanel(){
-        if(chatPanel==null){
+    public static ChatPanel getChatPanel() {
+        if (chatPanel == null) {
             chatPanel = new ChatPanel();
         }
         return chatPanel;
     }
 
-    public static InscriptionPanel getInscriptionPanel(){
-        if(inscriptionPanel==null){
-            return inscriptionPanel= new InscriptionPanel();
+    public static InscriptionPanel getInscriptionPanel() {
+        if (inscriptionPanel == null) {
+            return inscriptionPanel = new InscriptionPanel();
         }
         return inscriptionPanel;
     }
 
-    public static InputPanel getInputPanel(){
-        if(inputPanel==null){
+    public static InputPanel getInputPanel() {
+        if (inputPanel == null) {
             inputPanel = new InputPanel();
         }
         return inputPanel;
     }
 
-    public static PanelFond getPanelFond(){
-        if(panelFond==null){
+    public static PanelFond getPanelFond() {
+        if (panelFond == null) {
             panelFond = new PanelFond();
         }
         return panelFond;
     }
 
-    public static Controleur getControleur(){
-        if(controleur==null){
+    public static Controleur getControleur() {
+        if (controleur == null) {
             controleur = new Controleur();
         }
         return controleur;
     }
-    public static PanelNord getPanelNord(){
-        if(panelNord==null){
-            return panelNord= new PanelNord();
+
+    public static PanelNord getPanelNord() {
+        if (panelNord == null) {
+            return panelNord = new PanelNord();
         }
         return panelNord;
+    }
+
+    public static FenetreDiscussion getFenetreDiscussion() {
+        if (fenetreDiscussion == null) {
+            return fenetreDiscussion = new FenetreDiscussion();
+        }
+        return fenetreDiscussion;
+    }
+
+    public static PanelCentre getPanelCentre() {
+        if (panelCentre == null) {
+            return panelCentre = new PanelCentre();
+        }
+        return panelCentre;
+    }
+    public static PanelDiscussion getPanelDiscussion(){
+        if (panelDiscussion == null) {
+            return panelDiscussion = new PanelDiscussion();
+        }
+        return panelDiscussion;
     }
 }
