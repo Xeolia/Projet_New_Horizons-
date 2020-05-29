@@ -12,7 +12,6 @@ public class ClientConnexion implements Runnable {
     private Socket connexion;
     private PrintWriter writer;
     private BufferedInputStream reader;
-    //Notre liste de commandes. Le serveur nous répondra différemment selon la commande utilisée.
     private static int count = 0;
     private String name = "Client-";
 
@@ -46,7 +45,6 @@ public class ClientConnexion implements Runnable {
             }
         }
     }
-
 
     //Méthode pour lire les réponses du serveur
     private String read() throws IOException {

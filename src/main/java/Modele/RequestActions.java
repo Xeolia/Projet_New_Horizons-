@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,9 +31,9 @@ public class RequestActions {
 
     public static Utilisateur connexion() throws IOException {
         if(socketInstance == null){
-            socketInstance = new Socket("127.0.0.1", 1515);
+            socketInstance = new Socket(TimeServer.host, 1515);
         }
-        Utilisateur utilisateur = new Utilisateur("Tanguy","password"); //TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
+        Utilisateur utilisateur = new Utilisateur("Tanguy", "Benard","Guytanfeu","password"); //TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
         TimeServer.listClients.put(socketInstance,utilisateur);
         SaveLogs.put("Tanguy4", "password");
 
@@ -50,11 +51,11 @@ public class RequestActions {
         return utilisateur;
     }
 
-    public static void creationChatSimple() throws IOException {
+    public static void creationChatSimple(Utilisateur client, Utilisateur contact) throws IOException {
         //TODO (protocole CREATION_CHAT_SIMPLE)
     }
 
-    public static void creationChatGroupe() throws IOException {
+    public static void creationChatGroupe(Utilisateur client, ArrayList<Utilisateur>  contact) throws IOException {
         //TODO (protocole CREATION_CHAT_GROUPE)
     }
 

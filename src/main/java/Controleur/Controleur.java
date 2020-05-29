@@ -2,6 +2,7 @@ package Controleur;
 
 import Modele.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,8 @@ public class Controleur implements ActionListener, MouseListener {
     public Controleur() {
         Singletons.getInputPanel().enregistreEcouteur(this);
         Singletons.getInscriptionPanel().enregistreEcouteur(this);
+        Singletons.getPanelNord().enregistreEcouteur(this);
+        Singletons.getConnexionPanel().enregistreEcouteur(this);
     }
 
     @Override
@@ -25,16 +28,32 @@ public class Controleur implements ActionListener, MouseListener {
         if (event.getActionCommand() == "envoiMessage") {
             Singletons.getChatPanel().getTextArea().append(Singletons.getInputPanel().getTextField().getText() + "\n");
             try {
-                RequestActions.envoiMessage(TimeServer.listClients.get(RequestActions.socketInstance),null);
+                RequestActions.envoiMessage(TimeServer.listClients.get(RequestActions.socketInstance), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Singletons.getInputPanel().getTextField().setText("");
 
         }
+        if (event.getActionCommand() == "inscription") {
+
+            Singletons.getInscriptionPanel().getFieldPseudo().setText("");
+            Singletons.getInscriptionPanel().getFieldMDP().setText("");
+            Singletons.getInscriptionPanel().getFieldNom().setText("");
+            Singletons.getInscriptionPanel().getFieldPrenom().setText("");
+            Singletons.getInscriptionPanel().getFieldMDPVerification().setText("");
+
+            Singletons.getMaFenetre().repaint();
+            Singletons.getMaFenetre().revalidate();
+
+        }
         if (event.getActionCommand() == "connexion") {
-            Singletons.getMaFenetre().remove(Singletons.getPanelFond());
-            Singletons.getMaFenetre().add(Singletons.getChatPanel());
+            Singletons.getConnexionPanel().getFieldPseudo().setText("");
+            Singletons.getConnexionPanel().getFieldMDP().setText("");
+
+            Singletons.getPanelFond().remove(Singletons.getPanelOnglet());
+            Singletons.getPanelFond().add(Singletons.getChatPanel());
+            //Todo :  Après le test serveur de log, afficher le panel discussion
             try {
                 Utilisateur utilisateur = RequestActions.connexion();
             } catch (IOException e) {
@@ -42,6 +61,14 @@ public class Controleur implements ActionListener, MouseListener {
             }
             Singletons.getMaFenetre().repaint();
             Singletons.getMaFenetre().revalidate();
+
+        }
+        if (event.getActionCommand() == "discussion") {
+            JPanel jPanel = new JPanel();
+            jPanel.setBackground(Color.cyan);
+            Singletons.getPanelCentre().add(jPanel);
+            Singletons.getFenetreDiscussion().repaint();
+            Singletons.getFenetreDiscussion().revalidate();
 
         }
     }
@@ -64,10 +91,12 @@ public class Controleur implements ActionListener, MouseListener {
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
         Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(255,100,100));
+        Singletons.getConnexionPanel().getConnexionButton().setBackground(new Color(255,100,100));
     }
 
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
         Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(12, 91, 160));
+        Singletons.getConnexionPanel().getConnexionButton().setBackground(new Color(12, 91, 160));
     }
 }

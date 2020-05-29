@@ -1,14 +1,12 @@
 package Vue;
 
-
 import Controleur.Controleur;
-import Modele.Singletons;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class InscriptionPanel extends JPanel {
+public class ConnexionPanel extends JPanel {
 
     protected int strokeSize = 1;
     protected Color shadowColor = Color.black;
@@ -18,50 +16,31 @@ public class InscriptionPanel extends JPanel {
     protected int shadowGap = 5;
     protected int shadowOffset = 4;
     protected int shadowAlpha = 150;
-    protected JButton inscriptionButton;
-    protected JLabel labelInscription;
+    protected JButton connexionButton;
+
+    protected JLabel labelConnexion;
     protected JLabel emptyLine;
-    protected JTextField fieldPrenom;
-    protected JLabel labelPrenom;
-    protected JTextField fieldNom;
-    protected JLabel labelNom;
     protected JTextField fieldPseudo;
     protected JLabel labelPseudo;
     protected JTextField fieldMDP;
     protected JLabel labelMDP;
-    protected JTextField fieldMDPVerification;
-    protected JLabel labelMDPVerification;
 
-    public InscriptionPanel(){
+    public ConnexionPanel(){
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(102, 102, 102));
         this.setPreferredSize(new Dimension(600,700));
         this.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         this.setAlignmentY(JComponent.CENTER_ALIGNMENT);
         this.setOpaque(false);
-        labelInscription = new JLabel("Inscription");
+        labelConnexion = new JLabel("Connexion");
         emptyLine = new JLabel(" ");
-        fieldPrenom = new JTextField();
-        labelPrenom = new JLabel("Prenom");
-        fieldNom = new JTextField();
-        labelNom = new JLabel("Nom");
         fieldPseudo = new JTextField();
         labelPseudo = new JLabel("Pseudo");
         fieldMDP = new JPasswordField();
         labelMDP = new JLabel("Mot de passe");
-        fieldMDPVerification = new JPasswordField();
-        labelMDPVerification = new JLabel("Mot de passe (Vérification)");
-        inscriptionButton = new JButton("Enregistrer");
+        connexionButton = new JButton("Connexion");
 
-        labelInscription.setFont(new Font("", Font.ITALIC, 20));
-
-        fieldNom.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
-        fieldNom.setForeground(new Color(102, 102, 102));
-        fieldNom.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(12, 91, 160)));
-
-        fieldPrenom.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
-        fieldPrenom.setForeground(new Color(102, 102, 102));
-        fieldPrenom.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(12, 91, 160)));
+        labelConnexion.setFont(new Font("", Font.ITALIC, 20));
 
         fieldMDP.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         fieldMDP.setForeground(new Color(102, 102, 102));
@@ -75,54 +54,33 @@ public class InscriptionPanel extends JPanel {
         fieldMDP.setForeground(new Color(102, 102, 102));
         fieldMDP.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(12, 91, 160)));
 
-        fieldMDPVerification.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
-        fieldMDPVerification.setForeground(new Color(102, 102, 102));
-        fieldMDPVerification.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(12, 91, 160)));
-
-        labelNom.setFont(new Font("Segoe UI", 0, 10)); // NOI18N
-        labelNom.setForeground(new Color(153, 153, 153));
-
-        labelPrenom.setFont(new Font("Segoe UI", 0, 10)); // NOI18N
-        labelPrenom.setForeground(new Color(153, 153, 153));
-
         labelPseudo.setFont(new Font("Segoe UI", 0, 10)); // NOI18N
         labelPseudo.setForeground(new Color(153, 153, 153));
 
         labelMDP.setFont(new Font("Segoe UI", 0, 10)); // NOI18N
         labelMDP.setForeground(new Color(153, 153, 153));
 
-        labelMDPVerification.setFont(new Font("Segoe UI", 0, 10)); // NOI18N
-        labelMDPVerification.setForeground(new Color(153, 153, 153));
-
-        inscriptionButton.setBackground (new Color(12, 91, 160));
-        inscriptionButton.setForeground (Color.white);
-        inscriptionButton.setOpaque(true);
-        inscriptionButton.setBorderPainted(false);
+        connexionButton.setBackground (new Color(12, 91, 160));
+        connexionButton.setForeground (Color.white);
+        connexionButton.setOpaque(true);
+        connexionButton.setBorderPainted(false);
 
 
         this.setBorder(new EmptyBorder(10, 10, 10, 10));
         FormBuilder.init(this)
-                .add(labelInscription, FormBuilder::spanX3)
+                .add(labelConnexion, FormBuilder::spanX3)
                 .newRow()
                 .add(emptyLine)
                 .newRow()
-                .add(labelNom).add(labelPrenom)
-                .newRow()
-                .add(fieldNom, FormBuilder::fillParentX).add(fieldPrenom, FormBuilder::fillParentX)
-                .newRow()
                 .add(labelPseudo)
                 .newRow()
-                .add(fieldPseudo, FormBuilder::spanX2)
+                .add(fieldPseudo, FormBuilder::spanX3)
                 .newRow()
                 .add(labelMDP)
                 .newRow()
-                .add(fieldMDP, FormBuilder::spanX2)
+                .add(fieldMDP, FormBuilder::spanX3)
                 .newRow()
-                .add(labelMDPVerification)
-                .newRow()
-                .add(fieldMDPVerification, FormBuilder::spanX2)
-                .newRow()
-                .add("", inscriptionButton, FormBuilder::spanX2);
+                .add("", connexionButton, FormBuilder::spanX2);
     }
 
     @Override
@@ -163,16 +121,8 @@ public class InscriptionPanel extends JPanel {
         graphics.setStroke(new BasicStroke());
     }
 
-    public JButton getInscriptionButton() {
-        return inscriptionButton;
-    }
-
-    public JTextField getFieldPrenom() {
-        return fieldPrenom;
-    }
-
-    public JTextField getFieldNom() {
-        return fieldNom;
+    public JButton getConnexionButton() {
+        return connexionButton;
     }
 
     public JTextField getFieldPseudo() {
@@ -183,13 +133,11 @@ public class InscriptionPanel extends JPanel {
         return fieldMDP;
     }
 
-    public JTextField getFieldMDPVerification() {
-        return fieldMDPVerification;
+    public void enregistreEcouteur(Controleur controleur) {
+        connexionButton.addMouseListener(controleur);
+        connexionButton.addActionListener(controleur);
+        connexionButton.setActionCommand("connexion");
     }
 
-    public void enregistreEcouteur(Controleur controleur) {
-        inscriptionButton.addMouseListener(controleur);
-        inscriptionButton.addActionListener(controleur);
-        inscriptionButton.setActionCommand("inscription");
-    }
+
 }
