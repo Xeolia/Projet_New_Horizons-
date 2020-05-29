@@ -14,6 +14,8 @@ public class Singletons {
     private static PanelNord panelNord;
     private static FenetreDiscussion fenetreDiscussion;
     private static PanelDiscussion panelDiscussion;
+    private static ConnexionPanel connexionPanel;
+    private static PanelOnglet panelOnglet;
 
     public static MaFenetre getMaFenetre() {
         if (maFenetre == null) {
@@ -29,15 +31,29 @@ public class Singletons {
         return chatPanel;
     }
 
-    public static InscriptionPanel getInscriptionPanel() {
-        if (inscriptionPanel == null) {
-            return inscriptionPanel = new InscriptionPanel();
+    public static PanelOnglet getPanelOnglet(){
+        if(panelOnglet==null){
+            return panelOnglet= new PanelOnglet();
+        }
+        return panelOnglet;
+    }
+
+    public static InscriptionPanel getInscriptionPanel(){
+        if(inscriptionPanel==null){
+            return inscriptionPanel= new InscriptionPanel();
         }
         return inscriptionPanel;
     }
 
-    public static InputPanel getInputPanel() {
-        if (inputPanel == null) {
+    public static ConnexionPanel getConnexionPanel(){
+        if(connexionPanel==null){
+            return connexionPanel= new ConnexionPanel();
+        }
+        return connexionPanel;
+    }
+
+    public static InputPanel getInputPanel(){
+        if(inputPanel==null){
             inputPanel = new InputPanel();
         }
         return inputPanel;

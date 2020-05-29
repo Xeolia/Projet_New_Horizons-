@@ -1,6 +1,6 @@
 package Modele;
 
-public class Personne {
+public class Personne{
     private String nom;
     private String prenom;
     private String pseudo;

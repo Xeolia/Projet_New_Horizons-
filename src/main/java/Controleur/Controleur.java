@@ -20,6 +20,7 @@ public class Controleur implements ActionListener, MouseListener {
         Singletons.getInputPanel().enregistreEcouteur(this);
         Singletons.getInscriptionPanel().enregistreEcouteur(this);
         Singletons.getPanelNord().enregistreEcouteur(this);
+        Singletons.getConnexionPanel().enregistreEcouteur(this);
     }
 
     @Override
@@ -34,9 +35,25 @@ public class Controleur implements ActionListener, MouseListener {
             Singletons.getInputPanel().getTextField().setText("");
 
         }
+        if (event.getActionCommand() == "inscription") {
+
+            Singletons.getInscriptionPanel().getFieldPseudo().setText("");
+            Singletons.getInscriptionPanel().getFieldMDP().setText("");
+            Singletons.getInscriptionPanel().getFieldNom().setText("");
+            Singletons.getInscriptionPanel().getFieldPrenom().setText("");
+            Singletons.getInscriptionPanel().getFieldMDPVerification().setText("");
+
+            Singletons.getMaFenetre().repaint();
+            Singletons.getMaFenetre().revalidate();
+
+        }
         if (event.getActionCommand() == "connexion") {
-            Singletons.getMaFenetre().remove(Singletons.getPanelFond());
-            Singletons.getMaFenetre().add(Singletons.getChatPanel());
+            Singletons.getConnexionPanel().getFieldPseudo().setText("");
+            Singletons.getConnexionPanel().getFieldMDP().setText("");
+
+            Singletons.getPanelFond().remove(Singletons.getPanelOnglet());
+            Singletons.getPanelFond().add(Singletons.getChatPanel());
+            //Todo :  Après le test serveur de log, afficher le panel discussion
             try {
                 Utilisateur utilisateur = RequestActions.connexion();
             } catch (IOException e) {
@@ -73,11 +90,13 @@ public class Controleur implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
-        Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(255, 100, 100));
+        Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(255,100,100));
+        Singletons.getConnexionPanel().getConnexionButton().setBackground(new Color(255,100,100));
     }
 
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
         Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(12, 91, 160));
+        Singletons.getConnexionPanel().getConnexionButton().setBackground(new Color(12, 91, 160));
     }
 }

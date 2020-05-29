@@ -14,28 +14,9 @@ public class ClientProcessor implements Runnable {
     private PrintWriter writer;
     private BufferedInputStream reader;
     private int numClient;
-    private Hashtable listClients;
 
     public ClientProcessor(Socket pSock){
         sock = pSock;
-    }
-    public ClientProcessor(Socket sockClient, int countClients, Hashtable listClients1) {
-        this.listClients = listClients1;
-    }
-
-    public int getNumClient() {
-        return numClient;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    private String nom;
-
-    public ClientProcessor(Socket pSock, Hashtable listClients) {
-        this.sock = pSock;
-        this.listClients = listClients;
     }
 
     //Le traitement lancé dans un thread séparé
