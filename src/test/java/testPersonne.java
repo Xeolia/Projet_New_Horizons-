@@ -1,4 +1,4 @@
-import Modele.Personne;
+/*import Modele.Personne;
 import org.junit.Test;
 
 public class testPersonne {
@@ -30,4 +30,4 @@ public class testPersonne {
         assert (p.getPseudo().equals("pseudo"));
     }
 
-}
+}*/

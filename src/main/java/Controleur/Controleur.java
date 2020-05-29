@@ -2,6 +2,7 @@ package Controleur;
 
 import Modele.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class Controleur implements ActionListener, MouseListener {
     public Controleur() {
         Singletons.getInputPanel().enregistreEcouteur(this);
         Singletons.getInscriptionPanel().enregistreEcouteur(this);
+        Singletons.getPanelNord().enregistreEcouteur(this);
         Singletons.getConnexionPanel().enregistreEcouteur(this);
     }
 
@@ -26,7 +28,7 @@ public class Controleur implements ActionListener, MouseListener {
         if (event.getActionCommand() == "envoiMessage") {
             Singletons.getChatPanel().getTextArea().append(Singletons.getInputPanel().getTextField().getText() + "\n");
             try {
-                RequestActions.envoiMessage(TimeServer.listClients.get(RequestActions.socketInstance),null);
+                RequestActions.envoiMessage(TimeServer.listClients.get(RequestActions.socketInstance), null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -59,6 +61,14 @@ public class Controleur implements ActionListener, MouseListener {
             }
             Singletons.getMaFenetre().repaint();
             Singletons.getMaFenetre().revalidate();
+
+        }
+        if (event.getActionCommand() == "discussion") {
+            JPanel jPanel = new JPanel();
+            jPanel.setBackground(Color.cyan);
+            Singletons.getPanelCentre().add(jPanel);
+            Singletons.getFenetreDiscussion().repaint();
+            Singletons.getFenetreDiscussion().revalidate();
 
         }
     }

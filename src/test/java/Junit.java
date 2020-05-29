@@ -1,4 +1,4 @@
-import Modele.Singletons;
+/*import Modele.Singletons;
 import Vue.MaFenetre;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,4 +13,4 @@ public class Junit {
         Assert.assertNotNull(instance);
     }
 
-}
+}*/

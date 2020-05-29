@@ -1,5 +1,6 @@
 package Modele;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -13,8 +14,8 @@ public class MainClient {
         String nom = scanNom.nextLine();
         Socket socket = new Socket("127.0.0.1", 1515);
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
-        Thread t = new Thread(new ClientConnexion(socket, "nomClient"));
-        t.start();
+        //Thread t = new Thread(new ClientConnexion(socket));
+        //t.start();
 
         while (true) {
             Scanner sc = new Scanner(System.in);
@@ -23,5 +24,7 @@ public class MainClient {
             writer.write(messageServeur);
             writer.flush();
         }
+
     }
+
 }
