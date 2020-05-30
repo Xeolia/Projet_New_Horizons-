@@ -1,50 +1,49 @@
 package Modele;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class  Discussion {
 
-    ObjectMapper mapper = new ObjectMapper();
-    public int id;
-    public List<Message> listeMessages;
-    /*public List<Message> listeMessagesTemp;
-    public Map<String, Object> Save = new HashMap<String, Object>();*/
+    public String id;
+    public String nom;
+    public HashMap<String, String> listeMessages;
 
-    public Discussion(int id){
+    public void setListeMessages(HashMap<String, String> listeMessages) {
+        this.listeMessages = listeMessages;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Discussion(String id, String nom, HashMap<String, String> listeMessages){
         this.id = id;
-        listeMessages = new ArrayList<Message>();
+        this.nom = nom;
+        this.listeMessages = listeMessages;
     }
 
-
-    public void envoyerMessage(Date time, String text, String expediteur, String destinataire){
-        //listeMessagesTemp = new ArrayList<Message>();
-        listeMessages.add(new Message(time, text, expediteur, destinataire));
-        /*listeMessagesTemp.add(new Message(time, text, expediteur, destinataire));
-        Save.put(expediteur, listeMessagesTemp);
-        try {
-            mapper.writeValue(new File("result.json"), Save);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
-
+    public Discussion(){
+        this.id = null;
+        this.nom = null;
+        this.listeMessages = null;
+    }
+    public HashMap<String, String> getListeMessages() {
+        return listeMessages;
     }
 
-    public int getId() {
+    public String getId(){
         return id;
     }
 
-    public List<Message> getListeMessages() {
-        return listeMessages;
+    public void setId(String id) {
+        this.id = id;
     }
+
+
+
 }

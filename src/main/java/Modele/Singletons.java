@@ -4,7 +4,7 @@ import Controleur.Controleur;
 import Vue.*;
 
 public class Singletons {
-    public static PanelCentre panelCentre;
+    public static ListeDiscussion listeDiscussion;
     private static MaFenetre maFenetre;
     private static ChatPanel chatPanel;
     private static InscriptionPanel inscriptionPanel;
@@ -16,6 +16,7 @@ public class Singletons {
     private static ConnexionPanel connexionPanel;
     private static PanelOnglet panelOnglet;
     private static PanelError panelError;
+    private static ComboChoix comboChoix;
 
     public static MaFenetre getMaFenetre() {
         if (maFenetre == null) {
@@ -80,11 +81,11 @@ public class Singletons {
         return panelNord;
     }
 
-    public static PanelCentre getPanelCentre() {
-        if (panelCentre == null) {
-            return panelCentre = new PanelCentre();
+    public static ListeDiscussion getListeDiscussion() {
+        if (listeDiscussion == null) {
+            return listeDiscussion = new ListeDiscussion();
         }
-        return panelCentre;
+        return listeDiscussion;
     }
 
     public static PanelDiscussion getPanelDiscussion(){
@@ -99,5 +100,12 @@ public class Singletons {
             return panelError = new PanelError();
         }
         return panelError;
+    }
+
+    public static ComboChoix getComboChoix(){
+        if (comboChoix == null) {
+            return comboChoix = new ComboChoix();
+        }
+        return comboChoix;
     }
 }

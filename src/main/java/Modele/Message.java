@@ -9,11 +9,9 @@ public class Message {
     public String expediteur;
     public String destinataire;
 
-    public Message(Date time, String text, String expediteur, String destinataire){
-        this.time = time;
+    public Message(String text, String expediteur){
         this.text = text;
         this.expediteur = expediteur;
-        this.destinataire = destinataire;
     }
 
     public Date getTime() {

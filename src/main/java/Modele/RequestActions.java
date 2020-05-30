@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.*;
 
 
+import Vue.ComboChoix;
 import Vue.ConnexionPanel;
 import Vue.FrameError;
 import Vue.InscriptionPanel;
@@ -14,6 +15,7 @@ import Vue.InscriptionPanel;
 public class RequestActions {
     public static Socket socketInstance;
     public static String delimiteur = "/-/";
+    public static Utilisateur utilisateur;
 
     //TODO CHIFFRER LES REQUETES ET FAIRE EN SORTE QU'ELLE NE PASSE PASSE PAS EN CLAIR
 
@@ -41,7 +43,7 @@ public class RequestActions {
             socketInstance = new Socket(TimeServer.host, 1515);
         }
 
-        Utilisateur utilisateur = new Utilisateur();
+        utilisateur = new Utilisateur();
         ConnexionPanel connexionPanel = Singletons.getConnexionPanel();
         String requete = ProtocoleCode.CONNEXION + delimiteur + connexionPanel.getFieldPseudo().getText() + delimiteur + connexionPanel.getFieldMDP().getText();
         PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
@@ -56,33 +58,38 @@ public class RequestActions {
         stream = bis.read(b);
         response = new String(b, 0, stream);
 
-        utilisateur=SerialisationUtilisateur.findUserInJson(response);
+        utilisateur= Serialisation.findUserInJson(response);
 
         return utilisateur;
     }
 
-    public static void creationChatSimple(Utilisateur client, Utilisateur contact) throws IOException {
-        //TODO (protocole CREATION_CHAT_SIMPLE)
+    public static void creationChatSimple(String nom,String pseudo1, String pseudo2) throws IOException {
+        String requete = ProtocoleCode.CREATION_CHAT_SIMPLE+ delimiteur +nom+ delimiteur +pseudo1+ delimiteur +pseudo2;
+        PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
+        writer.write(requete);
+        writer.flush();
+
     }
 
     public static void creationChatGroupe(Utilisateur client, ArrayList<Utilisateur>  contact) throws IOException {
         //TODO (protocole CREATION_CHAT_GROUPE)
     }
 
-    public static void envoiMessage(Utilisateur expediteur, Utilisateur destinataire) throws IOException {
-        String requete = ProtocoleCode.MESSAGE+ delimiteur +expediteur.getPseudo()+ delimiteur +Singletons.getInputPanel().getTextField().getText();
+    public static void envoiMessage(Discussion discussion, String expediteur, String message) throws IOException {
+        String requete = ProtocoleCode.MESSAGE+ delimiteur +discussion.getId()+ delimiteur +expediteur+ delimiteur +message;
 
         PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
         writer.write(requete);
         writer.flush();
     }
 
-    public static void deconnexion(Utilisateur utilisateur) throws IOException {
+    public static void deconnexion() throws IOException {
         String requete = ProtocoleCode.DECONNEXION + delimiteur + utilisateur.getPseudo();
 
         PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
         writer.write(requete);
         writer.flush();
         socketInstance.close();
+        socketInstance=null;
     }
 }

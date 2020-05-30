@@ -1,8 +1,6 @@
 package Modele;
 
 import Vue.FrameError;
-import Vue.InscriptionPanel;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -10,10 +8,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
-import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 
 public class ClientProcessor implements Runnable {
 
@@ -56,7 +51,7 @@ public class ClientProcessor implements Runnable {
                         String pseudo_inscription = tableauReponse[3];
                         String mdp_inscription = tableauReponse[4];
                         Utilisateur utilisateur = new Utilisateur(nom_inscription, prenom_inscription,pseudo_inscription,mdp_inscription);
-                        SerialisationUtilisateur.insertUserToJson(utilisateur);
+                        Serialisation.insertUserToJson(utilisateur);
 
                         log = "Inscription de : " + pseudo_inscription;
                         System.out.println(log);
@@ -67,7 +62,7 @@ public class ClientProcessor implements Runnable {
                         Utilisateur utilisateur_connexion = new Utilisateur();
 
                         try {
-                            utilisateur_connexion=SerialisationUtilisateur.findUserInJson(pseudo_connexion);
+                            utilisateur_connexion= Serialisation.findUserInJson(pseudo_connexion);
 
                             if(utilisateur_connexion.getPseudo() != null && utilisateur_connexion.getPassword() !=null && utilisateur_connexion.getPassword().equals(mdp_connexion)){
                                 TimeServer.listClients.put(socket,utilisateur_connexion);
@@ -89,7 +84,15 @@ public class ClientProcessor implements Runnable {
 
                         break;
                     case CREATION_CHAT_SIMPLE:
-                        //TODO creation de discussion (un expediteur, un destinataire)
+                        String nom_discussion = tableauReponse[1];
+                        String pseudo1 = tableauReponse[2];
+                        String pseudo2 = tableauReponse[3];
+                        int id = Integer.parseInt(Serialisation.findLastDiscussionId())+1;
+                        DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion,new HashMap<String,String>(),pseudo1,pseudo2);
+                        Serialisation.insertSimpleDiscussionToJson(discussionSimple);
+
+                        log = "Discussion créé : " + nom_discussion;
+                        System.out.println(log);
                         break;
                     case CREATION_CHAT_GROUPE:
                         //TODO creation de discussion (un expediteur, un destinataire)
@@ -102,6 +105,15 @@ public class ClientProcessor implements Runnable {
                         break;
                     case DECONNEXION:
                         String pseudo_deconnexion =tableauReponse[1];
+                        Utilisateur utilisateur_deconnexion = Serialisation.findUserInJson(pseudo_deconnexion);
+
+                        if (utilisateur_deconnexion!=null){
+                            if(TimeServer.listClients.containsValue(utilisateur_deconnexion.getPseudo()))
+                            {
+                                TimeServer.listClients.remove(utilisateur_deconnexion);
+                            }
+                        }
+
                         System.out.println("Deconnexion de : " + pseudo_deconnexion);
                         socket.isClosed();
                         break;

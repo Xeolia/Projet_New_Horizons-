@@ -1,5 +1,6 @@
 package Vue;
 
+import Controleur.Controleur;
 import Modele.Singletons;
 
 import javax.swing.*;
@@ -89,6 +90,11 @@ public class ChatPanel extends JPanel {
                 height - shadowGap, arcs.width, arcs.height);
 
         graphics.setStroke(new BasicStroke());
+    }
+
+    public void enregistreEcouteur(Controleur controleur) {
+        boutonRetour.addActionListener(controleur);
+        boutonRetour.setActionCommand("quitChat");
     }
 
     public TextArea getTextArea() {
