@@ -5,25 +5,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
+import java.util.*;
 
 
 import Vue.ConnexionPanel;
 import Vue.FrameError;
 import Vue.InscriptionPanel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.javafx.webkit.UtilitiesImpl;
 
 public class RequestActions {
     public static Socket socketInstance;
     public static String delimiteur = "/-/";
-    public List<Message> listeMessagesTemp;
+    public static List<Object> listeMessagesTemp;
     public static Map<String, Object> SaveUserLogs = new HashMap<String, Object>();
     public static Map<String, Object> SaveLogsTemp = new HashMap<String, Object>();
     static ObjectMapper mapper = new ObjectMapper();
     public static File userDataSave = Paths.get("userData.json").toFile();
+    public static Object temp;
+    public static String tempS;
+    static List<?> list = new ArrayList<>();
+    static String  User;
 
 
     //TODO CHIFFRER LES REQUETES ET FAIRE EN SORTE QU'ELLE NE PASSE PASSE PAS EN CLAIR
@@ -57,15 +59,48 @@ public class RequestActions {
         if(socketInstance == null){
             socketInstance = new Socket(TimeServer.host, 1515);
         }//TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
-        Utilisateur utilisateur = null;
+        Utilisateur utilisateur = new Utilisateur();
         ConnexionPanel connexionPanel = Singletons.getConnexionPanel();
 
         try {
-            SaveLogsTemp = mapper.readValue(Paths.get("userData.json").toFile(), HashMap.class);
-            for (Map.Entry<String, Object> entry : SaveLogsTemp.entrySet()) {
-                SaveUserLogs.put(entry.getKey(), entry.getValue());
+
+            //List<Utilisateur> users = Arrays.asList(mapper.readValue(Paths.get("userData.json").toFile(), Utilisateur[].class));
+            //users.forEach(System.out::println);
+
+
+            //vérification Json de la connection
+            Map<?, ?> map = mapper.readValue(Paths.get("userData.json").toFile(), Map.class);
+            String pseudo = null;
+            String nom = null;
+            String prenom = null;
+            String password = null;
+            // print map entries
+            for (Map.Entry<?, ?> entry : map.entrySet()) {
+                if (entry.getKey() == connexionPanel.getFieldPseudo().getText()){
+                    Map<?, ?> mapTemp = (Map) entry.getValue();
+                    for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
+                        if(entry2.getKey() == "pseudo"){
+                           pseudo = (String) entry2.getValue();
+                        }
+                        if(entry2.getKey() == "nom"){
+                              nom = (String) entry2.getValue();
+                        }
+                        if(entry2.getKey() == "prenom"){
+                             prenom = (String) entry2.getValue();
+                        }
+                        if(entry2.getKey() == "password"){
+                             password = (String) entry2.getValue();
+                        }
+
+                    }
+
+                }
             }
-            utilisateur = (Utilisateur) SaveUserLogs.get(connexionPanel.getFieldPseudo().getText());
+            utilisateur.setPseudo(pseudo);
+            utilisateur.setNom(nom);
+            utilisateur.setPrenom(prenom);
+            utilisateur.setPassword(password);
+
             if(utilisateur != null && utilisateur.getPassword().equals(connexionPanel.getFieldMDP().getText())){
                 TimeServer.listClients.put(socketInstance,utilisateur);
                 Thread t = new Thread(new ClientConnexion(socketInstance, utilisateur.getPseudo()));

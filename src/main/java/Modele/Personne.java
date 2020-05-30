@@ -11,6 +11,12 @@ public class Personne{
         this.pseudo = pseudo;
     }
 
+    public Personne(){
+        this.nom = null;
+        this.prenom = null;
+        this.pseudo = null;
+    }
+
     public String getNom() {
         return nom;
     }
