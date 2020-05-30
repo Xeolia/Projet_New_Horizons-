@@ -15,7 +15,6 @@ import java.net.Socket;
 public class Controleur implements ActionListener, MouseListener {
     Socket socket;
 
-
     public Controleur() {
         Singletons.getInputPanel().enregistreEcouteur(this);
         Singletons.getInscriptionPanel().enregistreEcouteur(this);
@@ -36,39 +35,50 @@ public class Controleur implements ActionListener, MouseListener {
 
         }
         if (event.getActionCommand() == "inscription") {
-
-            Singletons.getInscriptionPanel().getFieldPseudo().setText("");
-            Singletons.getInscriptionPanel().getFieldMDP().setText("");
-            Singletons.getInscriptionPanel().getFieldNom().setText("");
-            Singletons.getInscriptionPanel().getFieldPrenom().setText("");
-            Singletons.getInscriptionPanel().getFieldMDPVerification().setText("");
-
-            Singletons.getMaFenetre().repaint();
-            Singletons.getMaFenetre().revalidate();
-
-        }
-        if (event.getActionCommand() == "connexion") {
-            Singletons.getConnexionPanel().getFieldPseudo().setText("");
-            Singletons.getConnexionPanel().getFieldMDP().setText("");
-
-            Singletons.getPanelFond().remove(Singletons.getPanelOnglet());
-            Singletons.getPanelFond().add(Singletons.getChatPanel());
-            //Todo :  Après le test serveur de log, afficher le panel discussion
+            boolean code = false;
             try {
-                Utilisateur utilisateur = RequestActions.connexion();
+                code = RequestActions.inscription();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Singletons.getMaFenetre().repaint();
-            Singletons.getMaFenetre().revalidate();
+            if (code) {
+                Singletons.getInscriptionPanel().getFieldPseudo().setText("");
+                Singletons.getInscriptionPanel().getFieldMDP().setText("");
+                Singletons.getInscriptionPanel().getFieldNom().setText("");
+                Singletons.getInscriptionPanel().getFieldPrenom().setText("");
+                Singletons.getInscriptionPanel().getFieldMDPVerification().setText("");
+
+                Singletons.getMaFenetre().repaint();
+                Singletons.getMaFenetre().revalidate();
+            }
+        }
+        if (event.getActionCommand() == "connexion") {
+            //Todo :  Après le test serveur de log, afficher le panel discussion
+            try {
+                Utilisateur utilisateur = RequestActions.connexion();
+                if(utilisateur!=null){
+                    Singletons.getConnexionPanel().getFieldPseudo().setText("");
+                    Singletons.getConnexionPanel().getFieldMDP().setText("");
+
+                    Singletons.getPanelFond().remove(Singletons.getPanelOnglet());
+                    Singletons.getPanelFond().add(Singletons.getPanelDiscussion());
+
+                    Singletons.getMaFenetre().repaint();
+                    Singletons.getMaFenetre().revalidate();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
 
         }
         if (event.getActionCommand() == "discussion") {
             JPanel jPanel = new JPanel();
             jPanel.setBackground(Color.cyan);
             Singletons.getPanelCentre().add(jPanel);
-            Singletons.getFenetreDiscussion().repaint();
-            Singletons.getFenetreDiscussion().revalidate();
+            Singletons.getMaFenetre().repaint();
+            Singletons.getMaFenetre().revalidate();
 
         }
     }

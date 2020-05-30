@@ -24,7 +24,5 @@ public class MainClient {
             writer.write(messageServeur);
             writer.flush();
         }
-
     }
-
 }

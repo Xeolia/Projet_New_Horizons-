@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -12,42 +11,73 @@ import java.util.Map;
 import java.util.ArrayList;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import Vue.ConnexionPanel;
+import Vue.FrameError;
+import Vue.InscriptionPanel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class RequestActions {
     public static Socket socketInstance;
     public static String delimiteur = "/-/";
     public List<Message> listeMessagesTemp;
-    public static Map<String, Object> SaveLogs = new HashMap<String, Object>();
+    public static Map<String, Object> SaveUserLogs = new HashMap<String, Object>();
     public static Map<String, Object> SaveLogsTemp = new HashMap<String, Object>();
     static ObjectMapper mapper = new ObjectMapper();
     public static File userDataSave = Paths.get("userData.json").toFile();
 
+
     //TODO CHIFFRER LES REQUETES ET FAIRE EN SORTE QU'ELLE NE PASSE PASSE PAS EN CLAIR
 
-    public static void inscription() throws IOException {
-        //TODO
+    public static boolean inscription() throws IOException {
+        if(socketInstance == null){
+            socketInstance = new Socket(TimeServer.host, 1515);
+        }
+        InscriptionPanel inscriptionPanel = Singletons.getInscriptionPanel();
+        if (inscriptionPanel.getFieldMDP().getText().equals(inscriptionPanel.getFieldMDPVerification().getText())){
+            Utilisateur utilisateur = new Utilisateur(inscriptionPanel.getFieldNom().getText(), inscriptionPanel.getFieldPrenom().getText(),inscriptionPanel.getFieldPseudo().getText(),inscriptionPanel.getFieldMDP().getText());
+            SaveUserLogs.put(utilisateur.getPseudo(), utilisateur);
+            try {
+
+                mapper.writeValue(Paths.get("userData.json").toFile(), SaveUserLogs);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            new FrameError();
+            return false;
+        }
+
+        socketInstance.close();
+        return false;
     }
 
     public static Utilisateur connexion() throws IOException {
         if(socketInstance == null){
             socketInstance = new Socket(TimeServer.host, 1515);
-        }
-        Utilisateur utilisateur = new Utilisateur("Tanguy", "Benard","Guytanfeu","password"); //TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
-        TimeServer.listClients.put(socketInstance,utilisateur);
-        SaveLogs.put("Tanguy4", "password");
-
+        }//TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
+        Utilisateur utilisateur = null;
+        ConnexionPanel connexionPanel = Singletons.getConnexionPanel();
 
         try {
-            SaveLogsTemp =  mapper.readValue(Paths.get("userData.json").toFile(), Map.class);
-            for (Map.Entry<?, ?> entry : SaveLogsTemp.entrySet()) {
-                SaveLogs.put((String)entry.getKey() ,entry.getValue());
+            SaveLogsTemp = mapper.readValue(Paths.get("userData.json").toFile(), HashMap.class);
+            for (Map.Entry<String, Object> entry : SaveLogsTemp.entrySet()) {
+                SaveUserLogs.put(entry.getKey(), entry.getValue());
             }
-            mapper.writeValue(Paths.get("userData.json").toFile(), SaveLogs);
+            utilisateur = (Utilisateur) SaveUserLogs.get(connexionPanel.getFieldPseudo().getText());
+            if(utilisateur != null && utilisateur.getPassword().equals(connexionPanel.getFieldMDP().getText())){
+                TimeServer.listClients.put(socketInstance,utilisateur);
+                Thread t = new Thread(new ClientConnexion(socketInstance, utilisateur.getPseudo()));
+            }
+            else{
+                Singletons.getPanelError().getLabelError().setText(connexionPanel.getFieldPseudo().getText());
+                new FrameError();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Thread t = new Thread(new ClientConnexion(socketInstance, utilisateur.getPseudo()));
+
         return utilisateur;
     }
 

@@ -30,13 +30,11 @@ public class PanelCentre extends JPanel {
         troisiemeDiscussion.setBackground(Color.gray);
         quatriemeDiscussion.setBackground(Color.blue);
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setLayout(new GridLayout(10, 1,30,50));
+        setLayout(new GridLayout(10, 1,500,50));
         this.add(premiereDiscussion);
         this.add(deuxiemeDiscussion);
         this.add(troisiemeDiscussion);
         this.add(quatriemeDiscussion);
-
-
     }
 
 }
