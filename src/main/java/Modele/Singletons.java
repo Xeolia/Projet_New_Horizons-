@@ -16,7 +16,6 @@ public class Singletons {
     private static ConnexionPanel connexionPanel;
     private static PanelOnglet panelOnglet;
     private static PanelError panelError;
-    private static FrameError frameError;
 
     public static MaFenetre getMaFenetre() {
         if (maFenetre == null) {

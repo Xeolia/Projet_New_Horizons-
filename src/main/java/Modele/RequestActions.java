@@ -1,32 +1,19 @@
 package Modele;
 
-import java.io.File;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.file.Paths;
 import java.util.*;
 
 
 import Vue.ConnexionPanel;
 import Vue.FrameError;
 import Vue.InscriptionPanel;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.javafx.webkit.UtilitiesImpl;
 
 public class RequestActions {
     public static Socket socketInstance;
     public static String delimiteur = "/-/";
-    public static List<Object> listeMessagesTemp;
-    public static Map<String, Object> SaveUserLogs = new HashMap<String, Object>();
-    public static Map<String, Object> SaveLogsTemp = new HashMap<String, Object>();
-    static ObjectMapper mapper = new ObjectMapper();
-    public static File userDataSave = Paths.get("userData.json").toFile();
-    public static Object temp;
-    public static String tempS;
-    static List<?> list = new ArrayList<>();
-
-
 
     //TODO CHIFFRER LES REQUETES ET FAIRE EN SORTE QU'ELLE NE PASSE PASSE PAS EN CLAIR
 
@@ -35,91 +22,41 @@ public class RequestActions {
             socketInstance = new Socket(TimeServer.host, 1515);
         }
         InscriptionPanel inscriptionPanel = Singletons.getInscriptionPanel();
-        if (inscriptionPanel.getFieldMDP().getText().equals(inscriptionPanel.getFieldMDPVerification().getText())){
-            Utilisateur utilisateur = new Utilisateur(inscriptionPanel.getFieldNom().getText(), inscriptionPanel.getFieldPrenom().getText(),inscriptionPanel.getFieldPseudo().getText(),inscriptionPanel.getFieldMDP().getText());
-            SaveUserLogs.put(utilisateur.getPseudo(), utilisateur);
-            try {
-
-                mapper.writeValue(Paths.get("userData.json").toFile(), SaveUserLogs);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (inscriptionPanel.getFieldMDP().getText().equals(inscriptionPanel.getFieldMDPVerification().getText())) {
+            String requete = ProtocoleCode.CREATION_COMPTE + delimiteur + inscriptionPanel.getFieldPrenom().getText() + delimiteur + inscriptionPanel.getFieldNom().getText() + delimiteur + inscriptionPanel.getFieldPseudo().getText() + delimiteur + inscriptionPanel.getFieldMDP().getText();
+            PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
+            writer.write(requete);
+            writer.flush();
+            return true;
         }
         else{
             new FrameError();
+            socketInstance.close();
             return false;
         }
-
-        socketInstance.close();
-        return false;
     }
 
     public static Utilisateur connexion() throws IOException {
-        if(socketInstance == null){
+        if(socketInstance == null) {
             socketInstance = new Socket(TimeServer.host, 1515);
-        }//TODO changer l'utilisateur avec les valeurs rentré dans le formulaire (après verification du serveur)
+        }
+
         Utilisateur utilisateur = new Utilisateur();
         ConnexionPanel connexionPanel = Singletons.getConnexionPanel();
+        String requete = ProtocoleCode.CONNEXION + delimiteur + connexionPanel.getFieldPseudo().getText() + delimiteur + connexionPanel.getFieldMDP().getText();
+        PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
+        writer.write(requete);
+        writer.flush();
 
-        try {
+        BufferedInputStream bis = new BufferedInputStream(socketInstance.getInputStream());
 
-            //List<Utilisateur> users = Arrays.asList(mapper.readValue(Paths.get("userData.json").toFile(), Utilisateur[].class));
-            //users.forEach(System.out::println);
+        String response = "";
+        int stream;
+        byte[] b = new byte[4096];
+        stream = bis.read(b);
+        response = new String(b, 0, stream);
 
-
-            //vérification Json de la connection
-            Map<?, ?> map = mapper.readValue(Paths.get("userData.json").toFile(), Map.class);
-            String pseudo = null;
-            String nom = null;
-            String prenom = null;
-            String password = null;
-            // print map entries
-            for (Map.Entry<?, ?> entry : map.entrySet()) {
-                if (entry.getKey().equals(connexionPanel.getFieldPseudo().getText())){
-                    Map<?, ?> mapTemp = (Map) entry.getValue();
-                    for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
-                        if(entry2.getKey() == "pseudo"){
-                            pseudo = (String) entry2.getValue();
-                            System.out.println(pseudo+" pseudo recup"); //il récupère
-                        }
-                        if(entry2.getKey() == "nom"){
-                              nom = (String) entry2.getValue();
-                            System.out.println(nom);
-                        }
-                        if(entry2.getKey() == "prenom"){
-                             prenom = (String) entry2.getValue();
-                            System.out.println(prenom);
-                        }
-                        if(entry2.getKey() == "password"){
-                             password = (String) entry2.getValue();
-                             System.out.println(password);
-                        }
-
-                    }
-
-                }
-            }
-
-            utilisateur.setPseudo(pseudo);
-            utilisateur.setNom(nom);
-            utilisateur.setPrenom(prenom);
-            utilisateur.setPassword(password);
-
-            System.out.println(utilisateur.getPseudo()+" "+utilisateur.getPassword()+" "+utilisateur.getNom()+" " + utilisateur.getPrenom());
-
-
-            if(utilisateur.getPseudo() != null && utilisateur.getPassword() !=null && utilisateur.getPassword().equals(connexionPanel.getFieldMDP().getText())){
-                TimeServer.listClients.put(socketInstance,utilisateur);
-                Thread t = new Thread(new ClientConnexion(socketInstance, utilisateur.getPseudo()));
-            }
-            else{
-                Singletons.getPanelError().getLabelError().setText(connexionPanel.getFieldPseudo().getText());
-                new FrameError();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        utilisateur=SerialisationUtilisateur.findUserInJson(response);
 
         return utilisateur;
     }

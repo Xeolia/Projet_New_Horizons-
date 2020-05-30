@@ -1,22 +1,29 @@
 package Modele;
 
+import Vue.FrameError;
+import Vue.InscriptionPanel;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class ClientProcessor implements Runnable {
 
-    private Socket sock;
+    private Socket socket;
     private PrintWriter writer;
     private BufferedInputStream reader;
     private int numClient;
 
     public ClientProcessor(Socket pSock){
-        sock = pSock;
+        socket = pSock;
     }
 
     //Le traitement lancé dans un thread séparé
@@ -25,33 +32,61 @@ public class ClientProcessor implements Runnable {
 
         boolean closeConnexion = false;
         //tant que la connexion est active, on traite les demandes
-        while (!sock.isClosed()) {
+        while (!socket.isClosed()) {
 
             try {
-                writer = new PrintWriter(sock.getOutputStream());
-                reader = new BufferedInputStream(sock.getInputStream());
+                writer = new PrintWriter(socket.getOutputStream());
+                reader = new BufferedInputStream(socket.getInputStream());
 
                 String response = read();
-                InetSocketAddress remote = (InetSocketAddress) sock.getRemoteSocketAddress();
+                InetSocketAddress remote = (InetSocketAddress) socket.getRemoteSocketAddress();
 
                 System.out.println("===================================\n" +
                         "\tString recue du client n° " + numClient + "\n" +
                         "> " + response + "\n" +
                         "===================================");
 
-                String toSend = "";
+                String log = "";
                 String[] tableauReponse = response.split(RequestActions.delimiteur);
                 ProtocoleCode code = ProtocoleCode.values()[Integer.parseInt(tableauReponse[0])];
                 switch (code) {
                     case CREATION_COMPTE:
-                        System.out.println("Creation de contact");
-                        //TODO ajout protocole (ajout sur le serveur JSON du compte si le pseudo n'est pas deja utilisé)
+                        String nom_inscription = tableauReponse[1];
+                        String prenom_inscription = tableauReponse[2];
+                        String pseudo_inscription = tableauReponse[3];
+                        String mdp_inscription = tableauReponse[4];
+                        Utilisateur utilisateur = new Utilisateur(nom_inscription, prenom_inscription,pseudo_inscription,mdp_inscription);
+                        SerialisationUtilisateur.insertUserToJson(utilisateur);
+
+                        log = "Inscription de : " + pseudo_inscription;
+                        System.out.println(log);
                         break;
                     case CONNEXION:
                         String pseudo_connexion =tableauReponse[1];
-                        toSend = "Connexion de : " + pseudo_connexion;
+                        String mdp_connexion =tableauReponse[2];
+                        Utilisateur utilisateur_connexion = new Utilisateur();
 
-                        System.out.println(toSend);
+                        try {
+                            utilisateur_connexion=SerialisationUtilisateur.findUserInJson(pseudo_connexion);
+
+                            if(utilisateur_connexion.getPseudo() != null && utilisateur_connexion.getPassword() !=null && utilisateur_connexion.getPassword().equals(mdp_connexion)){
+                                TimeServer.listClients.put(socket,utilisateur_connexion);
+                                Thread t = new Thread(new ClientConnexion(RequestActions.socketInstance, utilisateur_connexion.getPseudo()));
+                                log = "Connexion de : " + pseudo_connexion;
+                                System.out.println(log);
+                                String toSend = pseudo_connexion;
+                                writer.write(toSend);
+                                writer.flush();
+                            }
+                            else{
+                                Singletons.getPanelError().getLabelError().setText("Le nom d'utilisateur, ou le mot de passe n'est pas bon");
+                                new FrameError();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
                         break;
                     case CREATION_CHAT_SIMPLE:
                         //TODO creation de discussion (un expediteur, un destinataire)
@@ -62,17 +97,17 @@ public class ClientProcessor implements Runnable {
                     case MESSAGE:
                         String expediteur_message =tableauReponse[1];
                         String message =tableauReponse[2];
-                        toSend = expediteur_message+ " : " + message;
-                        System.out.println(toSend);
+                        log = expediteur_message+ " : " + message;
+                        System.out.println(log);
                         break;
                     case DECONNEXION:
                         String pseudo_deconnexion =tableauReponse[1];
                         System.out.println("Deconnexion de : " + pseudo_deconnexion);
-                        sock.isClosed();
+                        socket.isClosed();
                         break;
                     default:
-                        toSend = "Une erreur s'est produite, le code du protocole n'a pas été reconnu";
-                        System.err.println(toSend);
+                        log = "Une erreur s'est produite, le code du protocole n'a pas été reconnu";
+                        System.err.println(log);
                         break;
                 }
                 //Il FAUT IMPERATIVEMENT UTILISER flush()
@@ -81,16 +116,14 @@ public class ClientProcessor implements Runnable {
 
                 // on renvoie la reponse a tous les clients pour l'instant
                 for (Socket s : TimeServer.listClients.keySet()) {
-                    PrintWriter writerDiffusion = new PrintWriter(s.getOutputStream());
-                    writerDiffusion.write(toSend);
-                    writerDiffusion.flush();
+                    System.out.println(s.toString());
                 }
 
                 if (closeConnexion) {
                     System.err.println("COMMANDE CLOSE DETECTEE ! ");
                     writer = null;
                     reader = null;
-                    sock.close();
+                    socket.close();
                     break;
                 }
             } catch (SocketException e) {
@@ -112,6 +145,4 @@ public class ClientProcessor implements Runnable {
         response = new String(b, 0, stream);
         return response;
     }
-
-
 }
