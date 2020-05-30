@@ -25,7 +25,7 @@ public class RequestActions {
     public static Object temp;
     public static String tempS;
     static List<?> list = new ArrayList<>();
-    static String  User;
+
 
 
     //TODO CHIFFRER LES REQUETES ET FAIRE EN SORTE QU'ELLE NE PASSE PASSE PAS EN CLAIR
@@ -76,32 +76,40 @@ public class RequestActions {
             String password = null;
             // print map entries
             for (Map.Entry<?, ?> entry : map.entrySet()) {
-                if (entry.getKey() == connexionPanel.getFieldPseudo().getText()){
+                if (entry.getKey().equals(connexionPanel.getFieldPseudo().getText())){
                     Map<?, ?> mapTemp = (Map) entry.getValue();
                     for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
                         if(entry2.getKey() == "pseudo"){
-                           pseudo = (String) entry2.getValue();
+                            pseudo = (String) entry2.getValue();
+                            System.out.println(pseudo+" pseudo recup"); //il récupère
                         }
                         if(entry2.getKey() == "nom"){
                               nom = (String) entry2.getValue();
+                            System.out.println(nom);
                         }
                         if(entry2.getKey() == "prenom"){
                              prenom = (String) entry2.getValue();
+                            System.out.println(prenom);
                         }
                         if(entry2.getKey() == "password"){
                              password = (String) entry2.getValue();
+                             System.out.println(password);
                         }
 
                     }
 
                 }
             }
+
             utilisateur.setPseudo(pseudo);
             utilisateur.setNom(nom);
             utilisateur.setPrenom(prenom);
             utilisateur.setPassword(password);
 
-            if(utilisateur != null && utilisateur.getPassword().equals(connexionPanel.getFieldMDP().getText())){
+            System.out.println(utilisateur.getPseudo()+" "+utilisateur.getPassword()+" "+utilisateur.getNom()+" " + utilisateur.getPrenom());
+
+
+            if(utilisateur.getPseudo() != null && utilisateur.getPassword() !=null && utilisateur.getPassword().equals(connexionPanel.getFieldMDP().getText())){
                 TimeServer.listClients.put(socketInstance,utilisateur);
                 Thread t = new Thread(new ClientConnexion(socketInstance, utilisateur.getPseudo()));
             }
