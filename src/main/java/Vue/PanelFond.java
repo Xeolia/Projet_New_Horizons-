@@ -11,47 +11,111 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * La classe PanelFond permet de définir le panel de fond
+ *
+ * @author Tanguy Bénard, Alexia Serrier
+ * @version 1.0
+ */
+
 public class PanelFond extends JPanel {
 
+    /**
+     * Initialisation de la couleur kStartColor
+     * @see Color
+     */
     public Color kStartColor = new Color(255,100,100);
+
+    /**
+     * Initialisation de la couleur kEndColor
+     * @see Color
+     */
     public Color kEndColor = Color.BLUE;
+
+    /**
+     * Initialisation de la variable kTransparentControls sur true
+     */
     public boolean kTransparentControls = true;
+
+    /**
+     * Initialisation de la variable kGradientFocus sur 500
+     */
     public int kGradientFocus = 500;
+
+    /**
+     * label de titre
+     * @see JLabel
+     */
     private JLabel labelTitre;
 
+    /**
+     * Cette méthode permet de récupérer la variable kStartColor
+     * @return variable kStartColor
+     */
     public Color getkStartColor() {
         return kStartColor;
     }
 
+    /**
+     * Cette méthode permet de récupérer la variable kStartColor
+     * @param kStartColor
+     */
     public void setkStartColor(Color kStartColor) {
         this.kStartColor = kStartColor;
     }
 
+    /**
+     * Cette méthode permet de récupérer la variable kEndColor
+     * @return kEndColor
+     */
     public Color getkEndColor() {
         return kEndColor;
     }
 
+    /**
+     * Cette méthode permet de changer la variable kEndColor
+     * @param kEndColor nouvelle variable kEndColor
+     */
     public void setkEndColor(Color kEndColor) {
         this.kEndColor = kEndColor;
     }
 
+    /**
+     * Cette méthode permet de récupérer la variable kEndColor
+     * @return la variable kTransparentControls
+     */
     public boolean iskTransparentControls() {
         return kTransparentControls;
     }
 
+    /**
+     * Cette méthode permet de changer la variable kTransparentControls
+     * @param kTransparentControls nouvelle variable kTransparentControls
+     */
     public void setkTransparentControls(boolean kTransparentControls) {
         this.kTransparentControls = kTransparentControls;
     }
 
+    /**
+     * Cette méthode permet de récupérer la variable kGradientFocus
+     * @return la variable kGradientFocus
+     */
     public int getkGradientFocus() {
         return kGradientFocus;
     }
 
+
+    /**
+     * Cette méthode permet de changer la variable kGradientFocus
+     * @param kGradientFocus nouvelle variable kGradientFocus
+     */
     public void setkGradientFocus(int kGradientFocus) {
         this.kGradientFocus = kGradientFocus;
     }
-  
 
+    /**
+     * Constructeur de la classe PanelFond
+     */
     public PanelFond() {
 
         if (kTransparentControls) {
@@ -62,11 +126,19 @@ public class PanelFond extends JPanel {
         this.add(Singletons.getPanelOnglet());
     }
 
+    /**
+     * Cette Méthode permet de mettre les mouvements de souris sur écoute
+     * @param l objet MouseMotionListerner
+     */
     @Override
     public synchronized void addMouseMotionListener(MouseMotionListener l) {
         super.addMouseMotionListener(l); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Cette méthode permet de changer l'aspect de l'interface
+     * @param g type de graphique a utiliser
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -82,6 +154,10 @@ public class PanelFond extends JPanel {
         //g2d.dispose();
     }
 
+    /**
+     * Cette méthode permet de paramétrer
+     * @param isOpaque variable d'opacité
+     */
     private void setBg(boolean isOpaque) {
         Component[] components = this.getComponents();
         for (Component component : components) {
@@ -97,6 +173,10 @@ public class PanelFond extends JPanel {
         }
     }
 
+    /**
+     * Cette méthode permet de récupérer l'objet InscriptionPanel
+     * @return objet InscriptionPanel
+     */
     public InscriptionPanel getInscriptionPanel() {
         return Singletons.getInscriptionPanel();
     }

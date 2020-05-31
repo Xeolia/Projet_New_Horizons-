@@ -5,12 +5,37 @@ import Modele.Singletons;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * La classe PanelDiscussion permet de définir le panel discussion de l'application
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
+
 public class PanelDiscussion extends JPanel {
+
+    /**
+     * Le panel contenant la liste de message
+     * @see JPanel
+     */
     private JPanel listContainer;
+
+    /**
+     * Panel se trouvant en haut
+     * @see PanelNord
+     */
     JPanel panelNord;
+
+    /**
+     * Panel se trouvant au centre
+     * @see PanelCentre
+     */
     JPanel panelCentre;
 
 
+    /**
+     * Constructeur de la classe JPanel
+     */
     public PanelDiscussion() {
 
         panelNord = Singletons.getPanelNord();

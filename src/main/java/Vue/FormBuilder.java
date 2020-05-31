@@ -4,22 +4,59 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.function.Consumer;
 
+/**
+ * La classe FormBuilder permet de construire la fenêtre avec les différents éléments
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
+
 public class FormBuilder {
+
+    /**
+     * Conteneur qui contiendra plusieurs JLabel
+     * @see Container
+     */
     private final Container container;
+
+    /**
+     * Variable de numéro de ligne
+     */
     private int row;
+
+    /**
+     * Variable de numéro de colonne
+     */
     private int col = -1;
+
+    /**
+     * Contrainte applicable a des label
+     * @see GridBagConstraints
+     */
     private GridBagConstraints labelCons;
 
+    /**
+     * Constructeur de la classe FormBuilder
+     * @param container
+     */
     private FormBuilder(Container container) {
         this.container = container;
         container.setLayout(new GridBagLayout());
     }
 
+    /**
+     * Méhtode static permettant de créer un buidler préfabriqué
+     * @param container ce que le buider contiendra
+     * @return le builder
+     */
     public static FormBuilder init(Container container) {
         FormBuilder builder = new FormBuilder(container);
         return builder;
     }
 
+    /**
+     * Cette méthode initialise les contraintes sur les labels
+     */
     private void initLabelCons() {
         labelCons = new GridBagConstraints();
         labelCons.weightx = 0;
@@ -28,12 +65,23 @@ public class FormBuilder {
         labelCons.anchor = GridBagConstraints.NORTHEAST;
     }
 
+    /**
+     * Cette méthode permet d'ajouter un composant sans label
+     * @param comp le composant
+     * @return un objet FormBuilder
+     */
     //add component without label
     public FormBuilder add(JComponent comp) {
         this.add(null, comp, null);
         return this;
     }
 
+    /**
+     * Cette méthode permet d'ajouter un composant sans label et de permettre d'appliquer des contraintes
+     * @param comp le composant
+     * @param consSetters les contraintes a appliquer
+     * @return un objet FormBuilder
+     */
     //add component without label and allow caller to set constraints
     @SafeVarargs
     public final FormBuilder add(JComponent comp, Consumer<GridBagConstraints>... consSetters) {
@@ -41,6 +89,13 @@ public class FormBuilder {
         return this;
     }
 
+    /**
+     * Cette méthode permet d'ajouter un composant avec label et d'appliquer des contraintes
+     * @param label
+     * @param comp
+     * @param consSetters
+     * @return un objet FormBuilder
+     */
     //add component with label and allow caller to set constraints
     @SafeVarargs
     public final FormBuilder add(String label, JComponent comp, Consumer<GridBagConstraints>... consSetters) {
@@ -67,6 +122,11 @@ public class FormBuilder {
         return this;
     }
 
+    /**
+     * Cette méthode permet d'ajouter plusieurs label en temps que légende de ligne
+     * @param labels les labels a ajouter
+     * @return un objet FormBuilder
+     */
     //add multiple labels in current row
     public FormBuilder addLabelsAsRowHeading(String... labels) {
         GridBagConstraints cons = new GridBagConstraints();
@@ -79,6 +139,10 @@ public class FormBuilder {
         return this;
     }
 
+    /**
+     * Cette méthode créé une nouvelle ligne dans l'interface
+     * @return un objet FormBuilder
+     */
     //start new row
     public FormBuilder newRow() {
         ++row;
@@ -86,6 +150,11 @@ public class FormBuilder {
         return this;
     }
 
+    /**
+     * Cette méthode permet de sauter un colonne
+     * @param columns le numéro de colonne à sauter
+     * @return un objet FormBuilder
+     */
     //skip columns
     public FormBuilder skipColumns(int columns) {
         col+=columns;
@@ -93,33 +162,48 @@ public class FormBuilder {
     }
 
     /**
-     * Methods to set constraints, Useful when used as Java 8 method reference
+     * Méthode pour paramétrer les contraintes
      */
     //horizontal span 2
     public static void spanX2(GridBagConstraints c) {
         c.gridwidth = 2;
     }
 
+    /**
+     * Méthode pour paramétrer les contraintes
+     */
     //horizontal span 3
     public static void spanX3(GridBagConstraints c) {
         c.gridwidth = 3;
     }
 
+    /**
+     * Méthode pour paramétrer les contraintes
+     */
     //horizontal span 4
     public static void spanX4(GridBagConstraints c) {
         c.gridwidth = 4;
     }
 
+    /**
+     * Méthode pour paramétrer les contraintes
+     */
     //vertical span 2
     public static void spanY2(GridBagConstraints c) {
         c.gridheight = 2 ;
     }
 
+    /**
+     * Méthode pour paramétrer les contraintes
+     */
     //fills horizontally if parent resized
     public static void fillParentX(GridBagConstraints c) {
         c.weightx = 1;
     }
 
+    /**
+     * Méthode pour paramétrer les contraintes
+     */
     //fills vertically if parent resized
     public static void fillParentY(GridBagConstraints c) {
         c.weighty = 1;

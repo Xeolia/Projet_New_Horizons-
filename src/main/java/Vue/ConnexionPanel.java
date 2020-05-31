@@ -6,25 +6,101 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * La classe ConnexionPanel permet de définir le panel de connexion de l'application
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
+
 public class ConnexionPanel extends JPanel {
 
+    /**
+     * taille de bordure
+     */
     protected int strokeSize = 1;
+
+    /**
+     * Couleur de l'ombre
+     * @see Color
+     */
     protected Color shadowColor = Color.black;
+
+    /**
+     * Initialisation de la variable shady à true
+     */
     protected boolean shady = true;
+
+    /**
+     * Initialisation de la variable highQuality à true
+     */
     protected boolean highQuality = true;
+
+    /**
+     * Initialisation de la dimension arcs a 20,20
+     */
     protected Dimension arcs = new Dimension(20, 20);
+
+    /**
+     * Initialisation de l'écart d'ombre à 5
+     */
     protected int shadowGap = 5;
+
+    /**
+     * Initialisation du décallage de l'ombre à 4
+     */
     protected int shadowOffset = 4;
+
+    /**
+     * Initialisation de la variable alpha de l'ombre a 150
+     */
     protected int shadowAlpha = 150;
+
+    /**
+     * Bouton de connexion
+     * @see JButton
+     */
     protected JButton connexionButton;
 
+    /**
+     * Label de connexion
+     * @see JLabel
+     */
     protected JLabel labelConnexion;
+
+    /**
+     * Label de ligne vide
+     * @see JLabel
+     */
     protected JLabel emptyLine;
+
+    /**
+     * Champs pour le pseudo
+     * @see JTextField
+     */
     protected JTextField fieldPseudo;
+
+    /**
+     * Label pour le pseudo
+     * @see JLabel
+     */
     protected JLabel labelPseudo;
+
+    /**
+     * Champs pour le mot de passe
+     * @see JTextField
+     */
     protected JTextField fieldMDP;
+
+    /**
+     * Label pour le mot de passe
+     * @see JLabel
+     */
     protected JLabel labelMDP;
 
+    /**
+     * Constructeur de la classe ConnexionPanel
+     */
     public ConnexionPanel(){
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(102, 102, 102));
@@ -83,6 +159,10 @@ public class ConnexionPanel extends JPanel {
                 .add("", connexionButton, FormBuilder::spanX2);
     }
 
+    /**
+     * Cette méthode permet de changer l'aspect de l'interface
+     * @param g type de graphique a utiliser
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

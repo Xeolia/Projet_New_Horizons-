@@ -5,8 +5,17 @@ import Modele.Singletons;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * La classe MaFenetre permet de lancer l'interface de l'application
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
 public class MaFenetre extends JFrame {
 
+    /**
+     * Constructeur de la classe MaFenetre
+     */
     public MaFenetre() {
         setTitle("New horizon app");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -17,6 +26,10 @@ public class MaFenetre extends JFrame {
         this.getContentPane().add(Singletons.getPanelFond(), BorderLayout.CENTER);
     }
 
+    /**
+     * Méthode permettant de lancer l'application
+     * @param args
+     */
     public static void main(String[] args) {
         Singletons.getMaFenetre();
         Singletons.getControleur();
