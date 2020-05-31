@@ -108,9 +108,14 @@ public class Serialisation {
 
     public static HashMap<String, String> findSimpleDiscusionMessage(String id) throws IOException {
         Discussion discussion = findSimpleDiscusionInJson(id);
-        HashMap<String,String> mapMessage = null;
 
         return discussion.getListeMessages();
+    }
+
+    public static void insertSimpleDiscusionMessage(String id, String expediteur, String message) throws IOException {
+        DiscussionSimple discussion = (DiscussionSimple) findSimpleDiscusionInJson(id);
+        discussion.getListeMessages().put(expediteur, message);
+        Serialisation.insertSimpleDiscussionToJson(discussion);
     }
 
     public static String findLastDiscussionId() throws IOException {

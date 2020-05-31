@@ -75,8 +75,8 @@ public class RequestActions {
         //TODO (protocole CREATION_CHAT_GROUPE)
     }
 
-    public static void envoiMessage(Discussion discussion, String expediteur, String message) throws IOException {
-        String requete = ProtocoleCode.MESSAGE+ delimiteur +discussion.getId()+ delimiteur +expediteur+ delimiteur +message;
+    public static void envoiMessage(String idDiscussion, String expediteur, String message) throws IOException {
+        String requete = ProtocoleCode.MESSAGE+ delimiteur +idDiscussion+ delimiteur +expediteur+ delimiteur +message;
 
         PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
         writer.write(requete);

@@ -98,10 +98,17 @@ public class ClientProcessor implements Runnable {
                         //TODO creation de discussion (un expediteur, un destinataire)
                         break;
                     case MESSAGE:
-                        String expediteur_message =tableauReponse[1];
-                        String message =tableauReponse[2];
+                        String idDiscussion =tableauReponse[1];
+                        String expediteur_message =tableauReponse[2];
+                        String message =tableauReponse[3];
                         log = expediteur_message+ " : " + message;
                         System.out.println(log);
+                        Serialisation.insertSimpleDiscusionMessage(idDiscussion, expediteur_message, message);
+                        boolean toSend = true;
+                        for (Socket s : TimeServer.listClients.keySet()) {
+                            writer.write(String.valueOf(toSend));
+                            writer.flush();
+                        }
                         break;
                     case DECONNEXION:
                         String pseudo_deconnexion =tableauReponse[1];

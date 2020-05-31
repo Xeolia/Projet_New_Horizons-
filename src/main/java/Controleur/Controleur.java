@@ -51,12 +51,11 @@ public class Controleur implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand() == "envoiMessage") {
-            Singletons.getChatPanel().getTextArea().append(Singletons.getInputPanel().getTextField().getText() + "\n");
-            //try {
-                //RequestActions.envoiMessage(TimeServer.listClients.get(RequestActions.socketInstance), null);
-           // } catch (IOException e) {
-              //  e.printStackTrace();
-           // }
+            try {
+                RequestActions.envoiMessage(idDiscussion, utilisateur.getPseudo() ,Singletons.getInputPanel().getTextField().getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Singletons.getInputPanel().getTextField().setText("");
 
         }
@@ -122,11 +121,13 @@ public class Controleur implements ActionListener, MouseListener {
 
         }
         if (event.getActionCommand() == "quitChat") {
+            idDiscussion = null;
             Singletons.getChatPanel().getTextArea().setText("");
             Singletons.getPanelFond().remove(Singletons.getChatPanel());
             Singletons.getPanelFond().add(Singletons.getPanelDiscussion());
             Singletons.getMaFenetre().repaint();
             Singletons.getMaFenetre().revalidate();
+
         }
         if (event.getActionCommand() == "addDiscussion") {
             ComboChoix comboChoix = Singletons.getComboChoix();
