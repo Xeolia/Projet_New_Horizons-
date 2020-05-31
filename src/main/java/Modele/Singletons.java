@@ -4,7 +4,7 @@ import Controleur.Controleur;
 import Vue.*;
 
 public class Singletons {
-    public static PanelCentre panelCentre;
+    public static ListeDiscussion listeDiscussion;
     private static MaFenetre maFenetre;
     private static ChatPanel chatPanel;
     private static InscriptionPanel inscriptionPanel;
@@ -12,10 +12,11 @@ public class Singletons {
     private static PanelFond panelFond;
     private static Controleur controleur;
     private static PanelNord panelNord;
-    private static FenetreDiscussion fenetreDiscussion;
     private static PanelDiscussion panelDiscussion;
     private static ConnexionPanel connexionPanel;
     private static PanelOnglet panelOnglet;
+    private static PanelError panelError;
+    private static ComboChoix comboChoix;
 
     public static MaFenetre getMaFenetre() {
         if (maFenetre == null) {
@@ -80,23 +81,31 @@ public class Singletons {
         return panelNord;
     }
 
-    public static FenetreDiscussion getFenetreDiscussion() {
-        if (fenetreDiscussion == null) {
-            return fenetreDiscussion = new FenetreDiscussion();
+    public static ListeDiscussion getListeDiscussion() {
+        if (listeDiscussion == null) {
+            return listeDiscussion = new ListeDiscussion();
         }
-        return fenetreDiscussion;
+        return listeDiscussion;
     }
 
-    public static PanelCentre getPanelCentre() {
-        if (panelCentre == null) {
-            return panelCentre = new PanelCentre();
-        }
-        return panelCentre;
-    }
     public static PanelDiscussion getPanelDiscussion(){
         if (panelDiscussion == null) {
             return panelDiscussion = new PanelDiscussion();
         }
         return panelDiscussion;
+    }
+
+    public static PanelError getPanelError(){
+        if (panelError == null) {
+            return panelError = new PanelError();
+        }
+        return panelError;
+    }
+
+    public static ComboChoix getComboChoix(){
+        if (comboChoix == null) {
+            return comboChoix = new ComboChoix();
+        }
+        return comboChoix;
     }
 }

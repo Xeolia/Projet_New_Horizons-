@@ -15,13 +15,17 @@ public class Utilisateur extends Personne{
         this.prenom = prenom;
     }
 
+    public Utilisateur(){
+
+        this.pseudo = "test";
+        this.password = null;
+        this.nom= null;
+        this.prenom = null;
+    }
+
     @Override
     public String toString() {
         return "pseudo= " + pseudo;
-    }
-
-    public String getPseudo() {
-        return pseudo;
     }
 
     public String getPassword() { return password; }

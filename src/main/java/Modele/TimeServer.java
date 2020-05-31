@@ -55,7 +55,6 @@ public class TimeServer {
         Thread t = new Thread(new Runnable(){
             public void run(){
                 while(isRunning == true){
-
                     try {
                         //On attend une connexion d'un client
                         System.out.println("En attente d'un client numero " + countClients);

@@ -4,21 +4,16 @@ import java.util.Date;
 
 public class Message {
 
-    public Date time;
+    public String id;
     public String text;
     public String expediteur;
-    public String destinataire;
 
-    public Message(Date time, String text, String expediteur, String destinataire){
-        this.time = time;
+    public Message(String id,String text, String expediteur){
+        this.id = id;
         this.text = text;
         this.expediteur = expediteur;
-        this.destinataire = destinataire;
     }
 
-    public Date getTime() {
-        return time;
-    }
 
     public String getText() {
         return text;
@@ -28,7 +23,7 @@ public class Message {
         return expediteur;
     }
 
-    public String getDestinataire() {
-        return destinataire;
+    public String getId() {
+        return id;
     }
 }
