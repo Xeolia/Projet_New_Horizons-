@@ -44,27 +44,19 @@ public class Utilisateur extends Personne{
         this.prenom = prenom;
     }
 
-    /**
-     * Cette méthode permet d'afficher des informations sur l'utilisateur
-     * @return desciption de l'utilisateur
-     */
+    public Utilisateur(){
+
+        this.pseudo = "test";
+        this.password = null;
+        this.nom= null;
+        this.prenom = null;
+    }
+
     @Override
     public String toString() {
         return "pseudo= " + pseudo;
     }
 
-    /**
-     * Cette méthode permet de récupérer le pseudo de l'utilisateur
-     * @return le pseudo de l'utilisateur
-     */
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    /**
-     * Cette méthode permet de récupérer le password de l'utilisateur
-     * @return le password de l'utilisateur
-     */
     public String getPassword() { return password; }
 
     /**

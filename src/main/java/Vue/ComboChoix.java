@@ -1,21 +1,14 @@
 package Vue;
 
 import Controleur.Controleur;
-import Modele.Singletons;
+import Modele.Serialisation;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
 
-/**
- * La classe PanelDiscussion permet de définir le panel discussion de l'application
- *
- * @author Tanguy Bénard
- * @version 1.0
- */
-
-public class PanelDiscussion extends JPanel {
-    PanelNord panelNord;
-    ListeDiscussion ListeDiscussions;
+public class ComboChoix extends JPanel {
     protected int strokeSize = 1;
     protected Color shadowColor = Color.black;
     protected boolean shady = true;
@@ -24,35 +17,62 @@ public class PanelDiscussion extends JPanel {
     protected int shadowGap = 5;
     protected int shadowOffset = 4;
     protected int shadowAlpha = 150;
-    JButton deconnexionButton;
 
-    /**
-     * Constructeur de la classe JPanel
-     */
-    public PanelDiscussion() {
 
+    JButton boutonAjout = new JButton("Add");
+    JComboBox<String> combo;
+    JLabel labelNom;
+    JLabel emptyLine;
+    JTextField textFieldNom;
+
+    public ComboChoix() {
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(102, 102, 102));
         this.setPreferredSize(new Dimension(600,700));
         this.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         this.setAlignmentY(JComponent.CENTER_ALIGNMENT);
         this.setOpaque(false);
-        panelNord = Singletons.getPanelNord();
-        ListeDiscussions = Singletons.getListeDiscussion();
-        deconnexionButton = new JButton("Deconnexion");
-        this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        this.setLayout(new BorderLayout());
-        add(ListeDiscussions, BorderLayout.CENTER);
-        add(panelNord, BorderLayout.NORTH);
-        add(deconnexionButton, BorderLayout.SOUTH);
-        setVisible(true);
+        combo = null;
+        labelNom = new JLabel("Nom discussion :");
+        textFieldNom = new JTextField();
+        emptyLine = new JLabel("-------------------------");
+        try {
+            combo = new JComboBox<>(Serialisation.findListUsersInJson());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+        FormBuilder.init(this)
+                .add(labelNom, FormBuilder::spanX3)
+                .newRow()
+                .add(textFieldNom, FormBuilder::spanX3)
+                .newRow()
+                .add(emptyLine, FormBuilder::spanX3)
+                .newRow()
+                .add(combo)
+                .add(boutonAjout);
 
-        add(Singletons.getListeDiscussion());
+
+    }
+    public void enregistreEcouteur(Controleur parControleur){
+        boutonAjout.addActionListener(parControleur);
+        boutonAjout.setActionCommand("addDiscussion");
     }
 
-    public void enregistreEcouteur(Controleur controleur) {
-        deconnexionButton.addActionListener(controleur);
-        deconnexionButton.setActionCommand("deconnexion");
+    public JComboBox<String> getCombo() {
+        return combo;
+    }
+
+    public JLabel getLabelNom() {
+        return labelNom;
+    }
+
+    public JTextField getTextFieldNom() {
+        return textFieldNom;
+    }
+
+    public JButton getBoutonAjout() {
+        return boutonAjout;
     }
 
     @Override

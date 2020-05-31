@@ -11,17 +11,7 @@ import Vue.*;
  */
 
 public class Singletons {
-
-    /**
-     * Instance du PanelCentre
-     * @see PanelCentre
-     */
-    public static PanelCentre panelCentre;
-
-    /**
-     * Instance de MaFenetre
-     * @see MaFenetre
-     */
+    public static ListeDiscussion listeDiscussion;
     private static MaFenetre maFenetre;
 
     /**
@@ -59,17 +49,6 @@ public class Singletons {
      * @see PanelNord
      */
     private static PanelNord panelNord;
-
-    /**
-     * Instance de FenetreDiscussion
-     * @see FenetreDiscussion
-     */
-    private static FenetreDiscussion fenetreDiscussion;
-
-    /**
-     * Instance de PanelDiscussion
-     * @see PanelDiscussion
-     */
     private static PanelDiscussion panelDiscussion;
 
 
@@ -84,6 +63,8 @@ public class Singletons {
      * @see PanelOnglet
      */
     private static PanelOnglet panelOnglet;
+    private static PanelError panelError;
+    private static ComboChoix comboChoix;
 
     /**
      * Méthode permettant de récupérer l'instance de MaFenetre ou de la créer
@@ -184,36 +165,37 @@ public class Singletons {
         return panelNord;
     }
 
-    /**
-     * Méthode permettant de récupérer l'instance de FenetreDiscussion ou de la créer
-     * @return l'instance de FenetreDiscussion
-     */
-    public static FenetreDiscussion getFenetreDiscussion() {
-        if (fenetreDiscussion == null) {
-            return fenetreDiscussion = new FenetreDiscussion();
+    public static ListeDiscussion getListeDiscussion() {
+        if (listeDiscussion == null) {
+            return listeDiscussion = new ListeDiscussion();
         }
-        return fenetreDiscussion;
+        return listeDiscussion;
     }
 
-    /**
-     * Méthode permettant de récupérer l'instance de PanelCentre ou de la créer
-     * @return l'instance de PanelCentre
-     */
     public static PanelCentre getPanelCentre() {
         if (panelCentre == null) {
             return panelCentre = new PanelCentre();
         }
         return panelCentre;
     }
-
-    /**
-     * Méthode permettant de récupérer l'instance de PanelDiscussion ou de la créer
-     * @return l'instance de PanelDiscussion
-     */
     public static PanelDiscussion getPanelDiscussion(){
         if (panelDiscussion == null) {
             return panelDiscussion = new PanelDiscussion();
         }
         return panelDiscussion;
+    }
+
+    public static PanelError getPanelError(){
+        if (panelError == null) {
+            return panelError = new PanelError();
+        }
+        return panelError;
+    }
+
+    public static ComboChoix getComboChoix(){
+        if (comboChoix == null) {
+            return comboChoix = new ComboChoix();
+        }
+        return comboChoix;
     }
 }

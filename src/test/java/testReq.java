@@ -50,7 +50,7 @@ public class testReq {
         }
 
         try {
-            RequestActions.deconnexion(utilisateur);
+            RequestActions.deconnexion();
             assert true;
         } catch (IOException e) {
             e.printStackTrace();

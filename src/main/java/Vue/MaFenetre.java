@@ -20,6 +20,7 @@ public class MaFenetre extends JFrame {
         setTitle("New horizon app");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(1280, 850));
+        setLocationRelativeTo(null);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setVisible(true);

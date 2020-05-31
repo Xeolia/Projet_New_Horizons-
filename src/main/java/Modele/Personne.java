@@ -35,6 +35,12 @@ public class Personne{
         this.pseudo = pseudo;
     }
 
+    public Personne(){
+        this.nom = null;
+        this.prenom = null;
+        this.pseudo = null;
+    }
+
     /**
      * Cette méthode permet d'avoir le nom de la personne
      * @return nom de la personne

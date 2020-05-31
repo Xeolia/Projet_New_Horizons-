@@ -1,6 +1,8 @@
 package Modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * La classe DiscussionGroupe hérite de la classe Discussion et représente une discussion de groupe
@@ -16,12 +18,9 @@ public class DiscussionGroupe extends Discussion{
      */
     public ArrayList<Personne> listPersonnes;
 
-    /**
-     * Constructeur de la classe DiscussionGroupe
-     * @param id l'id de la discussion
-     */
-    public DiscussionGroupe(int id){
-        super(id);
+    public DiscussionGroupe(String id, String nom, HashMap<String, String> listeMessages, ArrayList<Utilisateur> listUtilisateurs){
+        super(id, nom, listeMessages);
+        this.listUtilisateurs = listUtilisateurs;
     }
 
     /**
