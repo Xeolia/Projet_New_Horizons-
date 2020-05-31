@@ -5,13 +5,48 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * La classe ChatThread créer un chat dans un thread et fonctionne en permanance
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
 public class ChatThread implements Runnable {
+
+    /**
+     * Socket qui sera utilisé pour le serveur
+     * @see Socket
+     */
     private Socket connexion;
+
+    /**
+     * Permet d'envoyé des données
+     * @see PrintWriter
+     */
     private PrintWriter writer;
+
+    /**
+     * Buffer pour lire les informations entrante
+     * @see BufferedInputStream
+     */
     private BufferedInputStream reader;
+
+    /**
+     * Initialisation de la variable count à 0
+     */
     private static int count = 0;
+
+    /**
+     * Initialisation de la variable name à "Client-"
+     */
     private String name = "Client-";
 
+
+    /**
+     * Constructeur de la classe ChatThread
+     * @param socket socket utilisé par l'utilisateur
+     * @param nomClient nom du client
+     */
     public ChatThread(Socket socket, String nomClient) {
         //attribution numero client
         name += ++count;
@@ -19,7 +54,9 @@ public class ChatThread implements Runnable {
         name += nomClient;
     }
 
-
+    /**
+     * Cette méthode permet de créer un thread qui écoute les réponses du serveur en permanence
+     */
     public void run() {
 
         while(true) { //On autorise continuelement la connexion du client
@@ -43,6 +80,11 @@ public class ChatThread implements Runnable {
         }
     }
 
+    /**
+     * Cette méthode renvoie la récupérer les réponses serveur en string
+     * @return réponse serveur en string
+     * @throws IOException si la méthode reader.read() ne fonctionne pas
+     */
     //Méthode pour lire les réponses du serveur
     private String read() throws IOException {
         String response = "";

@@ -201,18 +201,34 @@ public class ConnexionPanel extends JPanel {
         graphics.setStroke(new BasicStroke());
     }
 
+    /**
+     * Cette méthode permet de récupérer le bouton de conenxion
+     * @return l'objet connexionButton
+     */
     public JButton getConnexionButton() {
         return connexionButton;
     }
 
+    /**
+     * Cette méthode permet de récupérer le champs pseudo
+     * @return l'objet fieldPseudo
+     */
     public JTextField getFieldPseudo() {
         return fieldPseudo;
     }
 
+    /**
+     * Cette méthode permet de récupérer le champs mot de passe
+     * @return l'objet fieldMDP
+     */
     public JTextField getFieldMDP() {
         return fieldMDP;
     }
 
+    /**
+     * Cette méthode permet de mettre d'attribuer un ActionListener au bouton
+     * @param controleur le controleur qui appliquera des réactions après les actions sur le bouton
+     */
     public void enregistreEcouteur(Controleur controleur) {
         connexionButton.addMouseListener(controleur);
         connexionButton.addActionListener(controleur);

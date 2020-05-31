@@ -14,20 +14,63 @@ import java.awt.*;
  */
 
 public class PanelDiscussion extends JPanel {
+
+    /**
+     * Panel se trouvant en haut
+     * @see PanelNord
+     */
     PanelNord panelNord;
+
+    /**
+     * La liste des discussion de l'utilisateur
+     * @see ListeDiscussion
+     */
     ListeDiscussion ListeDiscussions;
+
+    /**
+     * taille de bordure
+     */
     protected int strokeSize = 1;
+
+    /**
+     * Couleur de l'ombre
+     * @see Color
+     */
     protected Color shadowColor = Color.black;
+
+    /**
+     * Initialisation de la variable shady à true
+     */
     protected boolean shady = true;
+
+    /**
+     * Initialisation de la variable highQuality à true
+     */
     protected boolean highQuality = true;
+
+    /**
+     * Initialisation de la dimension arcs a 20,20
+     */
     protected Dimension arcs = new Dimension(20, 20);
+
+    /**
+     * Initialisation de l'écart d'ombre à 5
+     */
     protected int shadowGap = 5;
+
+    /**
+     * Initialisation du décallage de l'ombre à 4
+     */
     protected int shadowOffset = 4;
+
+    /**
+     * Initialisation de la variable alpha de l'ombre a 150
+     */
     protected int shadowAlpha = 150;
     JButton deconnexionButton;
 
     /**
-     * Constructeur de la classe JPanel
+     * Constructeur de la classe JPaPanelDiscussionnel
      */
     public PanelDiscussion() {
 
@@ -50,11 +93,19 @@ public class PanelDiscussion extends JPanel {
         add(Singletons.getListeDiscussion());
     }
 
+    /**
+     * Cette méthode permet de mettre d'attribuer un ActionListener au bouton
+     * @param controleur le controleur qui appliquera des réactions après les actions sur le bouton
+     */
     public void enregistreEcouteur(Controleur controleur) {
         deconnexionButton.addActionListener(controleur);
         deconnexionButton.setActionCommand("deconnexion");
     }
 
+    /**
+     * Cette méthode permet de changer l'aspect de l'interface
+     * @param g type de graphique a utiliser
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

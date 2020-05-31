@@ -44,6 +44,9 @@ public class Utilisateur extends Personne{
         this.prenom = prenom;
     }
 
+    /**
+     * Constructeur de la classe Utilisateur avec des valeurs par défaut
+     */
     public Utilisateur(){
 
         this.pseudo = "test";
@@ -52,11 +55,19 @@ public class Utilisateur extends Personne{
         this.prenom = null;
     }
 
+    /**
+     * Cette méthode permet de retourn des information sur l'utilisateur
+     * @return information sur l'utilisateur
+     */
     @Override
     public String toString() {
         return "pseudo= " + pseudo;
     }
 
+    /**
+     * Cette méthode permet de récupérer le mot de passe utilisateur
+     * @return le mot de passe
+     */
     public String getPassword() { return password; }
 
     /**

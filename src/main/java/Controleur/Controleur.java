@@ -3,11 +3,9 @@ package Controleur;
 import Modele.*;
 import Vue.ComboChoix;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +19,15 @@ import java.util.Map;
  *
  */
 public class Controleur implements ActionListener, MouseListener {
-    Socket socket;
+
+    /**
+     * indentifiant de discussion
+     */
     public static String idDiscussion;
+
+    /**
+     * utilisateur de l'application
+     */
     public Utilisateur utilisateur;
 
 

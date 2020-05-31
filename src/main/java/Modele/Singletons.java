@@ -11,7 +11,16 @@ import Vue.*;
  */
 
 public class Singletons {
+
+    /**
+     * Instance de ListeDiscussion
+     * @see ListeDiscussion
+     */
     public static ListeDiscussion listeDiscussion;
+
+    /**
+     * Instance
+     */
     private static MaFenetre maFenetre;
 
     /**
@@ -63,7 +72,17 @@ public class Singletons {
      * @see PanelOnglet
      */
     private static PanelOnglet panelOnglet;
+
+    /**
+     * Instance de PanelError
+     * @see PanelError
+     */
     private static PanelError panelError;
+
+    /**
+     * Instance de ComboChoix
+     * @see ComboChoix
+     */
     private static ComboChoix comboChoix;
 
     /**
@@ -165,6 +184,10 @@ public class Singletons {
         return panelNord;
     }
 
+    /**
+     * Méthode permettant de récupérer l'instance de ListeDiscussion ou de la créer
+     * @return l'instance de ListeDiscussion
+     */
     public static ListeDiscussion getListeDiscussion() {
         if (listeDiscussion == null) {
             return listeDiscussion = new ListeDiscussion();
@@ -172,12 +195,10 @@ public class Singletons {
         return listeDiscussion;
     }
 
-    public static PanelCentre getPanelCentre() {
-        if (panelCentre == null) {
-            return panelCentre = new PanelCentre();
-        }
-        return panelCentre;
-    }
+    /**
+     * Méthode permettant de récupérer l'instance de PanelDiscussion ou de la créer
+     * @return l'instance de PanelDiscussion
+     */
     public static PanelDiscussion getPanelDiscussion(){
         if (panelDiscussion == null) {
             return panelDiscussion = new PanelDiscussion();
@@ -185,6 +206,10 @@ public class Singletons {
         return panelDiscussion;
     }
 
+    /**
+     * Méthode permettant de récupérer l'instance de PanelError ou de la créer
+     * @return l'instance de PanelError
+     */
     public static PanelError getPanelError(){
         if (panelError == null) {
             return panelError = new PanelError();
@@ -192,6 +217,10 @@ public class Singletons {
         return panelError;
     }
 
+    /**
+     * Méthode permettant de récupérer l'instance de ComboChoix ou de la créer
+     * @return l'instance de ComboChoix
+     */
     public static ComboChoix getComboChoix(){
         if (comboChoix == null) {
             return comboChoix = new ComboChoix();

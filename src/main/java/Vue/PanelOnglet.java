@@ -11,6 +11,10 @@ import javax.swing.*;
  * @version 1.0
  */
 public class PanelOnglet extends JTabbedPane {
+
+    /**
+     * Constructeur de la classe PanelOnglet
+     */
     public PanelOnglet(){
         this.addTab("Connexion", Singletons.getConnexionPanel());
         this.addTab("Inscription", Singletons.getInscriptionPanel());

@@ -165,6 +165,10 @@ public class ChatPanel extends JPanel {
         graphics.setStroke(new BasicStroke());
     }
 
+    /**
+     * Cette méthode permet de mettre d'attribuer un ActionListener au bouton
+     * @param controleur le controleur qui appliquera des réactions après les actions sur le bouton
+     */
     public void enregistreEcouteur(Controleur controleur) {
         boutonRetour.addActionListener(controleur);
         boutonRetour.setActionCommand("quitChat");
