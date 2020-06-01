@@ -1,9 +1,12 @@
+
 import Modele.Singletons;
+import Modele.TimeServer;
 import Vue.MaFenetre;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Junit {
+public class ModelTests {
+
 
     @Test
     public void testSingleton(){
@@ -11,6 +14,7 @@ public class Junit {
         MaFenetre instance = null;
         instance = Singletons.getMaFenetre();
         Assert.assertNotNull(instance);
+
     }
 
 }
