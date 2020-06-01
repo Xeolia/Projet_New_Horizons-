@@ -26,8 +26,10 @@ public class MainClient {
             writer.write(messageServeur);
             writer.flush();
         }*/
-        HashMap<String, String> listMessage = new HashMap<>();
-        listMessage.put("bobiiy", "Bonjour a toi guytanfeu");
+        HashMap<String, HashMap<String,String>> listMessage = new HashMap<>();
+        HashMap<String, String> temp = new HashMap<>();
+        temp.put("Guytanfeu","salut");
+        listMessage.put("0",temp);
         DiscussionSimple discussionSimple = new DiscussionSimple("5", "Famille", listMessage, "bobiiy","Guytanfeu");
         Serialisation.insertSimpleDiscussionToJson(discussionSimple);
 

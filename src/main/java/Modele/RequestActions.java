@@ -128,7 +128,7 @@ public class RequestActions {
      */
     public static void envoiMessage(String idDiscussion, String expediteur, String message) throws IOException {
         String requete = ProtocoleCode.MESSAGE+ delimiteur +idDiscussion+ delimiteur +expediteur+ delimiteur +message;
-
+        // On va faire du très sale
         PrintWriter writer = new PrintWriter(socketInstance.getOutputStream());
         writer.write(requete);
         writer.flush();

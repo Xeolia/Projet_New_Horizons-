@@ -80,7 +80,7 @@ public class DiscussionSimple extends Discussion{
      * @param utilisateur1 premier utilisateur
      * @param utilisateur2 deuxième utilisateur
      */
-    public DiscussionSimple(String id, String nom, HashMap<String, String> listeMessages, String utilisateur1, String utilisateur2){
+    public DiscussionSimple(String id, String nom, HashMap<String, HashMap<String,String>> listeMessages, String utilisateur1, String utilisateur2){
         super(id, nom, listeMessages);
         this.utilisateur1 = utilisateur1;
         this.utilisateur2 = utilisateur2;

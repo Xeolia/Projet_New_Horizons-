@@ -25,7 +25,7 @@ public class DiscussionGroupe extends Discussion{
      * @param listeMessages liste de messages de la discussion
      * @param listUtilisateurs liste des utilisateurs
      */
-    public DiscussionGroupe(String id, String nom, HashMap<String, String> listeMessages, ArrayList<Utilisateur> listUtilisateurs){
+    public DiscussionGroupe(String id, String nom, HashMap<String, HashMap<String,String>> listeMessages, ArrayList<Utilisateur> listUtilisateurs){
         super(id, nom, listeMessages);
         this.listUtilisateurs = listUtilisateurs;
     }

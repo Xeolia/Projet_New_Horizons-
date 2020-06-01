@@ -120,7 +120,7 @@ public class ClientProcessor implements Runnable {
                         String pseudo1 = tableauReponse[2];
                         String pseudo2 = tableauReponse[3];
                         int id = Integer.parseInt(Serialisation.findLastDiscussionId())+1;
-                        DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion,new HashMap<String,String>(),pseudo1,pseudo2);
+                        DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion,new HashMap<String,HashMap<String, String>>(),pseudo1,pseudo2);
                         Serialisation.insertSimpleDiscussionToJson(discussionSimple);
 
                         log = "Discussion créé : " + nom_discussion;
