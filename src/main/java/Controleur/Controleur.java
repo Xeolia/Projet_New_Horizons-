@@ -50,11 +50,14 @@ public class Controleur implements ActionListener, MouseListener {
                 System.out.println("salut test");
                 try {
                     HashMap<String,HashMap<String,String>> listeMessage = Serialisation.findSimpleDiscusionMessage(idDiscussion);
-                    for (Map.Entry<String, HashMap<String,String>> entry : listeMessage.entrySet()) {
+                    System.out.println("salut test1");
+                    for (Map.Entry<String, HashMap<String,String>> entry : listeMessage.entrySet()) { //error
                         Map<String, String> entry2 = entry.getValue();
+                        System.out.println("salut test2");
                         for (Map.Entry<String,String> entry3 : entry2.entrySet()) {
                             Singletons.getChatPanel().getTextArea().setText(entry3.getKey() + " : " + entry3.getValue());
                             System.out.println(entry3.getKey() + " : "+entry3.getValue());
+                            System.out.println("salut test3");
                         }
                     }
                 } catch (IOException e) {
