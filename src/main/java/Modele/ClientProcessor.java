@@ -10,18 +10,50 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.HashMap;
 
+/**
+ * La classe ClientProcessor permet les intéractions entre le client et le serveur
+ *
+ * @author Alexion Serrier, Thomas Carpentier
+ * @version 1.0
+ */
+
 public class ClientProcessor implements Runnable {
 
     private Socket socket;
+    /**
+     * Le socket du client
+     * @see Socket
+     */
+    private Socket sock;
+    /**
+     * Permet d'envoyé des données vers le serveur
+     * @see PrintWriter
+     */
     private PrintWriter writer;
+
+    /**
+     * Buffer pour lire les informations entrante
+     * @see BufferedInputStream
+     */
     private BufferedInputStream reader;
+
+    /**
+     * Numéro du client
+     */
     private int numClient;
 
+    /**
+     * Constructeur de la classe ClientProcessor
+     * @param pSock
+     *          socket utilisé par le client
+     */
     public ClientProcessor(Socket pSock){
         socket = pSock;
     }
 
-    //Le traitement lancé dans un thread séparé
+    /**
+     * La méthode run permet le traitement lancé dans un thread séparé
+     */
     public void run() {
         System.err.println("Lancement du traitement de la connexion cliente");
 
@@ -156,6 +188,12 @@ public class ClientProcessor implements Runnable {
     }
 
     //La méthode que nous utilisons pour lire les réponses client
+
+    /**
+     * La méthode read nous permet de lire les réponses client
+     * @return Une chaine de caractères de la réponse client
+     * @throws IOException Si le reader.read() ne marche pas
+     */
     private String read() throws IOException {
         String response = "";
         int stream;
@@ -164,4 +202,6 @@ public class ClientProcessor implements Runnable {
         response = new String(b, 0, stream);
         return response;
     }
+
+
 }

@@ -8,30 +8,134 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * La Classe InscriptionPanel définir le panel d'insciption de l'application
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
+
 public class InscriptionPanel extends JPanel {
 
+    /**
+     * taille de bordure
+     */
     protected int strokeSize = 1;
+
+    /**
+     * Couleur de l'ombre
+     * @see Color
+     */
     protected Color shadowColor = Color.black;
+
+    /**
+     * Initialisation de la variable shady à true
+     */
     protected boolean shady = true;
+
+    /**
+     * Initialisation de la variable highQuality à true
+     */
     protected boolean highQuality = true;
+
+    /**
+     * Initialisation de la dimension arcs a 20,20
+     */
     protected Dimension arcs = new Dimension(20, 20);
+
+    /**
+     * Initialisation de l'écart d'ombre à 5
+     */
     protected int shadowGap = 5;
+
+    /**
+     * Initialisation du décallage de l'ombre à 4
+     */
     protected int shadowOffset = 4;
+
+    /**
+     * Initialisation de la variable alpha de l'ombre a 150
+     */
     protected int shadowAlpha = 150;
+
+    /**
+     * Bouton d'inscription
+     * @see JButton
+     */
     protected JButton inscriptionButton;
+
+    /**
+     * Label correspondant a l'inscription
+     * @see JLabel
+     */
     protected JLabel labelInscription;
+
+    /**
+     * Ligne vide
+     * @see JLabel
+     */
     protected JLabel emptyLine;
+
+    /**
+     * Champs pour le prénom
+     * @see JTextField
+     */
     protected JTextField fieldPrenom;
+
+    /**
+     * Label  prénom
+     */
     protected JLabel labelPrenom;
+
+    /**
+     * Champs pour le nom
+     * @see JTextField
+     */
     protected JTextField fieldNom;
+
+    /**
+     * Label nom
+     * @see JLabel
+     */
     protected JLabel labelNom;
+
+    /**
+     * Champs correspondant au pseudo
+     * @see JTextField
+     */
     protected JTextField fieldPseudo;
+
+    /**
+     * Label pseudo
+     * @see JLabel
+     */
     protected JLabel labelPseudo;
+
+    /**
+     * Champs pour le mot de passe
+     * @see JTextField
+     */
     protected JTextField fieldMDP;
+
+    /**
+     * Label mot de passe
+     */
     protected JLabel labelMDP;
+
+    /**
+     * Chamsp pour la vérification du mot de passe
+     * @see JTextField
+     */
     protected JTextField fieldMDPVerification;
+
+    /**
+     * label vérification du mot de passe
+     */
     protected JLabel labelMDPVerification;
 
+    /**
+     * Constructeur de la classe InscriptionPanel
+     */
     public InscriptionPanel(){
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(102, 102, 102));
@@ -125,6 +229,10 @@ public class InscriptionPanel extends JPanel {
                 .add("", inscriptionButton, FormBuilder::spanX2);
     }
 
+    /**
+     * Cette méthode permet de changer l'aspect de l'interface
+     * @param g type de graphique a utiliser
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -163,30 +271,58 @@ public class InscriptionPanel extends JPanel {
         graphics.setStroke(new BasicStroke());
     }
 
+    /**
+     * Méthode permettant de récupérer le bouton d'inscription
+     * @return bouton d'inscription
+     */
     public JButton getInscriptionButton() {
         return inscriptionButton;
     }
 
+    /**
+     * Méthode permettant de récupérer le champs prénom
+     * @return champs prénom
+     */
     public JTextField getFieldPrenom() {
         return fieldPrenom;
     }
 
+    /**
+     * Méthode permettant de récupérer le champs nom
+     * @return champs nom
+     */
     public JTextField getFieldNom() {
         return fieldNom;
     }
 
+    /**
+     * Méthode permettant de récupérer le champs pseudo
+     * @return champs pseudo
+     */
     public JTextField getFieldPseudo() {
         return fieldPseudo;
     }
 
+    /**
+     * Méthode permettant de récupérer le champs mot de passe
+     * @return champs mot de passe
+     */
     public JTextField getFieldMDP() {
         return fieldMDP;
     }
 
+    /**
+     * Méthode permettant de récupérer le champs de vérification de mot de passe
+     * @return champs vérification de mot de passe
+     */
     public JTextField getFieldMDPVerification() {
         return fieldMDPVerification;
     }
 
+    /**
+     * Méthode permettant d'appliquer un listener sur le bouton insciption
+     * @param controleur le controleur qui appliquera des réactions apres les actions sur le bouton
+     */
     public void enregistreEcouteur(Controleur controleur) {
         inscriptionButton.addMouseListener(controleur);
         inscriptionButton.addActionListener(controleur);

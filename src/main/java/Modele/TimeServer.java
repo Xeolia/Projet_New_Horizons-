@@ -9,20 +9,54 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 
+/**
+ * La classe TimeServer permet de connecter plusieurs utilisateurs au serveur
+ *
+ * @author Thomas Carpentier, Alexia Serrier
+ */
+
 public class TimeServer {
 
+    /**
+     * Initialisation de variable port
+     */
     //On initialise des valeurs par défaut
     private int port = 1515;
 
+    /**
+     * Socket du serveur
+     */
     private ServerSocket server;
+
+    /**
+     * Initialisation de la variable isRunning
+     */
     private boolean isRunning = true;
+
+    /**
+     * Objet utilisateur
+     * @see Utilisateur
+     */
     private Utilisateur utilisateur;
+
+    /**
+     * Variable permettant de compter le nombre de client
+     */
     private int countClients; // variable temp, utile en mode console
+
+    /**
+     * Initialisation de l'adresse d'hôte
+     */
     public static String host = "127.0.0.1";
 
+    /**
+     * liste de clients
+     */
     public static HashMap<Socket, Utilisateur> listClients = new HashMap<Socket, Utilisateur> ();
 
-
+    /**
+     * Constructeur de la classe TimeServer avec des valeurs par défaut
+     */
     public TimeServer() {
         try {
             server = new ServerSocket(port, 100, InetAddress.getByName(host));
@@ -35,6 +69,11 @@ public class TimeServer {
         countClients = 1;
     }
 
+    /**
+     * Constructeur de la classe TimeServer
+     * @param pHost adresse de l'hôte
+     * @param pPort numéro de port
+     */
     public TimeServer(String pHost, int pPort){
         host = pHost;
         port = pPort;
@@ -50,6 +89,9 @@ public class TimeServer {
 
     }
 
+    /**
+     * Cette méthode permet d'ouvrir le serveur
+     */
     public void open(){
 
         Thread t = new Thread(new Runnable(){
@@ -84,10 +126,17 @@ public class TimeServer {
         t.start();
     }
 
+    /**
+     * Cette méthode permet de fermer le server
+     */
     public void close(){
         isRunning = false;
     }
 
+    /**
+     * Cette méthode permet de mettre en marche le serveur
+     * @param args
+     */
     public static void main(String[] args) {
         TimeServer timeServer = new TimeServer();
         timeServer.open();

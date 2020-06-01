@@ -8,11 +8,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * La classe Serialisation permet de serializer des objets
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ */
 public class Serialisation {
+    /**
+     * Liste des logs de l'utilisateur
+     */
     public static Map<String, Utilisateur> SaveUserLogs = new HashMap<String, Utilisateur>();
+
+    /**
+     * Liste des logs d'un discussion simple
+     */
     public static Map<String, DiscussionSimple> SaveSimpleDiscussionLogs = new HashMap<String, DiscussionSimple>();
+
+    /**
+     * Mapper d'objet
+     */
     public static ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * Cette méthode permet de récupérer un utilistauer dans un Json
+     * @param pseudo_connexion pseudo de l'utilisateur souhaitant se connecter
+     * @return l'objet utilisateur qui est connecté
+     * @throws IOException si le mapper à une erreur
+     */
     public static Utilisateur findUserInJson(String pseudo_connexion) throws IOException {
         //vérification Json de la connection
         Map<?, ?> map = mapper.readValue(Paths.get("userData.json").toFile(), Map.class);
@@ -51,6 +74,11 @@ public class Serialisation {
         return utilisateur_connexion;
     }
 
+    /**
+     * Cette méthode permet de récupérer une liste d'utilisateur dans un Json
+     * @return une liste d'utilisateur
+     * @throws IOException si le mapper a une erreur
+     */
     public static String [] findListUsersInJson() throws IOException {
         //vérification Json de la connection
         Map<?, ?> map = mapper.readValue(Paths.get("userData.json").toFile(), Map.class);
@@ -65,7 +93,12 @@ public class Serialisation {
         return listePseudo;
     }
 
-
+    /**
+     * Cette méthode permet de récupérer une discussion simple dans un Json
+     * @param id identifiant de la discussion
+     * @return l'objet discussion correspondant
+     * @throws IOException si le mapper à une erreur
+     */
     public static Discussion findSimpleDiscusionInJson(String id) throws IOException {
         //vérification Json de la connection
         Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
@@ -106,18 +139,36 @@ public class Serialisation {
         return discussionSimple;
     }
 
+    /**
+     * Cette méthode permet de récupérer une liste de message dans une discussion
+     * @param id l'identifiant de la discussion
+     * @return la liste de messages
+     * @throws IOException si le mapper à une erreur
+     */
     public static HashMap<String, String> findSimpleDiscusionMessage(String id) throws IOException {
         Discussion discussion = findSimpleDiscusionInJson(id);
 
         return discussion.getListeMessages();
     }
 
+    /**
+     * Cette méthode permet d'ajouter un message dans une discussion simple
+     * @param id identifiant de la discussion
+     * @param expediteur utilisateur qui envoie le message
+     * @param message contenu du message
+     * @throws IOException si le mapper à une erreur
+     */
     public static void insertSimpleDiscusionMessage(String id, String expediteur, String message) throws IOException {
         DiscussionSimple discussion = (DiscussionSimple) findSimpleDiscusionInJson(id);
         discussion.getListeMessages().put(expediteur, message);
         Serialisation.insertSimpleDiscussionToJson(discussion);
     }
 
+    /**
+     * Cette méthode permet de trouver l'identifiant de la dernière discussion
+     * @return l'identifiant de la dernière discussion
+     * @throws IOException si le mapper à une erreur
+     */
     public static String findLastDiscussionId() throws IOException {
         Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
         String id =null ;
@@ -128,6 +179,11 @@ public class Serialisation {
         return id;
     }
 
+    /**
+     * Cette méthode permet d'ajouter un utilisateur dans le Json
+     * @param utilisateur l'objet utilisateur à ajouter
+     * @throws IOException si le mapper à une erreur
+     */
     public static void insertUserToJson(Utilisateur utilisateur) throws IOException {
         SaveUserLogs = mapper.readValue(Paths.get("userData.json").toFile(), Map.class);
         SaveUserLogs.put(utilisateur.getPseudo(), utilisateur);
@@ -138,6 +194,12 @@ public class Serialisation {
         }
     }
 
+    /**
+     * Cette méthode permet de savoir si un utilisateur est dans une discussion
+     * @param pseudo pseudo de l'utilisateur
+     * @return la HashMap des discussion ou l'utilisateur est
+     * @throws IOException si le mapper à une erreur
+     */
     public static HashMap<String, String> isUserInDiscussion(String pseudo) throws IOException {
         HashMap<String,String> mapId = new HashMap<String,String>();
         String nomTemp = null;
@@ -156,6 +218,11 @@ public class Serialisation {
         return mapId;
     }
 
+    /**
+     * Cette méthode permet d'ajouter un discussion simple dans le Json
+     * @param discussionSimple la discussion simple
+     * @throws IOException si le mapper à une erreur
+     */
     public static void insertSimpleDiscussionToJson(DiscussionSimple discussionSimple) throws IOException{
         SaveSimpleDiscussionLogs = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
         SaveSimpleDiscussionLogs.put(discussionSimple.getId(), discussionSimple);

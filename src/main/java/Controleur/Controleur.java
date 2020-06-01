@@ -3,19 +3,37 @@ package Controleur;
 import Modele.*;
 import Vue.ComboChoix;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Controleur est la classe qui permet de controler les actions sur la Vue
+ *
+ * @author Tanguy Bénard
+ * @version 1.0
+ *
+ *
+ */
 public class Controleur implements ActionListener, MouseListener {
-    Socket socket;
+
+    /**
+     * indentifiant de discussion
+     */
     public static String idDiscussion;
+
+    /**
+     * utilisateur de l'application
+     */
     public Utilisateur utilisateur;
 
+
+    /**
+     * Constructeur de la classe controleur
+     */
     public Controleur() {
         Singletons.getInputPanel().enregistreEcouteur(this);
         Singletons.getInscriptionPanel().enregistreEcouteur(this);
@@ -48,6 +66,13 @@ public class Controleur implements ActionListener, MouseListener {
         });
     }
 
+
+    /**
+     * La méthode actionPerformed permet d'attribuer des actions a des évenements
+     *
+     * @param event
+     *             Un nouvelle évenement
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand() == "envoiMessage") {
@@ -146,27 +171,58 @@ public class Controleur implements ActionListener, MouseListener {
         }
     }
 
+
+    /**
+     * La méthode mouseClicked attribut une action a un click de souris
+     *
+     * @param mouseEvent
+     *              Evenement de souris.
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * La méthode mousePressed attribut une action quand le bouton de souris est pressé
+     *
+     * @param mouseEvent
+     *              Evenement de souris.
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * La méthode mouseReleased attribut une action quand le bouton de souris est relaché
+     *
+     * @param mouseEvent
+     *              Evenement de souris.
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * La méthode mouseEntered attribut une action quand le pointeur de la souris entre dans une zone
+     *
+     * @param mouseEvent
+     *              Evenement de souris.
+     */
     @Override
     public void mouseEntered(MouseEvent mouseEvent) {
         Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(255,100,100));
         Singletons.getConnexionPanel().getConnexionButton().setBackground(new Color(255,100,100));
     }
 
+    /**
+     * La méthode mouseExited attribut une action quand le pointeur de la souris sort d'une zone
+     *
+     * @param mouseEvent
+     *               Evenement de souris.
+     */
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
         Singletons.getInscriptionPanel().getInscriptionButton().setBackground(new Color(12, 91, 160));
