@@ -99,7 +99,7 @@ public class RequestActions {
      * @param nom nom de la discussion simple
      * @param pseudo1 nom du première utilisateur
      * @param pseudo2 nom du deuxième utilisateur
-     * @throws IOException
+     * @throws IOException si le socket a une erreur
      */
     public static void creationChatSimple(String nom,String pseudo1, String pseudo2) throws IOException {
         String requete = ProtocoleCode.CREATION_CHAT_SIMPLE+ delimiteur +nom+ delimiteur +pseudo1+ delimiteur +pseudo2;

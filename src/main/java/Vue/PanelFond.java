@@ -58,7 +58,7 @@ public class PanelFond extends JPanel {
 
     /**
      * Cette méthode permet de récupérer la variable kStartColor
-     * @param kStartColor
+     * @param kStartColor la variable kStartColor
      */
     public void setkStartColor(Color kStartColor) {
         this.kStartColor = kStartColor;
