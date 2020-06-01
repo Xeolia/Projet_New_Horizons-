@@ -1,6 +1,9 @@
 package Controleur;
 
-import Modele.*;
+import Modele.RequestActions;
+import Modele.Serialisation;
+import Modele.Singletons;
+import Modele.Utilisateur;
 import Vue.FrameError;
 import Vue.PanelAjoutDiscussion;
 

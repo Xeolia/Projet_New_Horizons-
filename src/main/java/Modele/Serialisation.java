@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,10 +102,10 @@ public class Serialisation {
         //vérification Json de la connection
         Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
         DiscussionSimple discussionSimple = new DiscussionSimple();
-        HashMap<String, String> listeMessages = null;
         String nom = null;
         String utilisateur1 = null;
         String utilisateur2 = null;
+        HashMap<String, HashMap<String,String>> listeMessages = null;
         // print map entries
         for (Map.Entry<?, ?> entry : map.entrySet()) {
             if (entry.getKey().equals(id)) {
@@ -115,7 +114,9 @@ public class Serialisation {
                 for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
 
                     if (entry2.getKey() == "listeMessages") {
-                        listeMessages = (HashMap) entry2.getValue();
+                        for (Map.Entry<?, ?> entry3 : mapTemp.entrySet()) {
+                            listeMessages = (HashMap) entry3.getValue();
+                        }
                     }
                     if (entry2.getKey() == "nom") {
                         nom = (String) entry2.getValue();
@@ -146,9 +147,28 @@ public class Serialisation {
      * @throws IOException si le mapper à une erreur
      */
     public static HashMap<String, String> findSimpleDiscusionMessage(String id) throws IOException {
-        Discussion discussion = findSimpleDiscusionInJson(id);
+        Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
+        HashMap<String,String> listeMessages = null;
+        // print map entries
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+            if (entry.getKey().equals(id)) {
 
-        return discussion.getListeMessages();
+                Map<?, ?> mapTemp = (Map) entry.getValue();
+                for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
+
+                    if (entry2.getKey() == "listeMessages") {
+                        for (Map.Entry<?, ?> entry3 : mapTemp.entrySet()) {
+                            for (Map.Entry<?, ?> entry4 : mapTemp.entrySet()) {
+                                listeMessages.put((String) entry4.getKey(),(String) entry4.getValue());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        return listeMessages;
     }
 
     /**
@@ -160,7 +180,11 @@ public class Serialisation {
      */
     public static void insertSimpleDiscusionMessage(String id, String expediteur, String message) throws IOException {
         DiscussionSimple discussion = (DiscussionSimple) findSimpleDiscusionInJson(id);
-        discussion.getListeMessages().put(expediteur, message);
+
+        HashMap<String, String> messageTemp = null;
+        messageTemp.put(expediteur,message);
+
+        discussion.getListeMessages().put(findLastMessageId(), messageTemp);
         Serialisation.insertSimpleDiscussionToJson(discussion);
     }
 
@@ -170,6 +194,31 @@ public class Serialisation {
      * @throws IOException si le mapper à une erreur
      */
     public static String findLastDiscussionId() throws IOException {
+        Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
+        String id =null ;
+        String idMessages=null;
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+            if (entry.getKey().equals(id)) {
+                Map<?, ?> mapTemp = (Map) entry.getValue();
+                for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
+                    if (entry2.getKey() == "listeMessages") {
+                        for (Map.Entry<?, ?> entry3 : mapTemp.entrySet()) {
+                                idMessages = (String) entry3.getKey();
+                        }
+                    }
+                }
+            }
+        }
+
+        return idMessages;
+    }
+
+    /**
+     * Cette méthode permet de trouver l'identifiant de la dernier message
+     * @return l'identifiant de la dernière message
+     * @throws IOException si le mapper à une erreur
+     */
+    public static String findLastMessageId() throws IOException {
         Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
         String id =null ;
         for (Map.Entry<?, ?> entry : map.entrySet()) {

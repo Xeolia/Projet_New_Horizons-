@@ -1,16 +1,11 @@
 package Vue;
 
-import Controleur.Controleur;
 import Modele.RequestActions;
 import Modele.Serialisation;
-import Modele.Singletons;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
