@@ -62,6 +62,7 @@ public class ClientProcessor implements Runnable {
         while (!socket.isClosed()) {
 
             try {
+                Thread.sleep(1000);
                 writer = new PrintWriter(socket.getOutputStream());
                 reader = new BufferedInputStream(socket.getInputStream());
 
@@ -95,7 +96,6 @@ public class ClientProcessor implements Runnable {
 
                         try {
                             utilisateur_connexion= Serialisation.findUserInJson(pseudo_connexion);
-
                             if(utilisateur_connexion.getPseudo() != null && utilisateur_connexion.getPassword() !=null && utilisateur_connexion.getPassword().equals(mdp_connexion)){
                                 TimeServer.listClients.put(socket,utilisateur_connexion);
                                 Thread t = new Thread(new ClientConnexion(RequestActions.socketInstance, utilisateur_connexion.getPseudo()));
@@ -106,9 +106,12 @@ public class ClientProcessor implements Runnable {
                                 writer.flush();
                             }
                             else{
-                                Singletons.getPanelError().getLabelError().setText("Le nom d'utilisateur, ou le mot de passe n'est pas bon");
-                                new FrameError();
+                                Thread t = new Thread(new ClientConnexion(RequestActions.socketInstance,  " "));
+                                String toSend = " ";
+                                writer.write(toSend);
+                                writer.flush();
                             }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -127,7 +130,7 @@ public class ClientProcessor implements Runnable {
                         System.out.println(log);
                         break;
                     case CREATION_CHAT_GROUPE:
-                        //TODO creation de discussion (un expediteur, un destinataire)
+                        //TODO creation de discussion (liste d'utilisateur)
                         break;
                     case MESSAGE:
                         String idDiscussion =tableauReponse[1];
@@ -182,6 +185,8 @@ public class ClientProcessor implements Runnable {
                 System.out.println(e.fillInStackTrace());
                 break;
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }

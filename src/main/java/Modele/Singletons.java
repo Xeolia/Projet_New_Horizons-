@@ -81,9 +81,9 @@ public class Singletons {
 
     /**
      * Instance de ComboChoix
-     * @see ComboChoix
+     * @see PanelAjoutDiscussion
      */
-    private static ComboChoix comboChoix;
+    private static PanelAjoutDiscussion panelAjoutDiscussion;
 
     /**
      * Méthode permettant de récupérer l'instance de MaFenetre ou de la créer
@@ -221,10 +221,10 @@ public class Singletons {
      * Méthode permettant de récupérer l'instance de ComboChoix ou de la créer
      * @return l'instance de ComboChoix
      */
-    public static ComboChoix getComboChoix(){
-        if (comboChoix == null) {
-            return comboChoix = new ComboChoix();
+    public static PanelAjoutDiscussion getPanelAjoutDiscussion(){
+        if (panelAjoutDiscussion == null) {
+            return panelAjoutDiscussion = new PanelAjoutDiscussion();
         }
-        return comboChoix;
+        return panelAjoutDiscussion;
     }
 }

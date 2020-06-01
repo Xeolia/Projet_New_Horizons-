@@ -1,6 +1,7 @@
 package Vue;
 
 import Controleur.Controleur;
+import Modele.RequestActions;
 import Modele.Serialisation;
 import Modele.Singletons;
 
@@ -29,7 +30,7 @@ public class ListeDiscussion extends JPanel {
     /**
      * List affichant la liste de discussion
      */
-    JList liste;
+    public static JList liste;
 
     /**
      * Label affichant le nom des discussions dans la liste
@@ -48,7 +49,6 @@ public class ListeDiscussion extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         liste=new JList();
 
-        initList();
         JScrollPane sp = new JScrollPane(liste);
         this.add(sp);
 
@@ -62,19 +62,27 @@ public class ListeDiscussion extends JPanel {
 
         HashMap<String,String> idMap = new HashMap<>();
         try {
-            idMap = Serialisation.isUserInDiscussion("bobiiy");//todo Change it
+            idMap = Serialisation.isUserInDiscussion(RequestActions.utilisateur.getPseudo());//todo Change it
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         listModel = new DefaultListModel();
+
+
         for (Map.Entry<?, ?> entry : idMap.entrySet()) {
-            listModel.addElement(entry.getKey());
+            try {
+                listModel.addElement(entry.getKey() + ": " +Serialisation.findSimpleDiscusionInJson(entry.getKey().toString()).nom);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        liste.addListSelectionListener(this::valueChanged);
         liste.setModel(listModel);
 
         this.updateUI();
+        this.repaint();
+        this.revalidate();
     }
 
     /**

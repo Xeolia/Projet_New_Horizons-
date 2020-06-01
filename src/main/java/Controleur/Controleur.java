@@ -1,8 +1,10 @@
 package Controleur;
 
 import Modele.*;
-import Vue.ComboChoix;
+import Vue.FrameError;
+import Vue.PanelAjoutDiscussion;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -26,6 +28,11 @@ public class Controleur implements ActionListener, MouseListener {
     public static String idDiscussion;
 
     /**
+     * scollpane de liste de discussion
+     */
+    public static JScrollPane sp;
+
+    /**
      * utilisateur de l'application
      */
     public Utilisateur utilisateur;
@@ -41,13 +48,13 @@ public class Controleur implements ActionListener, MouseListener {
         Singletons.getConnexionPanel().enregistreEcouteur(this);
         Singletons.getPanelDiscussion().enregistreEcouteur(this);
         Singletons.getChatPanel().enregistreEcouteur(this);
-        Singletons.getComboChoix().enregistreEcouteur(this);
-
+        Singletons.getPanelAjoutDiscussion().enregistreEcouteur(this);
 
         Singletons.getListeDiscussion().getListe().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                idDiscussion = (String) Singletons.getListeDiscussion().getListe().getSelectedValue();
-
+                String valueSelected = (String) Singletons.getListeDiscussion().getListe().getSelectedValue();
+                String[] tabNomDiscussion = valueSelected.split(":");
+                idDiscussion = tabNomDiscussion[0];
                 try {
                     HashMap<String,String> listeMessage = Serialisation.findSimpleDiscusionMessage(idDiscussion);
                     for (Map.Entry<?, ?> entry : listeMessage.entrySet()) {
@@ -103,30 +110,31 @@ public class Controleur implements ActionListener, MouseListener {
             }
         }
         if (event.getActionCommand() == "connexion") {
-            //Todo :  Après le test serveur de log, afficher le panel discussion
             try {
                 utilisateur = RequestActions.connexion();
-                if(utilisateur!=null){
+                if(utilisateur.getNom()!=null){
                     Singletons.getConnexionPanel().getFieldPseudo().setText("");
                     Singletons.getConnexionPanel().getFieldMDP().setText("");
 
                     Singletons.getPanelFond().remove(Singletons.getPanelOnglet());
                     Singletons.getPanelFond().add(Singletons.getPanelDiscussion());
 
+                    Singletons.getListeDiscussion().initList();
+
                     Singletons.getMaFenetre().repaint();
                     Singletons.getMaFenetre().revalidate();
+                }
+                else{
+                    new FrameError();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-
         }
         if (event.getActionCommand() == "discussion") {
 
             Singletons.getPanelFond().remove(Singletons.getPanelDiscussion());
-            Singletons.getPanelFond().add(Singletons.getComboChoix());
+            Singletons.getPanelFond().add(Singletons.getPanelAjoutDiscussion());
 
             Singletons.getMaFenetre().repaint();
             Singletons.getMaFenetre().revalidate();
@@ -154,17 +162,25 @@ public class Controleur implements ActionListener, MouseListener {
             Singletons.getMaFenetre().revalidate();
 
         }
+        if (event.getActionCommand() == "retourDiscussion") {
+            Singletons.getPanelAjoutDiscussion().getTextFieldNom().setText("");
+            Singletons.getPanelFond().remove(Singletons.getPanelAjoutDiscussion());
+            Singletons.getPanelFond().add(Singletons.getPanelDiscussion());
+            Singletons.getMaFenetre().repaint();
+            Singletons.getMaFenetre().revalidate();
+
+        }
         if (event.getActionCommand() == "addDiscussion") {
-            ComboChoix comboChoix = Singletons.getComboChoix();
+            PanelAjoutDiscussion panelAjoutDiscussion = Singletons.getPanelAjoutDiscussion();
             try {
-                RequestActions.creationChatSimple(comboChoix.getTextFieldNom().getText(), utilisateur.getPseudo(), comboChoix.getCombo().getSelectedItem().toString());
+                RequestActions.creationChatSimple(panelAjoutDiscussion.getTextFieldNom().getText(), utilisateur.getPseudo(), panelAjoutDiscussion.getCombo().getSelectedItem().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Singletons.getListeDiscussion().initList();
 
 
-            Singletons.getPanelFond().remove(Singletons.getComboChoix());
+            Singletons.getPanelFond().remove(Singletons.getPanelAjoutDiscussion());
             Singletons.getPanelFond().add(Singletons.getPanelDiscussion());
             Singletons.getMaFenetre().repaint();
             Singletons.getMaFenetre().revalidate();
