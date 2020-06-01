@@ -79,7 +79,7 @@ public class ListeDiscussion extends JPanel {
 
     /**
      * Cette méthode permet de changer des valeurs à l'intérieur des étiquettes de la liste
-     * @param listSelectionEvent
+     * @param listSelectionEvent événement listSelectionEvent
      */
     public void valueChanged(ListSelectionEvent listSelectionEvent) {
         etiquette.setText((String)liste.getSelectedValue());
@@ -87,6 +87,7 @@ public class ListeDiscussion extends JPanel {
 
     /**
      * Cette méthode permet de récupérer la liste de discussion
+     * @return la liste de discussion
      */
     public JList getListe() {
         return liste;

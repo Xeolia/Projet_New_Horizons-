@@ -7,7 +7,8 @@ import java.awt.*;
 /**
  * La classe PanelError permet de définir le panel erreur de l'applicationi
  *
- * @author
+ * @author Tanguy Bénard
+ * @version 1.0
  */
 public class PanelError extends JPanel {
     /**

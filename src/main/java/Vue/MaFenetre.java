@@ -28,8 +28,8 @@ public class MaFenetre extends JFrame {
     }
 
     /**
-     * Méthode permettant de lancer l'application
-     * @param args
+     * Cette méthode permet de mettre en marche le serveur
+     * @param args arguments de la méthode main
      */
     public static void main(String[] args) {
         Singletons.getMaFenetre();

@@ -135,7 +135,7 @@ public class TimeServer {
 
     /**
      * Cette méthode permet de mettre en marche le serveur
-     * @param args
+     * @param args arguments de la méthode main
      */
     public static void main(String[] args) {
         TimeServer timeServer = new TimeServer();

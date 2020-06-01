@@ -47,7 +47,7 @@ public abstract class  Discussion {
 
     /**
      * Cette méthode permet de changer le nom de la discussion
-     * @param nom
+     * @param nom nom de la discussion
      */
     public void setNom(String nom) {
         this.nom = nom;
@@ -84,7 +84,7 @@ public abstract class  Discussion {
 
     /**
      * Cette méthode permet de récupérer l'identifiant de la discussion
-     * @return
+     * @return retourne l'identifiant de la discussion
      */
     public String getId(){
         return id;
@@ -92,7 +92,7 @@ public abstract class  Discussion {
 
     /**
      * Cette méthode permet de changer l'identifiant de la discussion
-     * @param id
+     * @param id identifiant de la discussion
      */
     public void setId(String id) {
         this.id = id;

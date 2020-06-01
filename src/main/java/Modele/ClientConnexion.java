@@ -55,9 +55,6 @@ public class ClientConnexion implements Runnable {
 
     /**
      * La méthode run créer un thread qui écoute le serveur en permanance
-     *
-     * @throws IOException si jamais le reader est null
-     * @throws InterruptedException si le sleep sur le currentThread ne marche pas
      */
     public void run() {
 
@@ -76,7 +73,8 @@ public class ClientConnexion implements Runnable {
 
             try {
                 Thread.currentThread().sleep(1000);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }

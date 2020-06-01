@@ -75,7 +75,7 @@ public class Personne{
 
     /**
      * Cette méthode permet d'avoir le pseudo de la personne
-     * @return
+     * @return le pseudo de la personne
      */
     public String getPseudo() {
         return pseudo;

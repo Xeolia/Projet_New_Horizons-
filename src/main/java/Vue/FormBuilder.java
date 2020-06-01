@@ -37,7 +37,7 @@ public class FormBuilder {
 
     /**
      * Constructeur de la classe FormBuilder
-     * @param container
+     * @param container conteneur des éléments graphiques
      */
     private FormBuilder(Container container) {
         this.container = container;
@@ -91,9 +91,9 @@ public class FormBuilder {
 
     /**
      * Cette méthode permet d'ajouter un composant avec label et d'appliquer des contraintes
-     * @param label
-     * @param comp
-     * @param consSetters
+     * @param label nom du label
+     * @param comp composent JComponent
+     * @param consSetters contrainte sur GridBagConstraints
      * @return un objet FormBuilder
      */
     //add component with label and allow caller to set constraints
@@ -163,6 +163,7 @@ public class FormBuilder {
 
     /**
      * Méthode pour paramétrer les contraintes
+     * @param c objet GridBagConstraints
      */
     //horizontal span 2
     public static void spanX2(GridBagConstraints c) {
@@ -171,6 +172,7 @@ public class FormBuilder {
 
     /**
      * Méthode pour paramétrer les contraintes
+     * @param c objet GridBagConstraints
      */
     //horizontal span 3
     public static void spanX3(GridBagConstraints c) {
@@ -179,6 +181,7 @@ public class FormBuilder {
 
     /**
      * Méthode pour paramétrer les contraintes
+     * @param c objet GridBagConstraints
      */
     //horizontal span 4
     public static void spanX4(GridBagConstraints c) {
@@ -187,6 +190,7 @@ public class FormBuilder {
 
     /**
      * Méthode pour paramétrer les contraintes
+     * @param c objet GridBagConstraints
      */
     //vertical span 2
     public static void spanY2(GridBagConstraints c) {
@@ -195,6 +199,7 @@ public class FormBuilder {
 
     /**
      * Méthode pour paramétrer les contraintes
+     * @param c objet GridBagConstraints
      */
     //fills horizontally if parent resized
     public static void fillParentX(GridBagConstraints c) {
@@ -203,6 +208,7 @@ public class FormBuilder {
 
     /**
      * Méthode pour paramétrer les contraintes
+     * @param c objet GridBagConstraints
      */
     //fills vertically if parent resized
     public static void fillParentY(GridBagConstraints c) {
