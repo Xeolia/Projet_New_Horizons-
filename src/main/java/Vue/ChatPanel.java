@@ -28,6 +28,12 @@ public class ChatPanel extends JPanel {
     JButton boutonRetour;
 
     /**
+     * Bouton retour
+     * @see JButton
+     */
+    JButton boutonRefresh;
+
+    /**
      * Label pour le destinataire
      * @see JLabel
      */
@@ -100,7 +106,7 @@ public class ChatPanel extends JPanel {
         this.setOpaque(false);
 
         panelNord = new JPanel();
-        panelNord.setLayout(new GridLayout(1,3));
+        panelNord.setLayout(new GridLayout(1,4));
 
         spaceLabel = new JLabel();
 
@@ -108,13 +114,16 @@ public class ChatPanel extends JPanel {
         textArea.setFont(new Font("Segoe UI", 0, 14));
         textArea.disable();
 
+
         boutonRetour = new JButton("Retour");
+        boutonRefresh = new JButton("Refresh");
 
         labelDestinataire = new JLabel("Destinataire");
         labelDestinataire.setFont(new Font("Segoe UI", Font.ITALIC, 18));
 
         panelNord.add(labelDestinataire);
         panelNord.add(spaceLabel);
+        panelNord.add(boutonRefresh);
         panelNord.add(boutonRetour);
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10)) ;
         this.setLayout(new BorderLayout());
@@ -172,6 +181,8 @@ public class ChatPanel extends JPanel {
     public void enregistreEcouteur(Controleur controleur) {
         boutonRetour.addActionListener(controleur);
         boutonRetour.setActionCommand("quitChat");
+        boutonRefresh.addActionListener(controleur);
+        boutonRefresh.setActionCommand("refresh");
     }
 
     /**

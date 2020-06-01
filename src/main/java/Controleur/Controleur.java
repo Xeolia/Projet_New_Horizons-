@@ -1,9 +1,6 @@
 package Controleur;
 
-import Modele.RequestActions;
-import Modele.Serialisation;
-import Modele.Singletons;
-import Modele.Utilisateur;
+import Modele.*;
 import Vue.FrameError;
 import Vue.PanelAjoutDiscussion;
 
@@ -38,7 +35,17 @@ public class Controleur implements ActionListener, MouseListener {
     /**
      * utilisateur de l'application
      */
-    public Utilisateur utilisateur;
+    public static Utilisateur utilisateur;
+
+    /**
+     * thread de chat
+     */
+    ChatThread chatThread= new ChatThread();
+
+    /**
+     * thread de chat
+     */
+    Thread thread= new Thread(chatThread);
 
 
     /**
@@ -59,9 +66,9 @@ public class Controleur implements ActionListener, MouseListener {
                 String[] tabNomDiscussion = valueSelected.split(":");
                 idDiscussion = tabNomDiscussion[0];
                 try {
-                    HashMap<String,String> listeMessage = Serialisation.findSimpleDiscusionMessage(idDiscussion);
-                    for (Map.Entry<?, ?> entry : listeMessage.entrySet()) {
-                        Singletons.getChatPanel().getTextArea().setText(entry.getKey() + " : " + entry.getValue());
+                    String message = Serialisation.findSimpleDiscusionMessage(idDiscussion);
+                    if(message!=null){
+                            Singletons.getChatPanel().getTextArea().setText(message);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -92,7 +99,18 @@ public class Controleur implements ActionListener, MouseListener {
                 e.printStackTrace();
             }
             Singletons.getInputPanel().getTextField().setText("");
+            String message = null;
+            try {
+                message = Serialisation.findSimpleDiscusionMessage(Controleur.idDiscussion);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(message!=null){
+                Singletons.getChatPanel().getTextArea().setText(message);
+            }
 
+            Singletons.getMaFenetre().repaint();
+            Singletons.getMaFenetre().revalidate();
         }
         if (event.getActionCommand() == "inscription") {
             boolean code = false;
@@ -141,6 +159,23 @@ public class Controleur implements ActionListener, MouseListener {
 
             Singletons.getMaFenetre().repaint();
             Singletons.getMaFenetre().revalidate();
+
+        }
+        if (event.getActionCommand() == "refresh") {
+
+            String message = null;
+            try {
+                message = Serialisation.findSimpleDiscusionMessage(Controleur.idDiscussion);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(message!=null){
+                Singletons.getChatPanel().getTextArea().setText(message);
+            }
+            Singletons.getMaFenetre().repaint();
+            Singletons.getMaFenetre().revalidate();
+            Singletons.getChatPanel().repaint();
+            Singletons.getChatPanel().revalidate();
 
         }
         if (event.getActionCommand() == "deconnexion") {
