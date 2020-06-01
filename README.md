@@ -25,6 +25,15 @@ Au démarrage, le client a le choix entre se connecter avec un compte existant e
 
 ##### Accès aux discussions
 Lorsque le client est connecté, celui ci a accès à plusieurs interfaces :
-- la liste des discussions en cours [screenshot3]
-- la création d'une nouvelle conversation <img src="/Photo/CreationConversation.PNG"  width="800" alt="e1CreationConv">
-- le chat dans une conversation donnée [screenshot5]
+
+* la liste des discussions en cours
+
+<img src="/Photo/ListeConversation.png"  width="800" alt="e1inscription">
+
+* la création d'une nouvelle conversation
+
+<img src="/Photo/CreationConversation.PNG"  width="800" alt="e1CreationConv">
+
+* le chat dans une conversation donnée
+
+<img src="/Photo/ConversationSimple.png"  width="800" alt="e1CreationConv">

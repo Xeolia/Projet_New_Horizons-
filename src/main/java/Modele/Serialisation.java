@@ -164,7 +164,6 @@ public class Serialisation {
                                 else{
                                     message = message + (String) entry4.getKey()+ " : " + (String) entry4.getValue()+" \n";
                                 }
-
                             }
                         }
                     }
@@ -188,7 +187,8 @@ public class Serialisation {
 
         HashMap<String, String> messageTemp = new HashMap<>();
         messageTemp.put(expediteur,message);
-        int lastIdMessage = Integer.parseInt(findLastMessageId()+1);
+        int lastIdMessage = Integer.parseInt(findLastMessageId());
+        lastIdMessage = lastIdMessage+1;
 
         discussion.getListeMessages().put(String.valueOf(lastIdMessage), messageTemp);
         Serialisation.insertSimpleDiscussionToJson(discussion);
