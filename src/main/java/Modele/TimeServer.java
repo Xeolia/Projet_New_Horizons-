@@ -86,7 +86,6 @@ public class TimeServer {
         }
 
         countClients = 1;
-
     }
 
     /**

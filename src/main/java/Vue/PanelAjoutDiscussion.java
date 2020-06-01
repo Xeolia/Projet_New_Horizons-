@@ -15,7 +15,7 @@ import java.io.IOException;
  * @version 1.0
  */
 
-public class ComboChoix extends JPanel {
+public class PanelAjoutDiscussion extends JPanel {
 
     /**
      * taille de bordure
@@ -63,7 +63,13 @@ public class ComboChoix extends JPanel {
      * Bouton d'ajout
      * @see JButton
      */
-    JButton boutonAjout = new JButton("Add");
+    JButton boutonAjout = new JButton("Ajout");
+
+    /**
+     * Bouton d'ajout
+     * @see JButton
+     */
+    JButton boutonRetour = new JButton("Retour");
 
     /**
      * Liste déroulante
@@ -92,7 +98,7 @@ public class ComboChoix extends JPanel {
     /**
      * Constructeur de la classe ComboChoix
      */
-    public ComboChoix() {
+    public PanelAjoutDiscussion() {
         this.setBackground(new Color(255, 255, 255));
         this.setForeground(new Color(102, 102, 102));
         this.setPreferredSize(new Dimension(600,700));
@@ -117,9 +123,9 @@ public class ComboChoix extends JPanel {
                 .add(emptyLine, FormBuilder::spanX3)
                 .newRow()
                 .add(combo)
-                .add(boutonAjout);
-
-
+                .add(boutonAjout)
+                .newRow()
+                .add(boutonRetour, FormBuilder::spanX3);
     }
 
     /**
@@ -129,6 +135,8 @@ public class ComboChoix extends JPanel {
     public void enregistreEcouteur(Controleur parControleur){
         boutonAjout.addActionListener(parControleur);
         boutonAjout.setActionCommand("addDiscussion");
+        boutonRetour.addActionListener(parControleur);
+        boutonRetour.setActionCommand("retourDiscussion");
     }
 
     /**

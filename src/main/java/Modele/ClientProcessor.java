@@ -95,7 +95,6 @@ public class ClientProcessor implements Runnable {
 
                         try {
                             utilisateur_connexion= Serialisation.findUserInJson(pseudo_connexion);
-
                             if(utilisateur_connexion.getPseudo() != null && utilisateur_connexion.getPassword() !=null && utilisateur_connexion.getPassword().equals(mdp_connexion)){
                                 TimeServer.listClients.put(socket,utilisateur_connexion);
                                 Thread t = new Thread(new ClientConnexion(RequestActions.socketInstance, utilisateur_connexion.getPseudo()));
@@ -106,9 +105,12 @@ public class ClientProcessor implements Runnable {
                                 writer.flush();
                             }
                             else{
-                                Singletons.getPanelError().getLabelError().setText("Le nom d'utilisateur, ou le mot de passe n'est pas bon");
-                                new FrameError();
+                                Thread t = new Thread(new ClientConnexion(RequestActions.socketInstance,  " "));
+                                String toSend = " ";
+                                writer.write(toSend);
+                                writer.flush();
                             }
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -119,15 +121,19 @@ public class ClientProcessor implements Runnable {
                         String nom_discussion = tableauReponse[1];
                         String pseudo1 = tableauReponse[2];
                         String pseudo2 = tableauReponse[3];
-                        int id = Integer.parseInt(Serialisation.findLastDiscussionId())+1;
-                        DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion,new HashMap<String,String>(),pseudo1,pseudo2);
-                        Serialisation.insertSimpleDiscussionToJson(discussionSimple);
+                        int id = 0;
+                        if(Serialisation.findLastDiscussionId()!=null) {
+                            id = Integer.parseInt(Serialisation.findLastDiscussionId()) + 1;
+                        }
+                            DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion, new HashMap<String, HashMap<String, String>>(), pseudo1, pseudo2);
+                            Serialisation.insertSimpleDiscussionToJson(discussionSimple);
 
-                        log = "Discussion créé : " + nom_discussion;
-                        System.out.println(log);
+                            log = "Discussion créé : " + nom_discussion;
+                            System.out.println(log);
+
                         break;
                     case CREATION_CHAT_GROUPE:
-                        //TODO creation de discussion (un expediteur, un destinataire)
+                        //TODO creation de discussion (liste d'utilisateur)
                         break;
                     case MESSAGE:
                         String idDiscussion =tableauReponse[1];
