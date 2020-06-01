@@ -108,6 +108,7 @@ public class ChatPanel extends JPanel {
         textArea.setFont(new Font("Segoe UI", 0, 14));
         textArea.disable();
 
+
         boutonRetour = new JButton("Retour");
 
         labelDestinataire = new JLabel("Destinataire");

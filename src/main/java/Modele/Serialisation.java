@@ -114,9 +114,7 @@ public class Serialisation {
                 for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
 
                     if (entry2.getKey() == "listeMessages") {
-                        for (Map.Entry<?, ?> entry3 : mapTemp.entrySet()) {
-                            listeMessages = (HashMap) entry3.getValue();
-                        }
+                        listeMessages = (HashMap) entry2.getValue();
                     }
                     if (entry2.getKey() == "nom") {
                         nom = (String) entry2.getValue();
@@ -146,20 +144,27 @@ public class Serialisation {
      * @return la liste de messages
      * @throws IOException si le mapper à une erreur
      */
-    public static HashMap<String, String> findSimpleDiscusionMessage(String id) throws IOException {
+    public static String findSimpleDiscusionMessage(String id) throws IOException {
         Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
-        HashMap<String,String> listeMessages = null;
+        HashMap<String,String> listeMessages = new HashMap<>();
+        String message = null;
         // print map entries
         for (Map.Entry<?, ?> entry : map.entrySet()) {
             if (entry.getKey().equals(id)) {
-
                 Map<?, ?> mapTemp = (Map) entry.getValue();
                 for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
-
                     if (entry2.getKey() == "listeMessages") {
-                        for (Map.Entry<?, ?> entry3 : mapTemp.entrySet()) {
-                            for (Map.Entry<?, ?> entry4 : mapTemp.entrySet()) {
-                                listeMessages.put((String) entry4.getKey(),(String) entry4.getValue());
+                        Map<?, ?> mapTemp2 = (Map) entry2.getValue();
+                        for (Map.Entry<?, ?> entry3 : mapTemp2.entrySet()) {
+                            Map<?, ?> mapTemp3 = (Map) entry3.getValue();
+                            for (Map.Entry<?, ?> entry4 : mapTemp3.entrySet()) {
+                                if (message==null){
+                                    message = (String) entry4.getKey()+ " : " + (String) entry4.getValue()+" \n";
+                                }
+                                else{
+                                    message = message + (String) entry4.getKey()+ " : " + (String) entry4.getValue()+" \n";
+                                }
+
                             }
                         }
                     }
@@ -168,7 +173,7 @@ public class Serialisation {
         }
 
 
-        return listeMessages;
+        return message;
     }
 
     /**
@@ -181,10 +186,11 @@ public class Serialisation {
     public static void insertSimpleDiscusionMessage(String id, String expediteur, String message) throws IOException {
         DiscussionSimple discussion = (DiscussionSimple) findSimpleDiscusionInJson(id);
 
-        HashMap<String, String> messageTemp = null;
+        HashMap<String, String> messageTemp = new HashMap<>();
         messageTemp.put(expediteur,message);
+        int lastIdMessage = Integer.parseInt(findLastMessageId()+1);
 
-        discussion.getListeMessages().put(findLastMessageId(), messageTemp);
+        discussion.getListeMessages().put(String.valueOf(lastIdMessage), messageTemp);
         Serialisation.insertSimpleDiscussionToJson(discussion);
     }
 
@@ -222,8 +228,16 @@ public class Serialisation {
         Map<?, ?> map = mapper.readValue(Paths.get("simpleDiscussionData.json").toFile(), Map.class);
         String id =null ;
         for (Map.Entry<?, ?> entry : map.entrySet()) {
-            id = (String) entry.getKey();
-        }
+                Map<?, ?> mapTemp = (Map) entry.getValue();
+                for (Map.Entry<?, ?> entry2 : mapTemp.entrySet()) {
+                    if (entry2.getKey() == "listeMessages") {
+                        Map<?, ?> mapTemp2 = (Map) entry2.getValue();
+                        for (Map.Entry<?, ?> entry3 : mapTemp2.entrySet()) {
+                            id = (String) entry3.getKey();
+                        }
+                    }
+                }
+            }
 
         return id;
     }

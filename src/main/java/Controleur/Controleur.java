@@ -59,9 +59,9 @@ public class Controleur implements ActionListener, MouseListener {
                 String[] tabNomDiscussion = valueSelected.split(":");
                 idDiscussion = tabNomDiscussion[0];
                 try {
-                    HashMap<String,String> listeMessage = Serialisation.findSimpleDiscusionMessage(idDiscussion);
-                    for (Map.Entry<?, ?> entry : listeMessage.entrySet()) {
-                        Singletons.getChatPanel().getTextArea().setText(entry.getKey() + " : " + entry.getValue());
+                    String message = Serialisation.findSimpleDiscusionMessage(idDiscussion);
+                    if(message!=null){
+                            Singletons.getChatPanel().getTextArea().setText(message);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

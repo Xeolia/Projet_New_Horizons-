@@ -62,7 +62,6 @@ public class ClientProcessor implements Runnable {
         while (!socket.isClosed()) {
 
             try {
-                Thread.sleep(1000);
                 writer = new PrintWriter(socket.getOutputStream());
                 reader = new BufferedInputStream(socket.getInputStream());
 
@@ -122,12 +121,16 @@ public class ClientProcessor implements Runnable {
                         String nom_discussion = tableauReponse[1];
                         String pseudo1 = tableauReponse[2];
                         String pseudo2 = tableauReponse[3];
-                        int id = Integer.parseInt(Serialisation.findLastDiscussionId())+1;
-                        DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion,new HashMap<String,HashMap<String,String>>(),pseudo1,pseudo2);
-                        Serialisation.insertSimpleDiscussionToJson(discussionSimple);
+                        int id = 0;
+                        if(Serialisation.findLastDiscussionId()!=null) {
+                            id = Integer.parseInt(Serialisation.findLastDiscussionId()) + 1;
+                        }
+                            DiscussionSimple discussionSimple = new DiscussionSimple(String.valueOf(id), nom_discussion, new HashMap<String, HashMap<String, String>>(), pseudo1, pseudo2);
+                            Serialisation.insertSimpleDiscussionToJson(discussionSimple);
 
-                        log = "Discussion créé : " + nom_discussion;
-                        System.out.println(log);
+                            log = "Discussion créé : " + nom_discussion;
+                            System.out.println(log);
+
                         break;
                     case CREATION_CHAT_GROUPE:
                         //TODO creation de discussion (liste d'utilisateur)
@@ -185,8 +188,6 @@ public class ClientProcessor implements Runnable {
                 System.out.println(e.fillInStackTrace());
                 break;
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
