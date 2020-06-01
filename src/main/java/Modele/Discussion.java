@@ -27,13 +27,13 @@ public abstract class  Discussion {
      * List des messages
      * @see HashMap
      */
-    public HashMap<String, String> listeMessages;
+    public HashMap<String, HashMap<String, String>> listeMessages;
 
     /**
      * Cette méthode permet de changer de la liste de messages
      * @param listeMessages nouvelle liste de messages
      */
-    public void setListeMessages(HashMap<String, String> listeMessages) {
+    public void setListeMessages(HashMap<String, HashMap<String, String>> listeMessages) {
         this.listeMessages = listeMessages;
     }
 
@@ -59,7 +59,7 @@ public abstract class  Discussion {
      * @param nom nom de la discussion
      * @param listeMessages List des messages
      */
-    public Discussion(String id, String nom, HashMap<String, String> listeMessages){
+    public Discussion(String id, String nom, HashMap<String, HashMap<String, String>> listeMessages){
         this.id = id;
         this.nom = nom;
         this.listeMessages = listeMessages;
@@ -78,7 +78,7 @@ public abstract class  Discussion {
      * Cette méthode permet de récupérer la liste de message de la discussion
      * @return la liste de message
      */
-    public HashMap<String, String> getListeMessages() {
+    public HashMap<String, HashMap<String, String>> getListeMessages() {
         return listeMessages;
     }
 

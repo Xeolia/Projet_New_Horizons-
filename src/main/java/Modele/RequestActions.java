@@ -7,13 +7,9 @@ import java.net.Socket;
 import java.util.*;
 
 
-import Vue.ComboChoix;
 import Vue.ConnexionPanel;
 import Vue.FrameError;
 import Vue.InscriptionPanel;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * La classe RequestActions permet d'envoyer des requêtes côté serveur
@@ -90,6 +86,11 @@ public class RequestActions {
         response = new String(b, 0, stream);
 
         utilisateur= Serialisation.findUserInJson(response);
+
+        if (utilisateur.getNom()==null){
+            socketInstance.close();
+            socketInstance=null;
+        }
 
         return utilisateur;
     }
