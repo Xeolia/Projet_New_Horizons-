@@ -5,7 +5,7 @@ import Vue.MaFenetre;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ModelTests {
+public class testSingleton {
 
 
     @Test

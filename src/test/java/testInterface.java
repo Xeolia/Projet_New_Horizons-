@@ -3,7 +3,7 @@ import Vue.MaFenetre;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Junit {
+public class testInterface {
 
     @Test
     public void testSingleton(){
